@@ -1,0 +1,18 @@
+---
+interface Props {
+  variant?: 'default' | 'dark' | 'gradient';
+  class?: string;
+}
+
+const { variant = 'default', class: className } = Astro.props;
+
+const variantClasses = {
+  default: 'bento-card',
+  dark: 'bento-card bg-dark text-white border-dark',
+  gradient: 'bento-card bg-gradient-to-br from-dark-teal to-sage text-white border-dark-teal',
+};
+---
+
+<div class:list={[variantClasses[variant], className]}>
+  <slot />
+</div>

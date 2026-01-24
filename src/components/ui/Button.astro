@@ -1,0 +1,26 @@
+---
+interface Props {
+  variant?: 'primary' | 'outline';
+  href?: string;
+  class?: string;
+  type?: 'button' | 'submit';
+}
+
+const { variant = 'primary', href, class: className, type = 'button' } = Astro.props;
+
+const baseClasses = 'px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300';
+const variantClasses = {
+  primary: 'btn-primary',
+  outline: 'btn-outline',
+};
+---
+
+{href ? (
+  <a href={href} class:list={[baseClasses, variantClasses[variant], className]}>
+    <slot />
+  </a>
+) : (
+  <button type={type} class:list={[baseClasses, variantClasses[variant], className]}>
+    <slot />
+  </button>
+)}

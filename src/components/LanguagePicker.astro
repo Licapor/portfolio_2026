@@ -1,0 +1,30 @@
+---
+import { languages } from '../i18n/ui';
+import { getLocalizedPath, getRouteFromUrl } from '../i18n/utils';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+const currentLang = (Astro.currentLocale || 'es') as 'es' | 'en';
+const route = getRouteFromUrl(Astro.url);
+---
+
+<div class:list={['flex items-center gap-2', className]}>
+  {Object.entries(languages).map(([lang, label]) => (
+    <a
+      href={getLocalizedPath(route || '/', lang as 'es' | 'en')}
+      class:list={[
+        'text-sm font-medium transition-colors',
+        currentLang === lang
+          ? 'text-gold'
+          : 'text-gray-400 hover:text-sage'
+      ]}
+      aria-label={`Switch to ${label}`}
+      aria-current={currentLang === lang ? 'page' : undefined}
+    >
+      {lang.toUpperCase()}
+    </a>
+  ))}
+</div>

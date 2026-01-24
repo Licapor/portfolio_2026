@@ -1,0 +1,147 @@
+---
+// Componente reutilizable para formas geométricas decorativas
+// Usa variantes predefinidas para cada sección
+
+interface Props {
+  variant?: 'hero' | 'about' | 'projects' | 'contact' | 'footer' | 'minimal';
+}
+
+const { variant = 'minimal' } = Astro.props;
+---
+
+<div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+  {variant === 'minimal' && (
+    <>
+      {/* Minimal: solo algunas formas sutiles */}
+      <div class="absolute -top-20 -right-20 w-80 h-80 rounded-full border border-mint geo-rotate opacity-30"></div>
+      <div class="absolute bottom-20 left-10 w-12 h-12 rounded-full bg-gold geo-float opacity-40"></div>
+      <div class="absolute top-1/3 right-[5%] w-6 h-6 bg-sage rotate-45 geo-pulse opacity-50"></div>
+    </>
+  )}
+
+  {variant === 'hero' && (
+    <>
+      {/* Círculos */}
+      <div class="geo-parallax absolute top-20 right-[10%] w-96 h-96 rounded-full border-2 border-mint geo-rotate opacity-40"></div>
+      <div class="geo-parallax absolute top-60 right-[25%] w-48 h-48 rounded-full border border-gold geo-rotate anim-reverse opacity-35"></div>
+      <div class="geo-parallax absolute top-40 left-[15%] w-16 h-16 rounded-full bg-cream geo-float opacity-80"></div>
+      <div class="geo-parallax absolute top-[60%] left-[8%] w-10 h-10 rounded-full bg-sage geo-float-delayed opacity-60"></div>
+      <div class="absolute top-32 left-[35%] w-6 h-6 rounded-full bg-mint geo-pulse opacity-70"></div>
+      <div class="absolute top-[45%] right-[15%] w-5 h-5 rounded-full bg-gold geo-pulse opacity-60"></div>
+
+      {/* Líneas */}
+      <svg class="absolute top-1/4 left-1/4 w-64 h-64 geo-parallax" viewBox="0 0 100 100">
+        <line x1="0" y1="100" x2="100" y2="0" stroke="currentColor" class="text-gold draw-line" stroke-width="2" />
+      </svg>
+      <svg class="absolute top-[45%] left-[5%] w-32 h-2 opacity-40" viewBox="0 0 100 2">
+        <line x1="0" y1="1" x2="100" y2="1" stroke="currentColor" class="text-sage draw-line" stroke-width="2" />
+      </svg>
+      <svg class="absolute top-[20%] right-[35%] w-2 h-24 opacity-35" viewBox="0 0 2 100">
+        <line x1="1" y1="0" x2="1" y2="100" stroke="currentColor" class="text-mint draw-line anim-delay-50" stroke-width="2" />
+      </svg>
+
+      {/* Cuadrados */}
+      <div class="geo-parallax absolute bottom-32 right-[20%] w-24 h-24 border-2 border-sage rotate-45 geo-float-delayed"></div>
+      <div class="geo-parallax absolute top-[30%] right-[8%] w-12 h-12 border border-gold rotate-12 geo-float opacity-50"></div>
+      <div class="absolute bottom-[40%] left-[20%] w-8 h-8 bg-mint rotate-45 geo-pulse opacity-60"></div>
+      <div class="absolute top-[55%] right-[25%] w-6 h-6 bg-cream rotate-12 geo-pulse opacity-70"></div>
+
+      {/* Cruces */}
+      <div class="geo-parallax absolute top-1/3 right-[30%]">
+        <svg class="w-12 h-12 text-gold geo-pulse" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M11 2v9H2v2h9v9h2v-9h9v-2h-9V2z"/>
+        </svg>
+      </div>
+      <div class="absolute bottom-[30%] right-[12%]">
+        <svg class="w-6 h-6 text-sage geo-pulse anim-delay-30 opacity-50" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M11 2v9H2v2h9v9h2v-9h9v-2h-9V2z"/>
+        </svg>
+      </div>
+
+      {/* Puntos decorativos */}
+      <div class="absolute bottom-40 left-[10%] flex gap-3">
+        <div class="w-3 h-3 rounded-full bg-gold geo-pulse"></div>
+        <div class="w-3 h-3 rounded-full bg-sage geo-pulse anim-delay-20"></div>
+        <div class="w-3 h-3 rounded-full bg-mint geo-pulse anim-delay-40"></div>
+      </div>
+      <div class="absolute top-[25%] right-[5%] flex flex-col gap-3">
+        <div class="w-2 h-2 rounded-full bg-gold geo-pulse"></div>
+        <div class="w-2 h-2 rounded-full bg-sage geo-pulse anim-delay-15"></div>
+        <div class="w-2 h-2 rounded-full bg-mint geo-pulse anim-delay-30"></div>
+        <div class="w-2 h-2 rounded-full bg-cream geo-pulse anim-delay-45"></div>
+      </div>
+
+      {/* Triángulo y Semicírculos */}
+      <svg class="geo-parallax absolute bottom-[25%] left-[30%] w-20 h-20 opacity-40" viewBox="0 0 100 100">
+        <polygon points="50,10 90,90 10,90" fill="none" stroke="currentColor" class="text-sage draw-line" stroke-width="2" />
+      </svg>
+      <div class="geo-parallax absolute bottom-20 left-[40%] w-32 h-16 bg-cream rounded-t-full opacity-70"></div>
+      <div class="geo-parallax absolute top-[50%] right-[40%] w-16 h-8 bg-mint/50 rounded-b-full opacity-50 geo-float"></div>
+
+      {/* Anillo y Rombo */}
+      <div class="absolute top-[70%] left-[5%] w-20 h-20 rounded-full border-4 border-gold/30 geo-rotate opacity-40"></div>
+      <div class="geo-parallax absolute top-[15%] left-[45%] w-8 h-8 bg-gold rotate-45 geo-float opacity-40"></div>
+    </>
+  )}
+
+  {variant === 'about' && (
+    <>
+      <div class="absolute -top-20 -right-20 w-80 h-80 rounded-full border border-mint geo-rotate opacity-30"></div>
+      <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full border-2 border-gold/30 geo-rotate anim-reverse opacity-20"></div>
+      <div class="absolute top-40 right-[5%] w-24 h-24 rounded-full bg-cream geo-float opacity-60"></div>
+      <div class="absolute top-[50%] left-[2%] w-20 h-20 rounded-full border border-sage geo-float-delayed opacity-40"></div>
+      <div class="absolute bottom-32 left-[8%] w-12 h-12 rounded-full bg-mint geo-float-delayed opacity-50"></div>
+      <div class="absolute top-[25%] right-[12%] w-10 h-10 rounded-full bg-gold geo-pulse opacity-40"></div>
+      <div class="absolute top-[70%] right-[8%] w-6 h-6 rounded-full bg-sage geo-pulse opacity-50"></div>
+      <svg class="absolute bottom-20 right-[15%] w-40 h-40 opacity-20" viewBox="0 0 100 100">
+        <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" class="text-gold" stroke-width="1" />
+      </svg>
+      <div class="absolute top-[20%] left-[5%] w-16 h-16 border border-gold rotate-45 geo-float opacity-40"></div>
+      <div class="absolute bottom-[15%] right-[3%] w-24 h-24 border-2 border-mint rotate-12 geo-float-delayed opacity-25"></div>
+    </>
+  )}
+
+  {variant === 'projects' && (
+    <>
+      <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full border border-gold/30 geo-rotate opacity-20"></div>
+      <div class="absolute top-20 right-[8%] w-32 h-32 rounded-full border-2 border-sage geo-float opacity-30"></div>
+      <div class="absolute top-[40%] left-[3%] w-12 h-12 rounded-full bg-mint geo-float-delayed opacity-50"></div>
+      <div class="absolute bottom-[30%] right-[5%] w-8 h-8 rounded-full bg-gold geo-pulse opacity-40"></div>
+      <div class="absolute top-[60%] right-[10%] w-20 h-20 border border-mint rotate-45 geo-float opacity-30"></div>
+      <div class="absolute top-[20%] left-[15%] w-8 h-8 bg-cream rotate-12 geo-pulse opacity-70"></div>
+      <svg class="absolute bottom-[20%] left-[8%] w-32 h-32 opacity-20" viewBox="0 0 100 100">
+        <line x1="0" y1="100" x2="100" y2="0" stroke="currentColor" class="text-gold" stroke-width="1" />
+        <line x1="20" y1="100" x2="100" y2="20" stroke="currentColor" class="text-gold" stroke-width="1" />
+      </svg>
+      <div class="absolute bottom-0 right-[25%] w-24 h-12 bg-cream rounded-t-full opacity-40"></div>
+    </>
+  )}
+
+  {variant === 'contact' && (
+    <>
+      <div class="absolute top-20 left-10 w-64 h-64 bg-cream/50 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 right-10 w-80 h-80 bg-mint/30 rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-32 -left-32 w-96 h-96 rounded-full border border-gold/30 geo-rotate opacity-30"></div>
+      <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full border-2 border-mint geo-rotate anim-reverse opacity-20"></div>
+      <div class="absolute top-[20%] right-[8%] w-20 h-20 rounded-full border-2 border-sage geo-float opacity-40"></div>
+      <div class="absolute bottom-[40%] left-[3%] w-16 h-16 rounded-full border border-mint geo-float-delayed opacity-35"></div>
+      <div class="absolute top-[40%] left-[5%] w-10 h-10 rounded-full bg-gold geo-float-delayed opacity-50"></div>
+      <div class="absolute bottom-[30%] right-[5%] w-16 h-16 border border-gold rotate-45 geo-float opacity-30"></div>
+      <div class="absolute top-[15%] left-[8%] w-20 h-20 border-2 border-mint rotate-12 geo-float opacity-25"></div>
+    </>
+  )}
+
+  {variant === 'footer' && (
+    <>
+      <div class="absolute -top-16 -left-16 w-32 h-32 rounded-full border border-gold/20 geo-rotate"></div>
+      <div class="absolute top-4 right-[20%] w-6 h-6 rounded-full bg-sage/10 geo-pulse"></div>
+      <div class="absolute -bottom-8 right-[10%] w-16 h-16 border border-mint/15 rotate-45 geo-float"></div>
+      <div class="absolute top-1/2 right-[5%] flex gap-2 -translate-y-1/2">
+        <div class="w-1.5 h-1.5 rounded-full bg-gold/30 geo-pulse"></div>
+        <div class="w-1.5 h-1.5 rounded-full bg-sage/30 geo-pulse anim-delay-20"></div>
+        <div class="w-1.5 h-1.5 rounded-full bg-mint/30 geo-pulse anim-delay-40"></div>
+      </div>
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-sage/30 via-gold/40 to-mint/30"></div>
+    </>
+  )}
+</div>

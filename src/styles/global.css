@@ -1,1 +1,349 @@
 @import "tailwindcss";
+
+/* Custom Palette: Centralized Colors */
+@theme {
+  /* Base Palette */
+  --color-cream: #EEE8B2;
+  --color-cream-light: #F5F2CE;
+  --color-gold: #C18D52;
+  --color-gold-light: #D4A76A;
+  --color-gold-dark: #A67A45;
+  --color-dark: #081B1B;
+  --color-dark-teal: #203B37;
+  --color-sage: #5A8F76;
+  --color-sage-light: #6FA388;
+  --color-mint: #96CDB0;
+  --color-mint-light: #B0DBC4;
+
+  /* Primary (Emerald) - for interactive elements */
+  --color-primary: #10b981;
+  --color-primary-dark: #047857;
+  --color-primary-light: #34d399;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background: var(--color-gold);
+  color: white;
+}
+
+/* Custom scrollbar - minimal */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-sage), var(--color-gold));
+  border-radius: 3px;
+}
+
+/* ========== TEXT ANIMATIONS ========== */
+
+/* Letter by letter reveal */
+.text-reveal {
+  opacity: 0;
+  animation: textReveal 0.8s ease forwards;
+}
+
+@keyframes textReveal {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Split text animation - each letter */
+.split-text span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(50px) rotate(10deg);
+  animation: letterIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes letterIn {
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+/* Marquee animation */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: flex;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Typing effect */
+.typewriter {
+  overflow: hidden;
+  border-right: 3px solid #C18D52;
+  white-space: nowrap;
+  animation: typing 3s steps(30) forwards, blink 0.8s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* Scramble text effect placeholder */
+.scramble-text {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ========== GEOMETRIC ANIMATIONS ========== */
+
+/* Floating geometric shapes */
+.geo-float {
+  animation: geoFloat 6s ease-in-out infinite;
+}
+
+.geo-float-delayed {
+  animation: geoFloat 6s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+@keyframes geoFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+/* Rotating shapes */
+.geo-rotate {
+  animation: geoRotate 20s linear infinite;
+}
+
+@keyframes geoRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Pulsing shapes */
+.geo-pulse {
+  animation: geoPulse 3s ease-in-out infinite;
+}
+
+@keyframes geoPulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+/* Shape that follows scroll */
+.geo-parallax {
+  transition: transform 0.3s ease-out;
+}
+
+/* Orbiting elements */
+.orbit {
+  animation: orbit 15s linear infinite;
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+}
+
+/* Drawing line animation */
+.draw-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 2s ease forwards;
+}
+
+@keyframes drawLine {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ========== SCROLL REVEAL ========== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger delays */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+.stagger-6 { transition-delay: 0.6s; }
+
+/* Animation delays for geometric shapes */
+.anim-delay-15 { animation-delay: 0.15s; }
+.anim-delay-20 { animation-delay: 0.2s; }
+.anim-delay-30 { animation-delay: 0.3s; }
+.anim-delay-40 { animation-delay: 0.4s; }
+.anim-delay-45 { animation-delay: 0.45s; }
+.anim-delay-50 { animation-delay: 0.5s; }
+.anim-reverse { animation-direction: reverse; }
+
+/* ========== UI EFFECTS ========== */
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #C18D52, #5A8F76, #96CDB0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animated gradient text */
+.gradient-text-animated {
+  background: linear-gradient(90deg, #C18D52, #5A8F76, #96CDB0, #C18D52);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientMove 4s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+}
+
+/* Bento card */
+.bento-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.bento-card:hover {
+  border-color: #10b981;
+  box-shadow: 0 20px 40px -20px rgba(16, 185, 129, 0.3);
+  transform: translateY(-4px);
+}
+
+/* Outlined text - Emerald */
+.text-outline {
+  -webkit-text-stroke: 2px #10b981;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Hover underline animation */
+.hover-underline {
+  position: relative;
+}
+
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #C18D52, #5A8F76, #96CDB0);
+  border-radius: 2px;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-underline:hover::after {
+  width: 100%;
+}
+
+/* Button styles - Emerald primary */
+.btn-primary {
+  background: linear-gradient(135deg, #10b981, #047857);
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+}
+
+.btn-outline {
+  border: 2px solid #10b981;
+  color: #047857;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: #10b981;
+  color: white;
+}

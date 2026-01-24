@@ -1,0 +1,107 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { socialLinks, whatsappLink } from '../../content/social';
+import GeometricShapes from '../ui/GeometricShapes.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import BentoCard from '../ui/BentoCard.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const emailHref = `mailto:${t('global.email')}`;
+---
+
+<section id="contact" class="py-24 lg:py-32 bg-white relative overflow-hidden">
+  <GeometricShapes variant="contact" />
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 relative">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Left: Text content -->
+      <div class="reveal">
+        <SectionHeader
+          labelKey="contact.label"
+          titleKey="contact.title"
+          titleOutlineKey="contact.titleOutline"
+          class="mb-8"
+        />
+        <p class="text-xl text-gray-500 mb-8 max-w-md">
+          {t('contact.description')}
+        </p>
+
+        <a
+          href={`mailto:${t('global.email')}`}
+          class="inline-flex items-center gap-3 text-3xl lg:text-4xl font-bold text-gray-900 hover:text-primary transition-colors hover-underline"
+        >
+          {t('global.email')}
+        </a>
+      </div>
+
+      <!-- Right: Social & Contact cards bento -->
+      <div class="grid grid-cols-2 gap-4 reveal stagger-2">
+        <!-- Email card -->
+        <a
+          href={emailHref}
+          class="col-span-2"
+          aria-label={t('contact.emailLabel')}
+        >
+          <BentoCard variant="gradient" class="p-6 relative overflow-hidden">
+            <div class="absolute -top-4 -right-4 w-16 h-16 rounded-full border-2 border-sage/20"></div>
+            <div class="absolute bottom-4 right-12 w-4 h-4 rounded-full bg-gold/30"></div>
+            <p class="text-xl font-bold text-gray-900 relative">{t('contact.emailLabel')}</p>
+          </BentoCard>
+        </a>
+
+        <!-- Social links -->
+        {socialLinks.map((link) => (
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Visit ${link.name}`}
+            class="bento-card p-6 flex flex-col items-center justify-center gap-3 group hover:border-primary transition-all duration-300 relative overflow-hidden"
+          >
+            <svg class="w-8 h-8 text-gold group-hover:text-primary transition-colors relative z-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" set:html={link.icon} />
+            <span class="text-sm font-medium text-gray-600 group-hover:text-gray-900 transition-colors relative z-10">{link.name}</span>
+          </a>
+        ))}
+
+        <!-- WhatsApp card -->
+        <a
+          href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="col-span-2"
+          aria-label={t('contact.whatsappLabel')}
+        >
+          <BentoCard variant="gradient" class="p-6 relative overflow-hidden">
+            <div class="absolute -top-4 -left-4 w-16 h-16 rounded-full border-2 border-sage/20"></div>
+            <div class="absolute bottom-4 left-12 w-4 h-4 rounded-full bg-gold/30"></div>
+            <p class="text-xl font-bold text-gray-900 relative">{t('contact.whatsappLabel')}</p>
+          </BentoCard>
+        </a>
+      </div>
+    </div>
+
+    <!-- Bottom marquee text -->
+    <div class="mt-24 overflow-hidden reveal">
+      <div class="flex gap-8 animate-marquee whitespace-nowrap">
+        <span class="text-8xl lg:text-[12rem] font-bold text-gray-100 select-none">
+          {t('contact.marquee')}
+        </span>
+        <span class="text-8xl lg:text-[12rem] font-bold text-gray-100 select-none">
+          {t('contact.marquee')}
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    animation: marquee 20s linear infinite;
+  }
+</style>

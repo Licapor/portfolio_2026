@@ -1,0 +1,100 @@
+---
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../i18n/utils';
+import { navLinks } from '../../content/navigation';
+import LanguagePicker from '../LanguagePicker.astro';
+import Button from '../ui/Button.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const homePath = getLocalizedPath('/', lang);
+const emailHref = `mailto:${t('global.email')}`;
+---
+
+<header class:list={['fixed top-0 left-0 right-0 z-50 glass transition-all duration-500', className]}>
+  <nav class="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex items-center justify-between" aria-label="Main navigation">
+    <a href={homePath} class="text-2xl font-bold text-gray-900 hover-underline" aria-label={t('global.name')}>
+      <span class="gradient-text-animated">LC</span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-10" role="list">
+      {navLinks.map(link => (
+        <li>
+          <a
+            href={link.href}
+            class="text-dark-teal hover:text-primary transition-colors font-medium hover-underline"
+          >
+            {t(link.labelKey)}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="hidden md:flex items-center gap-6">
+      <LanguagePicker />
+      <Button variant="primary" href={emailHref} class="px-5 py-2.5 text-sm">
+        {t('nav.cta')}
+      </Button>
+    </div>
+
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden text-gray-900"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="md:hidden hidden bg-white/95 backdrop-blur-xl border-t border-gray-100" role="menu">
+    <ul class="px-6 py-6 space-y-4" role="list">
+      {navLinks.map(link => (
+        <li role="menuitem">
+          <a href={link.href} class="block text-dark font-medium py-2 hover:text-primary transition-colors">
+            {t(link.labelKey)}
+          </a>
+        </li>
+      ))}
+      <li class="pt-2" role="menuitem">
+        <LanguagePicker />
+      </li>
+      <li class="pt-4" role="menuitem">
+        <Button variant="primary" href={emailHref} class="block w-full text-center">
+          {t('nav.cta')}
+        </Button>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  btn?.addEventListener('click', () => {
+    const isHidden = menu?.classList.toggle('hidden');
+    btn.setAttribute('aria-expanded', String(!isHidden));
+  });
+
+  menu?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      menu?.classList.add('hidden');
+      btn?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+<style>
+  header.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  }
+</style>

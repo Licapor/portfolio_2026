@@ -1,0 +1,110 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import GeometricShapes from '../ui/GeometricShapes.astro';
+import Button from '../ui/Button.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section class="min-h-screen relative overflow-hidden bg-gradient-to-br from-cream/30 via-white to-mint/20">
+  <GeometricShapes variant="hero" />
+
+  <!-- Main content -->
+  <div class="relative z-10 min-h-screen flex flex-col justify-center px-6 lg:px-12 max-w-7xl mx-auto pt-24">
+    <div class="grid lg:grid-cols-12 gap-8 items-center">
+      <!-- Left: Typography -->
+      <div class="lg:col-span-8">
+        <p class="text-gold font-semibold mb-4 text-lg tracking-wide hero-fade-in anim-delay-20">
+          {t('hero.greeting')}
+        </p>
+
+        <h1 class="mb-6">
+          <span class="block text-6xl md:text-7xl lg:text-[8rem] font-bold leading-[0.85] tracking-tight">
+            <span class="split-text text-gray-900">{t('hero.title1')}</span>
+          </span>
+          <span class="block text-6xl md:text-7xl lg:text-[8rem] font-bold leading-[0.85] tracking-tight mt-2">
+            <span class="text-outline">{t('hero.title2')}</span>
+          </span>
+          <span class="block text-6xl md:text-7xl lg:text-[8rem] font-bold leading-[0.85] tracking-tight mt-2">
+            <span class="text-gray-900">{t('hero.title3')}</span>
+          </span>
+        </h1>
+
+        <p class="text-xl md:text-2xl text-gray-500 font-light mt-8 max-w-xl hero-slide-up-delayed">
+          {t('hero.description')}
+          <span class="gradient-text font-medium">{t('hero.highlight1')}</span> {t('hero.descriptionEnd')}
+          <span class="gradient-text font-medium">{t('hero.highlight2')}</span>
+        </p>
+      </div>
+
+      <!-- Right: Info cards -->
+      <div class="lg:col-span-4 space-y-4 hero-slide-up-more-delayed">
+        <div class="bento-card p-6">
+          <span class="text-5xl font-bold gradient-text">{t('hero.yearsNumber')}</span>
+          <p class="text-gray-500 mt-2">{t('hero.stat1')}</p>
+        </div>
+        <div class="bento-card p-6">
+          <span class="text-5xl font-bold gradient-text">{t('hero.industriesNumber')}</span>
+          <p class="text-gray-500 mt-2">{t('hero.stat2')}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom: CTA + Scroll indicator -->
+    <div class="flex items-center justify-between mt-16 lg:mt-24">
+      <div class="flex gap-4">
+        <Button variant="primary" href="#work">
+          {t('hero.cta1')}
+        </Button>
+        <Button variant="outline" href="#contact">
+          {t('hero.cta2')}
+        </Button>
+      </div>
+
+      <div class="hidden lg:flex items-center gap-3 text-dark-teal/50">
+        <span class="text-sm">{t('hero.scroll')}</span>
+        <div class="w-6 h-10 border-2 border-sage/30 rounded-full flex justify-center pt-2">
+          <div class="w-1.5 h-3 bg-gold rounded-full animate-bounce"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marquee -->
+  <div class="absolute bottom-0 left-0 right-0 py-6 bg-gradient-to-r from-dark-teal via-sage to-dark-teal text-white overflow-hidden">
+    <div class="marquee">
+      <div class="marquee-content gap-8 text-lg font-medium">
+        <span>{t('hero.marquee')}</span>
+        <span class="opacity-50">•</span>
+        <span>{t('hero.marquee')}</span>
+        <span class="opacity-50">•</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-fade-in {
+    animation: fadeSlideUp 0.8s ease both;
+  }
+
+  .hero-slide-up-delayed {
+    animation: fadeSlideUp 0.8s ease 0.8s both;
+  }
+
+  .hero-slide-up-more-delayed {
+    animation: fadeSlideUp 0.8s ease 1s both;
+  }
+</style>

@@ -1,0 +1,105 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  tags: string[];
+  demoUrl?: string;
+  codeUrl?: string;
+  featured?: boolean;
+  color?: string;
+  featuredLabel?: string;
+  liveDemoLabel?: string;
+  codeLabel?: string;
+}
+
+const {
+  title,
+  description,
+  tags,
+  demoUrl,
+  codeUrl,
+  featured = false,
+  color = "gray",
+  featuredLabel = "★ Featured",
+  liveDemoLabel = "Live Demo",
+  codeLabel = "Code"
+} = Astro.props;
+
+const isEmerald = color === 'emerald';
+---
+
+<article class:list={['group bento-card h-full flex flex-col', featured ? 'min-h-[400px]' : 'min-h-[300px]']}>
+  <!-- Image/Visual area -->
+  <div class:list={[
+    'relative flex-1 overflow-hidden',
+    featured ? 'p-8' : 'p-6',
+    isEmerald ? 'bg-gradient-to-br from-cream/30 to-mint/20' : 'bg-gradient-to-br from-gray-50 to-gray-100/50'
+  ]}>
+    <!-- Project preview placeholder -->
+    <div class="absolute inset-0 flex items-center justify-center">
+      <div class="relative">
+        <!-- Decorative shapes -->
+        <div class:list={['w-32 h-32 rounded-2xl rotate-6 geo-float', isEmerald ? 'bg-mint/50' : 'bg-gray-200/50']}></div>
+        <div class:list={['absolute top-4 left-4 w-32 h-32 rounded-2xl -rotate-6 geo-float-delayed', isEmerald ? 'bg-gold/40' : 'bg-gray-300/50']}></div>
+        <div class:list={['absolute top-8 left-8 w-32 h-32 rounded-2xl', isEmerald ? 'bg-sage/30' : 'bg-gray-400/30']}></div>
+      </div>
+    </div>
+
+    <!-- Number indicator -->
+    <div class="absolute top-4 left-4">
+      <span class:list={['text-sm font-mono', isEmerald ? 'text-gold' : 'text-gray-400']}>
+        {featured ? featuredLabel : ''}
+      </span>
+    </div>
+
+    <!-- Hover overlay with links -->
+    <div class="absolute inset-0 bg-white/95 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-4">
+      {demoUrl && (
+        <a
+          href={demoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-6 py-3 btn-primary rounded-full flex items-center gap-2 font-semibold"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+          {liveDemoLabel}
+        </a>
+      )}
+      {codeUrl && (
+        <a
+          href={codeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-6 py-3 btn-outline rounded-full flex items-center gap-2 font-semibold"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+          </svg>
+          {codeLabel}
+        </a>
+      )}
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="p-6 border-t border-gray-100">
+    <h3 class:list={['font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors', featured ? 'text-2xl' : 'text-xl']}>
+      {title}
+    </h3>
+    <p class="text-gray-500 mb-4 line-clamp-2 text-sm">
+      {description}
+    </p>
+
+    <!-- Tags -->
+    <div class="flex flex-wrap gap-2">
+      {tags.map(tag => (
+        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-full font-medium">
+          {tag}
+        </span>
+      ))}
+    </div>
+  </div>
+</article>

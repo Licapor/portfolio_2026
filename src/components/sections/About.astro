@@ -1,0 +1,94 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { skills } from '../../content/skills';
+import GeometricShapes from '../ui/GeometricShapes.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import SkillBar from '../ui/SkillBar.astro';
+import InfoCard from '../ui/InfoCard.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="about" class="py-24 lg:py-32 bg-white relative overflow-hidden">
+  <GeometricShapes variant="about" />
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 relative">
+    <SectionHeader
+      labelKey="about.label"
+      titleKey="about.title"
+      titleOutlineKey="about.titleOutline"
+      class="mb-16"
+    />
+
+    <!-- Bento Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- Columna izquierda: Card principal + Skills -->
+      <div class="lg:col-span-8 flex flex-col gap-6">
+        <!-- Card 1: Main intro -->
+        <div class="bento-card p-8 flex flex-col justify-between reveal stagger-1 relative overflow-hidden min-h-[280px]">
+          <div class="absolute -top-10 -right-10 w-40 h-40 bg-mint-light rounded-full geo-float opacity-50"></div>
+          <div class="absolute bottom-10 right-20 w-8 h-8 border border-mint rotate-45 opacity-30"></div>
+
+          <div class="relative">
+            <h3 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
+              {t('about.intro')}
+              <span class="gradient-text">{t('about.introHighlight')}</span>
+            </h3>
+          </div>
+          <p class="text-gray-500 text-lg relative">
+            {t('about.description')}
+          </p>
+        </div>
+
+        <!-- Card 2: Soft Skills -->
+        <div class="bento-card p-6 reveal stagger-2 relative overflow-hidden">
+          <div class="absolute -top-4 -right-4 w-16 h-16 bg-mint-light rounded-full opacity-50"></div>
+          <h4 class="font-bold text-gray-900 mb-4 relative">{t('about.skillsTitle')}</h4>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-3 relative">
+            {skills.map(skill => (
+              <SkillBar name={t(skill.nameKey)} level={skill.level} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna derecha: Location, Languages -->
+      <div class="lg:col-span-4 flex flex-col gap-6">
+        <!-- Card 3: Location -->
+        <InfoCard variant="gradient" class="reveal stagger-3">
+          <div class="absolute -bottom-6 -right-6 w-20 h-20 rounded-full border-2 border-white/20"></div>
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <div>
+            <p class="text-sm text-white/70">{t('about.locationLabel')}</p>
+            <p class="text-2xl font-bold text-white">{t('about.location')}</p>
+          </div>
+        </InfoCard>
+
+        <!-- Card 4: Languages -->
+        <InfoCard class="reveal stagger-4">
+          <div class="absolute top-4 right-4 w-6 h-6 border border-gold/30 rotate-45 opacity-30"></div>
+          <div class="absolute bottom-8 right-8 w-3 h-3 rounded-full bg-sage opacity-20"></div>
+          <p class="text-gray-500 text-sm">{t('about.languagesLabel')}</p>
+          <div class="flex gap-4 text-xl font-bold">
+            <span class="flex items-center gap-1.5">
+              <span class="text-2xl">🇲🇽</span>
+              <span class="text-gold">{t('about.langES')}</span>
+            </span>
+            <span class="flex items-center gap-1.5">
+              <span class="text-2xl">🇺🇸</span>
+              <span class="text-gold">{t('about.langEN')}</span>
+            </span>
+            <span class="flex items-center gap-1.5">
+              <span class="text-2xl">🇧🇷</span>
+              <span class="text-gold">{t('about.langPT')}</span>
+            </span>
+          </div>
+        </InfoCard>
+      </div>
+    </div>
+  </div>
+</section>
