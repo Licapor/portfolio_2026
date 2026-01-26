@@ -8,7 +8,8 @@ export const defaultLang = 'es';
 export const ui = {
   es: {
     // Global
-    'global.name': 'Liliana Canedo',
+    'global.name': 'Li',
+    'global.logo': 'LCP',
     'global.email': 'hola@iele.com',
 
     // Navigation
@@ -18,7 +19,7 @@ export const ui = {
     'nav.cta': 'Hablemos',
 
     // Hero
-    'hero.greeting': 'Hola, soy Liliana Capor',
+    'hero.greeting': "Li's studio",
     'hero.title1': 'Digital',
     'hero.title2': 'Product',
     'hero.title3': 'Developer',
@@ -96,7 +97,8 @@ export const ui = {
   },
   en: {
     // Global
-    'global.name': 'Liliana Canedo',
+    'global.name': 'Li',
+    'global.logo': 'LCP',
     'global.email': 'hola@iele.com',
 
     // Navigation
@@ -106,7 +108,7 @@ export const ui = {
     'nav.cta': "Let's talk",
 
     // Hero
-    'hero.greeting': "Hi, I'm Liliana Capor",
+    'hero.greeting': "Li's studio",
     'hero.title1': 'Digital',
     'hero.title2': 'Product',
     'hero.title3': 'Developer',

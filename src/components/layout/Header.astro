@@ -4,6 +4,10 @@ import { navLinks } from '../../content/navigation';
 import LanguagePicker from '../LanguagePicker.astro';
 import Button from '../ui/Button.astro';
 
+// Logo options - change this to test different logos:
+// Li_1.png | Li_claro.png | Li_Gris.png | Li_Negro.png | Li_verde.png | Li.png
+import logo from '../../assets/icons/li_logo.svg';
+
 interface Props {
   class?: string;
 }
@@ -16,9 +20,9 @@ const emailHref = `mailto:${t('global.email')}`;
 ---
 
 <header class:list={['fixed top-0 left-0 right-0 z-50 glass transition-all duration-500', className]}>
-  <nav class="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex items-center justify-between" aria-label="Main navigation">
-    <a href={homePath} class="text-2xl font-bold text-gray-900 hover-underline" aria-label={t('global.name')}>
-      <span class="gradient-text-animated">LC</span>
+  <nav class="max-w-7xl mx-auto px-6 lg:px-12 py-2 flex items-center justify-between" aria-label="Main navigation">
+    <a href={homePath} class="flex items-center" aria-label={t('global.name')}>
+      <img src={logo.src} alt={t('global.name')} class="h-16 w-auto" />
     </a>
 
     <ul class="hidden md:flex items-center gap-10" role="list">

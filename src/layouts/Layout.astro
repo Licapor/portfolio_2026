@@ -8,13 +8,13 @@ interface Props {
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://lilianacapor.com');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://iele.dev');
 
 const {
   title,
   description = lang === 'es'
-    ? "Portfolio de desarrolladora Frontend & Producto. Creando experiencias digitales modernas y funcionales."
-    : "Frontend & Product Developer Portfolio. Creating modern and functional digital experiences."
+    ? "Digital product development studio"
+    : "Digital product development studio. Creating modern and functional digital experiences."
 } = Astro.props;
 
 const ogImage = "/og-image.png";
