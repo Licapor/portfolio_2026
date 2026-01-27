@@ -1,6 +1,7 @@
 ---
 import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../i18n/utils';
 import GeometricShapes from '../ui/GeometricShapes.astro';
+import logoClaro from '../../assets/icons/li_logo_claro.svg';
 
 interface Props {
   class?: string;
@@ -19,8 +20,8 @@ const homePath = getLocalizedPath('/', lang);
   <div class="max-w-7xl mx-auto px-6 lg:px-12 relative">
     <div class="flex flex-col md:flex-row items-center justify-between gap-6">
       <!-- Logo/Name -->
-      <a href={homePath} class="text-2xl font-bold" aria-label={t('global.name')}>
-        <span class="gradient-text-animated">LC</span>
+      <a href={homePath} aria-label={t('global.name')}>
+        <img src={logoClaro.src} alt={t('global.name')} class="h-8 w-auto" />
       </a>
 
       <!-- Copyright -->
