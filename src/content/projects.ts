@@ -46,7 +46,7 @@ export const projects: Project[] = [
     titleKey: 'project6.title',
     descriptionKey: 'project6.description',
     tags: ['Emprendimiento', 'Operaciones', 'Marketing'],
-    demoUrl: '#',
+    projectUrl: '/en/projects/tojol',
     featured: false,
   },
 ];

@@ -82,6 +82,19 @@ export const ui = {
     'project6.title': 'Tojol - Café & Cocina',
     'project6.description': 'Fundación y gestión de establecimiento de alimentos con 10% de crecimiento mensual, equipo de 5 personas y rating de 5 estrellas con 90% clientela internacional.',
 
+    // Tojol Project Page
+    'tojol.subtitle': 'Healthy Breakfast • Dairy & Gluten-Free • Vegan Options',
+    'tojol.intro': 'Tojol fue un restaurante especializado en platillos con ingredientes auténticos mexicanos. Nuestro menú ofrecía opciones deliciosas y nutritivas, incluyendo opciones veganas y sin gluten. En Tojol, nos enorgullecíamos de usar nuestras propias leches vegetales y ser un establecimiento libre de lácteos.',
+    'tojol.location': 'La Punta, Puerto Escondido',
+    'tojol.coffeeTitle': 'El único coffee brew bar en La Punta',
+    'tojol.coffeeDesc': 'Utilizamos métodos de filtrado y goteo para ofrecerte un café de alta calidad.',
+    'tojol.foodTitle': 'Desayunos saludables y jugos',
+    'tojol.foodDesc': 'El único bar de jugos cold-pressed en Puerto Escondido.',
+    'tojol.reviewsTitle': 'Lo que decían nuestros clientes',
+    'tojol.googleRating': 'Calificación en Google',
+    'tojol.backToProjects': 'Volver a proyectos',
+    'tojol.viewProject': 'Ver Proyecto',
+
     // Contact
     'contact.label': 'Contacto',
     'contact.title': 'Hablemos',
@@ -170,6 +183,19 @@ export const ui = {
     'project5.description': 'Development of automated reports using Xandr Monetize API and Power BI for monetization analysis and strategic recommendations.',
     'project6.title': 'Tojol - Café & Kitchen',
     'project6.description': 'Founded and managed a food establishment with 10% monthly growth, team of 5, and 5-star rating with 90% international clientele.',
+
+    // Tojol Project Page
+    'tojol.subtitle': 'Healthy Breakfast • Dairy & Gluten-Free • Vegan Options',
+    'tojol.intro': "Tojol is a restaurant specializing in creating dishes with mexican authentic ingredients. Our menu features delicious and nutritious options, including vegan and gluten-free dishes. At Tojol, we pride ourselves on using our own plant-based milks and being a dairy-free establishment. Whether you're looking for a satisfying breakfast, a refreshing juice, or a high quality cup of coffee, our welcoming space in the heart of La Punta, Puerto Escondido has something for everyone.",
+    'tojol.location': 'La Punta, Puerto Escondido',
+    'tojol.coffeeTitle': 'The only coffee brew bar in La Punta',
+    'tojol.coffeeDesc': 'We use filtering and drip coffee methods to offer you a high-quality cup of coffee.',
+    'tojol.foodTitle': 'Healthy breakfast and juices',
+    'tojol.foodDesc': 'The only cold-pressed juices bar in Puerto Escondido.',
+    'tojol.reviewsTitle': 'What our customers said',
+    'tojol.googleRating': 'Google Rating',
+    'tojol.backToProjects': 'Back to projects',
+    'tojol.viewProject': 'View Project',
 
     // Contact
     'contact.label': 'Contact',

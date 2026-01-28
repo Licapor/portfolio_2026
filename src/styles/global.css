@@ -19,6 +19,11 @@
   --color-primary: #10b981;
   --color-primary-dark: #047857;
   --color-primary-light: #34d399;
+
+  /* Tojol Project */
+  --color-tojol-yellow: #eee03b;
+  --color-tojol-yellow-light: #f5eb6e;
+  --color-tojol-yellow-dark: #d4c935;
 }
 
 html {

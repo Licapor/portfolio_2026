@@ -7,6 +7,7 @@ export interface Project {
   tags: string[];
   demoUrl?: string;
   codeUrl?: string;
+  projectUrl?: string;     // URL interna para página de proyecto dedicada
   featured: boolean;
 }
 
