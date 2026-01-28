@@ -19,16 +19,10 @@ const t = useTranslations(lang);
           {t('hero.greeting')}
         </p>
 
-        <h1 class="mb-6">
-          <span class="block text-6xl md:text-7xl lg:text-[8rem] font-bold leading-[0.85] tracking-tight">
-            <span class="split-text text-gray-900">{t('hero.title1')}</span>
-          </span>
-          <span class="block text-6xl md:text-7xl lg:text-[8rem] font-bold leading-[0.85] tracking-tight mt-2">
-            <span class="text-outline">{t('hero.title2')}</span>
-          </span>
-          <span class="block text-6xl md:text-7xl lg:text-[8rem] font-bold leading-[0.85] tracking-tight mt-2">
-            <span class="text-gray-900">{t('hero.title3')}</span>
-          </span>
+        <h1 class="mb-6 text-6xl md:text-7xl lg:text-[8rem] font-bold leading-[0.85] tracking-tight">
+          <span class="block split-text text-gray-900">{t('hero.title1')}</span>
+          <span class="block text-outline mt-2" aria-label={t('hero.title2')}>{t('hero.title2')}</span>
+          <span class="block text-gray-900 mt-2">{t('hero.title3')}</span>
         </h1>
 
         <p class="text-xl md:text-2xl text-gray-500 font-light mt-8 max-w-xl hero-slide-up-delayed">

@@ -94,7 +94,6 @@ export const ui = {
     'tojol.reviewsDesc': 'Calificación perfecta de 5 estrellas en Google Reviews.',
     'tojol.googleRating': 'Calificación en Google',
     'tojol.backToProjects': 'Volver a proyectos',
-    'tojol.viewProject': 'Ver Proyecto',
 
     // Contact
     'contact.label': 'Contacto',
@@ -197,7 +196,6 @@ export const ui = {
     'tojol.reviewsDesc': 'Perfect 5-star rating on Google Reviews.',
     'tojol.googleRating': 'Google Rating',
     'tojol.backToProjects': 'Back to projects',
-    'tojol.viewProject': 'View Project',
 
     // Contact
     'contact.label': 'Contact',
