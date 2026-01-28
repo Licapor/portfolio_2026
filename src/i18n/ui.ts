@@ -79,8 +79,8 @@ export const ui = {
     'project4.description': 'Configuración e integración de publicidad programática mediante APIs de Xandr y Prebid.js para plataformas web y mobile en Segundamano.',
     'project5.title': 'Reportes Automatizados AdTech',
     'project5.description': 'Desarrollo de reportes automatizados mediante API de Xandr Monetize y Power BI para análisis de monetización y recomendaciones estratégicas.',
-    'project6.title': 'Tojol - Café & Cocina',
-    'project6.description': 'Fundación y gestión de establecimiento de alimentos con 10% de crecimiento mensual, equipo de 5 personas y rating de 5 estrellas con 90% clientela internacional.',
+    'project6.title': 'Tojol - Lo Bueno de Comer',
+    'project6.description': 'Coffee brew bar and healthy breakfast.',
 
     // Tojol Project Page
     'tojol.subtitle': 'Healthy Breakfast • Dairy & Gluten-Free • Vegan Options',
@@ -181,8 +181,8 @@ export const ui = {
     'project4.description': 'Configuration and integration of programmatic advertising through Xandr and Prebid.js APIs for web and mobile platforms at Segundamano.',
     'project5.title': 'Automated AdTech Reports',
     'project5.description': 'Development of automated reports using Xandr Monetize API and Power BI for monetization analysis and strategic recommendations.',
-    'project6.title': 'Tojol - Café & Kitchen',
-    'project6.description': 'Founded and managed a food establishment with 10% monthly growth, team of 5, and 5-star rating with 90% international clientele.',
+    'project6.title': 'Tojol - Lo Bueno de Comer',
+    'project6.description': 'Coffee brew bar and healthy breakfast.',
 
     // Tojol Project Page
     'tojol.subtitle': 'Healthy Breakfast • Dairy & Gluten-Free • Vegan Options',

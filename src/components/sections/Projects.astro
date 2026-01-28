@@ -25,15 +25,21 @@ const t = useTranslations(lang);
     <!-- Bento Projects Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {projects.map((project, index) => (
-        <div class:list={[`reveal stagger-${(index % 6) + 1}`, project.featured && 'md:col-span-2 lg:col-span-2']}>
+        <div class:list={[
+          `reveal stagger-${(index % 6) + 1}`,
+          project.featured === true && 'md:col-span-2 lg:col-span-2',
+          project.featured === 'tall' && 'md:row-span-2'
+        ]}>
           <ProjectCard
             title={t(project.titleKey)}
             description={t(project.descriptionKey)}
             tags={project.tags}
+            image={project.image}
+            video={project.video}
             demoUrl={project.demoUrl}
             codeUrl={project.codeUrl}
             projectUrl={project.projectUrl}
-            featured={project.featured}
+            featured={!!project.featured}
             color={project.featured ? 'emerald' : 'gray'}
             featuredLabel={t('projects.featured')}
             liveDemoLabel={t('projects.liveDemo')}
