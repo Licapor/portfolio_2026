@@ -3,10 +3,6 @@ import Layout from '../../../layouts/Layout.astro';
 import { useTranslations } from '../../../i18n/utils';
 
 const t = useTranslations('en');
-
-// Placeholder para las imágenes - se actualizarán cuando agregues los archivos
-const cafeImages: string[] = [];
-const foodImages: string[] = [];
 ---
 
 <Layout title="Tojol - Café & Kitchen | Li">
@@ -17,12 +13,12 @@ const foodImages: string[] = [];
   <main class="min-h-screen bg-white">
     <!-- Hero Section -->
     <section class="relative min-h-screen bg-tojol-yellow overflow-hidden content-center">
-      <div class="w-full px-32">
+      <div class="w-full px-6 md:px-16 lg:px-32">
         <!-- Left: Logo + Text -->
         <div class="flex flex-col max-w-lg relative z-10">
             <img
               src="/projects/tojol/logo.svg"
-              alt="Tojol Logo"
+              alt="Tojol Café & Kitchen logo - healthy breakfast restaurant"
               class="h-40 lg:h-48"
             />
         </div>
@@ -33,81 +29,86 @@ const foodImages: string[] = [];
         <!-- Image rotated 40deg inside circle -->
         <img
           src="/projects/tojol/hero_img.svg"
-          alt="Tojol collage"
-          class="absolute bottom-20 right-90 w-[1900px] rotate-[40deg]"
+          alt="Collage of Tojol healthy dishes and coffee"
+          class="absolute bottom-20 right-90 w-[1900px] rotate-40"
         />
       </div>
     </section>
 
     <!-- Intro Section -->
     <section class="relative pt-14 pb-12 lg:pt-20 overflow-hidden">
-      <div class="text-center px-48">
+      <div class="text-center px-6 md:px-16 lg:px-48">
         <h2 class="text-2xl font-bold mb-12">
           {t('tojol.subtitle')}
         </h2>
-        <p class="text-xl font-medium leading-loose"> {t('tojol.intro')}</p>
+        <p class="text-xl font-medium leading-loose">{t('tojol.intro')}</p>
       </div>
     </section>
+
     <!-- Coffee Section -->
     <section>
-        <p class="bg-tojol-green py-10 text-white text-center font-bold text-4xl">{t('tojol.coffeeTitle')}</p>
-        <p class="px-48 py-8 font-bold text-center font-lg tracking-wider uppercase">{t('tojol.coffeeDesc')}</p>
+        <p class="bg-tojol-green py-10 text-white text-center font-bold text-2xl md:text-4xl">{t('tojol.coffeeTitle')}</p>
+        <p class="px-6 md:px-16 lg:px-48 py-8 font-bold text-center text-sm md:text-base tracking-wider uppercase">{t('tojol.coffeeDesc')}</p>
         <!-- Coffee Gallery -->
-        <div class="px-48 py-10">
+        <div class="px-6 md:px-16 lg:px-48 py-10">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <!-- Imágenes pequeñas: cf1 y cf3 -->
             <div class="lg:col-span-4 flex flex-col gap-6">
               <img
                 src="/projects/tojol/coffee/cf1.webp"
-                alt="Tojol coffee"
+                alt="Barista preparing filter coffee at Tojol"
                 class="w-full h-full object-cover rounded-2xl"
+                loading="lazy"
               />
               <img
                 src="/projects/tojol/coffee/cf3.webp"
-                alt="Tojol coffee"
+                alt="Drip coffee brewing process"
                 class="w-full h-full object-cover rounded-2xl"
+                loading="lazy"
               />
             </div>
             <!-- Imagen grande: cf2 -->
             <div class="lg:col-span-8">
               <img
                 src="/projects/tojol/coffee/cf2.webp"
-                alt="Tojol coffee"
+                alt="Fresh specialty coffee cup with latte art"
                 class="w-full h-full object-cover rounded-2xl"
+                loading="lazy"
               />
             </div>
           </div>
         </div>
-      
-        
     </section>
 
     <!-- Food Section -->
     <section>
-        <p class="bg-tojol-green py-10 text-white text-center font-bold text-4xl">{t('tojol.foodTitle')}</p>
-        <p class="px-48 py-8 font-bold text-center font-lg tracking-wider uppercase">{t('tojol.foodDesc')}</p>
+        <p class="bg-tojol-green py-10 text-white text-center font-bold text-2xl md:text-4xl">{t('tojol.foodTitle')}</p>
+        <p class="px-6 md:px-16 lg:px-48 py-8 font-bold text-center text-sm md:text-base tracking-wider uppercase">{t('tojol.foodDesc')}</p>
         <!-- Food Gallery -->
-        <div class="px-48 py-10">
+        <div class="px-6 md:px-16 lg:px-48 py-10">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <!-- Imagen grande: f4 -->
             <div class="lg:col-span-8">
               <img
                 src="/projects/tojol/food/f4.webp"
-                alt="Tojol food"
-                class="w-full h-170 object-cover rounded-2xl"
+                alt="Healthy avocado toast with fresh vegetables"
+                class="w-full h-auto lg:h-[680px] object-cover rounded-2xl"
+                loading="lazy"
               />
             </div>
             <!-- Imágenes pequeñas: f1 y f2 -->
             <div class="lg:col-span-4 flex flex-col gap-6">
               <img
                 src="/projects/tojol/food/f1.webp"
-                alt="Tojol food"
-                class="w-full h-82 object-cover rounded-2xl"
+                alt="Fresh berry smoothie bowl"
+                class="w-full h-auto lg:h-[328px] object-cover rounded-2xl"
+                loading="lazy"
               />
               <img
                 src="/projects/tojol/food/f2.webp"
-                alt="Tojol food"
-                class="w-full h-82 object-cover rounded-2xl"
+                alt="Tropical fruit smoothie with papaya"
+                class="w-full h-auto lg:h-[328px] object-cover rounded-2xl"
+                loading="lazy"
               />
             </div>
           </div>
@@ -116,23 +117,23 @@ const foodImages: string[] = [];
 
     <!-- Google Reviews Section -->
     <section>
-      <p class="bg-tojol-green py-10 text-white text-center font-bold text-4xl">{t('tojol.reviewsTitle')}</p>
-      <p class="px-48 py-8 font-bold text-center font-lg tracking-wider uppercase">{t('tojol.reviewsDesc')}</p>
+      <p class="bg-tojol-green py-10 text-white text-center font-bold text-2xl md:text-4xl">{t('tojol.reviewsTitle')}</p>
+      <p class="px-6 md:px-16 lg:px-48 py-8 font-bold text-center text-sm md:text-base tracking-wider uppercase">{t('tojol.reviewsDesc')}</p>
 
-      <!-- Reviews Gallery - Opción 3: Masonry -->
-      <div class="px-48 py-10">
-        <div class="columns-3 md:columns-4 lg:columns-5 gap-3 space-y-3">
-          <img src="/projects/tojol/reviews/reviews_overall.webp" alt="Tojol Google Reviews" class="w-full rounded-xl shadow-md break-inside-avoid" />
-          <img src="/projects/tojol/reviews/r1.webp" alt="Review" class="w-full rounded-xl shadow-md break-inside-avoid" />
-          <img src="/projects/tojol/reviews/r2.webp" alt="Review" class="w-full rounded-xl shadow-md break-inside-avoid" />
-          <img src="/projects/tojol/reviews/r3.webp" alt="Review" class="w-full rounded-xl shadow-md break-inside-avoid" />
-          <img src="/projects/tojol/reviews/r5.webp" alt="Review" class="w-full rounded-xl shadow-md break-inside-avoid" />
-          <img src="/projects/tojol/reviews/r6.webp" alt="Review" class="w-full rounded-xl shadow-md break-inside-avoid" />
-          <img src="/projects/tojol/reviews/r7.webp" alt="Review" class="w-full rounded-xl shadow-md break-inside-avoid" />
-          <img src="/projects/tojol/reviews/r8.webp" alt="Review" class="w-full rounded-xl shadow-md break-inside-avoid" />
-          <img src="/projects/tojol/reviews/r9.webp" alt="Review" class="w-full rounded-xl shadow-md break-inside-avoid" />
-          <img src="/projects/tojol/reviews/r010.webp" alt="Review" class="w-full rounded-xl shadow-md break-inside-avoid" />
-          <img src="/projects/tojol/reviews/r011.webp" alt="Review" class="w-full rounded-xl shadow-md break-inside-avoid" />
+      <!-- Reviews Gallery - Masonry -->
+      <div class="px-6 md:px-16 lg:px-48 py-10">
+        <div class="columns-2 md:columns-4 lg:columns-5 gap-3 space-y-3">
+          <img src="/projects/tojol/reviews/reviews_overall.webp" alt="Tojol Google Reviews - 5.0 stars overall rating" class="w-full rounded-xl shadow-md break-inside-avoid" loading="lazy" />
+          <img src="/projects/tojol/reviews/r1.webp" alt="Customer review praising the vegetarian options and cozy atmosphere" class="w-full rounded-xl shadow-md break-inside-avoid" loading="lazy" />
+          <img src="/projects/tojol/reviews/r2.webp" alt="5-star review about healthy food and garden vibe" class="w-full rounded-xl shadow-md break-inside-avoid" loading="lazy" />
+          <img src="/projects/tojol/reviews/r3.webp" alt="Customer recommending the Coco Latte coffee" class="w-full rounded-xl shadow-md break-inside-avoid" loading="lazy" />
+          <img src="/projects/tojol/reviews/r5.webp" alt="Review about friendly staff and great food" class="w-full rounded-xl shadow-md break-inside-avoid" loading="lazy" />
+          <img src="/projects/tojol/reviews/r6.webp" alt="Customer review about best coffee experience" class="w-full rounded-xl shadow-md break-inside-avoid" loading="lazy" />
+          <img src="/projects/tojol/reviews/r7.webp" alt="5-star review praising the gluten-free options" class="w-full rounded-xl shadow-md break-inside-avoid" loading="lazy" />
+          <img src="/projects/tojol/reviews/r8.webp" alt="Review about cozy jungle vibe and amazing food" class="w-full rounded-xl shadow-md break-inside-avoid" loading="lazy" />
+          <img src="/projects/tojol/reviews/r9.webp" alt="Customer loving the sun butter mango toast" class="w-full rounded-xl shadow-md break-inside-avoid" loading="lazy" />
+          <img src="/projects/tojol/reviews/r010.webp" alt="Review recommending the avocado toast and fresh juices" class="w-full rounded-xl shadow-md break-inside-avoid" loading="lazy" />
+          <img src="/projects/tojol/reviews/r011.webp" alt="5-star review about excellent service and healthy breakfast" class="w-full rounded-xl shadow-md break-inside-avoid" loading="lazy" />
         </div>
       </div>
     </section>
@@ -157,31 +158,5 @@ const foodImages: string[] = [];
 <style>
   main, main * {
     font-family: 'Poppins', sans-serif;
-  }
-
-  .review-card {
-    position: relative;
-    height: 180px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-    cursor: pointer;
-  }
-
-  .review-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    object-position: top;
-    border-radius: 12px;
-    transition: all 0.4s ease;
-  }
-
-  .review-card:hover img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: auto;
-    z-index: 20;
-    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3);
   }
 </style>

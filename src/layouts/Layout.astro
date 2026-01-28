@@ -13,11 +13,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://iele.dev
 const {
   title,
   description = lang === 'es'
-    ? "Digital product development studio"
+    ? "Estudio de desarrollo de productos digitales. Creando experiencias digitales modernas y funcionales."
     : "Digital product development studio. Creating modern and functional digital experiences."
 } = Astro.props;
 
-const ogImage = "/og-image.png";
+// Alternate language URLs for hreflang
+const currentPath = Astro.url.pathname;
+const esURL = currentPath.startsWith('/en') ? currentPath.replace('/en', '') || '/' : currentPath;
+const enURL = currentPath.startsWith('/en') ? currentPath : `/en${currentPath}`;
+
+const ogImage = `${canonicalURL.origin}/og-image.png`;
 ---
 
 <!doctype html>
@@ -29,6 +34,11 @@ const ogImage = "/og-image.png";
     <meta name="author" content={t('global.name')} />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalURL.href} />
+
+    <!-- Hreflang for i18n SEO -->
+    <link rel="alternate" hreflang="es" href={`${canonicalURL.origin}${esURL}`} />
+    <link rel="alternate" hreflang="en" href={`${canonicalURL.origin}${enURL}`} />
+    <link rel="alternate" hreflang="x-default" href={`${canonicalURL.origin}${esURL}`} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />

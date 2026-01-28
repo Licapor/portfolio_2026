@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Spanish (default) -->
+  <url>
+    <loc>https://li.studio/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://li.studio/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://li.studio/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://li.studio/"/>
+    <lastmod>2026-01-28</lastmod>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- English -->
+  <url>
+    <loc>https://li.studio/en/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://li.studio/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://li.studio/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://li.studio/"/>
+    <lastmod>2026-01-28</lastmod>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Tojol Project (English) -->
+  <url>
+    <loc>https://li.studio/en/projects/tojol/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+</urlset>
