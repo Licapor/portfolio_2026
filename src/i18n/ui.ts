@@ -58,6 +58,10 @@ export const ui = {
     'skill.adaptability': 'Adaptabilidad',
     'skill.teamwork': 'Trabajo en Equipo',
     'skill.creativity': 'Creatividad',
+    'skill.empathy': 'Empatía',
+    'skill.analyticalThinking': 'Pensamiento Analítico',
+    'skill.timeManagement': 'Gestión del Tiempo',
+    'skill.attentionToDetail': 'Atención al Detalle',
 
     // Projects
     'projects.label': 'Proyectos',
@@ -160,6 +164,10 @@ export const ui = {
     'skill.adaptability': 'Adaptability',
     'skill.teamwork': 'Teamwork',
     'skill.creativity': 'Creativity',
+    'skill.empathy': 'Empathy',
+    'skill.analyticalThinking': 'Analytical Thinking',
+    'skill.timeManagement': 'Time Management',
+    'skill.attentionToDetail': 'Attention to Detail',
 
     // Projects
     'projects.label': 'Projects',
