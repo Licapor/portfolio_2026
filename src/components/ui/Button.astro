@@ -1,10 +1,7 @@
 ---
-interface Props {
-  variant?: 'primary' | 'outline';
-  href?: string;
-  class?: string;
-  type?: 'button' | 'submit';
-}
+import type { ButtonProps } from '../../types';
+
+type Props = ButtonProps;
 
 const { variant = 'primary', href, class: className, type = 'button' } = Astro.props;
 

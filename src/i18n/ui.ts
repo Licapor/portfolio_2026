@@ -1,17 +1,34 @@
 export const languages = {
   es: 'Español',
   en: 'English',
-};
+} as const;
 
 export const defaultLang = 'es';
 
+// Valores que no necesitan traducción (marcas, números, nombres propios)
+export const shared = {
+  'global.name': 'Li',
+  'global.logo': 'LCP',
+  'global.email': 'liliana@licapor.dev',
+  'hero.greeting': "Li's studio",
+  'hero.title1': 'Digital',
+  'hero.title2': 'Product',
+  'hero.title3': 'Developer',
+  'hero.yearsNumber': '9+',
+  'hero.industriesNumber': '5',
+  'hero.marquee': 'Product Development • No-Code • WeWeb • Xano • Figma • AdTech • Prebid.js',
+  'about.langES': 'ES',
+  'about.langEN': 'EN',
+  'about.langPT': 'PT',
+  'project6.title': 'Tojol - Lo Bueno de Comer',
+  'project6.description': 'Coffee brew bar and healthy breakfast.',
+  'tojol.subtitle': 'Healthy Breakfast • Dairy & Gluten-Free • Vegan Options',
+  'tojol.location': 'La Punta, Puerto Escondido',
+  'contact.titleOutline': '!',
+} as const;
+
 export const ui = {
   es: {
-    // Global
-    'global.name': 'Li',
-    'global.logo': 'LCP',
-    'global.email': 'hola@iele.com',
-
     // Navigation
     'nav.projects': 'Proyectos',
     'nav.about': 'Sobre mí',
@@ -19,22 +36,15 @@ export const ui = {
     'nav.cta': 'Hablemos',
 
     // Hero
-    'hero.greeting': "Li's studio",
-    'hero.title1': 'Digital',
-    'hero.title2': 'Product',
-    'hero.title3': 'Developer',
     'hero.description': 'Transformando ideas en',
     'hero.highlight1': 'productos digitales',
     'hero.highlight2': 'valor',
     'hero.descriptionEnd': 'que generan',
     'hero.stat1': 'Años haciendo tec',
     'hero.stat2': 'Industrias: Comunicación, E-commerce, AdTech, Educación, Hostelería',
-    'hero.yearsNumber': '9+',
-    'hero.industriesNumber': '5',
     'hero.cta1': 'Ver Proyectos',
     'hero.cta2': 'Contacto',
     'hero.scroll': 'Scroll',
-    'hero.marquee': 'Product Development • No-Code • WeWeb • Xano • Figma • AdTech • Prebid.js',
 
     // About
     'about.label': 'Sobre mí',
@@ -47,9 +57,6 @@ export const ui = {
     'about.location': 'Ciudad de México',
     'about.skillsTitle': 'Habilidades Blandas',
     'about.languagesLabel': 'Idiomas',
-    'about.langES': 'ES',
-    'about.langEN': 'EN',
-    'about.langPT': 'PT',
 
     // Soft Skills
     'skill.communication': 'Comunicación',
@@ -83,13 +90,9 @@ export const ui = {
     'project4.description': 'Configuración e integración de publicidad programática mediante APIs de Xandr y Prebid.js para plataformas web y mobile en Segundamano.',
     'project5.title': 'Reportes Automatizados AdTech',
     'project5.description': 'Desarrollo de reportes automatizados mediante API de Xandr Monetize y Power BI para análisis de monetización y recomendaciones estratégicas.',
-    'project6.title': 'Tojol - Lo Bueno de Comer',
-    'project6.description': 'Coffee brew bar and healthy breakfast.',
 
     // Tojol Project Page
-    'tojol.subtitle': 'Healthy Breakfast • Dairy & Gluten-Free • Vegan Options',
     'tojol.intro': 'Tojol fue un restaurante especializado en platillos con ingredientes auténticos mexicanos. Nuestro menú ofrecía opciones deliciosas y nutritivas, incluyendo opciones veganas y sin gluten. En Tojol, nos enorgullecíamos de usar nuestras propias leches vegetales y ser un establecimiento libre de lácteos.',
-    'tojol.location': 'La Punta, Puerto Escondido',
     'tojol.coffeeTitle': 'El único coffee brew bar en La Punta',
     'tojol.coffeeDesc': 'Utilizamos métodos de filtrado y goteo para ofrecerte un café de alta calidad.',
     'tojol.foodTitle': 'Desayunos saludables y jugos',
@@ -102,7 +105,6 @@ export const ui = {
     // Contact
     'contact.label': 'Contacto',
     'contact.title': 'Hablemos',
-    'contact.titleOutline': '!',
     'contact.description': '¿Tienes un proyecto en mente o buscas alguien para tu equipo? Estoy abierta a nuevas oportunidades.',
     'contact.emailLabel': 'Escríbeme',
     'contact.whatsappLabel': 'Chatea conmigo',
@@ -113,11 +115,6 @@ export const ui = {
     'footer.backToTop': 'Volver arriba',
   },
   en: {
-    // Global
-    'global.name': 'Li',
-    'global.logo': 'LCP',
-    'global.email': 'hola@iele.com',
-
     // Navigation
     'nav.projects': 'Projects',
     'nav.about': 'About',
@@ -125,22 +122,15 @@ export const ui = {
     'nav.cta': "Let's talk",
 
     // Hero
-    'hero.greeting': "Li's studio",
-    'hero.title1': 'Digital',
-    'hero.title2': 'Product',
-    'hero.title3': 'Developer',
     'hero.description': 'Transforming ideas into',
     'hero.highlight1': 'digital products',
     'hero.highlight2': 'value',
     'hero.descriptionEnd': 'that create',
     'hero.stat1': 'Years building tech',
     'hero.stat2': 'Industries: Communication, E-commerce, AdTech, Education, Hospitality',
-    'hero.yearsNumber': '9+',
-    'hero.industriesNumber': '5',
     'hero.cta1': 'View Projects',
     'hero.cta2': 'Contact',
     'hero.scroll': 'Scroll',
-    'hero.marquee': 'Product Development • No-Code • WeWeb • Xano • Figma • AdTech • Prebid.js',
 
     // About
     'about.label': 'About',
@@ -153,9 +143,6 @@ export const ui = {
     'about.location': 'Mexico City',
     'about.skillsTitle': 'Soft Skills',
     'about.languagesLabel': 'Languages',
-    'about.langES': 'ES',
-    'about.langEN': 'EN',
-    'about.langPT': 'PT',
 
     // Soft Skills
     'skill.communication': 'Communication',
@@ -189,13 +176,9 @@ export const ui = {
     'project4.description': 'Configuration and integration of programmatic advertising through Xandr and Prebid.js APIs for web and mobile platforms at Segundamano.',
     'project5.title': 'Automated AdTech Reports',
     'project5.description': 'Development of automated reports using Xandr Monetize API and Power BI for monetization analysis and strategic recommendations.',
-    'project6.title': 'Tojol - Lo Bueno de Comer',
-    'project6.description': 'Coffee brew bar and healthy breakfast.',
 
     // Tojol Project Page
-    'tojol.subtitle': 'Healthy Breakfast • Dairy & Gluten-Free • Vegan Options',
     'tojol.intro': "Tojol is a restaurant specializing in creating dishes with mexican authentic ingredients. Our menu features delicious and nutritious options, including vegan and gluten-free dishes. At Tojol, we pride ourselves on using our own plant-based milks and being a dairy-free establishment. Whether you're looking for a satisfying breakfast, a refreshing juice, or a high quality cup of coffee, our welcoming space in the heart of La Punta, Puerto Escondido has something for everyone.",
-    'tojol.location': 'La Punta, Puerto Escondido',
     'tojol.coffeeTitle': 'The only coffee brew bar in La Punta',
     'tojol.coffeeDesc': 'We use filtering and drip coffee methods to offer you a high-quality cup of coffee.',
     'tojol.foodTitle': 'Healthy breakfast and juices',
@@ -208,7 +191,6 @@ export const ui = {
     // Contact
     'contact.label': 'Contact',
     'contact.title': "Let's talk",
-    'contact.titleOutline': '!',
     'contact.description': 'Have a project in mind or looking for someone for your team? I am open to new opportunities.',
     'contact.emailLabel': 'Drop me a line',
     'contact.whatsappLabel': 'Chat with me',
@@ -219,3 +201,9 @@ export const ui = {
     'footer.backToTop': 'Back to top',
   },
 } as const;
+
+// Type exports for type safety
+export type Language = keyof typeof languages;
+export type SharedKey = keyof typeof shared;
+export type TranslationKey = keyof typeof ui[typeof defaultLang];
+export type AllKeys = SharedKey | TranslationKey;

@@ -1,38 +1,48 @@
-// Tipos TypeScript para el portfolio
+// ============================================
+// Data Types - Estructuras de datos del contenido
+// ============================================
+
+/** Layout variants para tarjetas de proyecto en el grid bento */
+export type ProjectLayout = 'default' | 'wide' | 'tall';
 
 export interface Project {
   id: string;
-  titleKey: string;        // Key para i18n
-  descriptionKey: string;  // Key para i18n
+  titleKey: string;
+  descriptionKey: string;
   tags: string[];
-  image?: string;          // URL de imagen preview
-  video?: string;          // URL de video preview
+  image?: string;
+  video?: string;
   demoUrl?: string;
   codeUrl?: string;
-  projectUrl?: string;     // URL interna para página de proyecto dedicada
-  featured: boolean | 'tall';  // true = wide (2 cols), 'tall' = tall (2 rows)
+  projectUrl?: string;
+  /** Layout en grid: 'wide' = 2 cols, 'tall' = 2 rows, 'default' = 1x1 */
+  layout?: ProjectLayout;
 }
 
 export interface Skill {
-  nameKey: string;  // Key para i18n
-  level: number;    // 0-100
+  nameKey: string;
+  level: number; // 0-100
 }
 
 export interface SocialLink {
   name: string;
   url: string;
-  icon: string;  // SVG path
+  icon: string;
 }
 
 export interface NavLink {
   href: string;
-  labelKey: string;  // Key para i18n
+  labelKey: string;
 }
 
-// Props para componentes
+// ============================================
+// Component Props - Props de componentes Astro
+// ============================================
+
 export interface ButtonProps {
   variant?: 'primary' | 'outline';
   href?: string;
+  type?: 'button' | 'submit';
   class?: string;
 }
 
@@ -45,4 +55,18 @@ export interface SectionHeaderProps {
 export interface BentoCardProps {
   class?: string;
   variant?: 'default' | 'dark' | 'gradient';
+}
+
+export interface ProjectCardProps {
+  title: string;
+  description: string;
+  tags: string[];
+  image?: string;
+  video?: string;
+  demoUrl?: string;
+  codeUrl?: string;
+  projectUrl?: string;
+  featured?: boolean;
+  featuredLabel?: string;
+  color?: 'emerald' | 'gray';
 }
