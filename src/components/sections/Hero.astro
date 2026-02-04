@@ -67,12 +67,11 @@ const t = useTranslations(lang);
 
   <!-- Marquee -->
   <div class="absolute bottom-0 left-0 right-0 py-6 bg-gradient-to-r from-dark-teal via-sage to-dark-teal text-white overflow-hidden">
-    <div class="marquee">
-      <div class="marquee-content gap-8 text-lg font-medium">
-        <span>{t('hero.marquee')}</span>
-        <span class="opacity-50">•</span>
-        <span>{t('hero.marquee')}</span>
-        <span class="opacity-50">•</span>
+    <div class="marquee-container">
+      <div class="marquee-track">
+        <span class="marquee-item">{t('hero.marquee')}</span>
+        <span class="marquee-item">{t('hero.marquee')}</span>
+        <span class="marquee-item">{t('hero.marquee')}</span>
       </div>
     </div>
   </div>
@@ -100,5 +99,38 @@ const t = useTranslations(lang);
 
   .hero-slide-up-more-delayed {
     animation: fadeSlideUp 0.8s ease 1s both;
+  }
+
+  /* Marquee continuo sin huecos */
+  .marquee-container {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: scroll 30s linear infinite;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  .marquee-item {
+    flex-shrink: 0;
+    padding: 0 2rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.333%);
+    }
   }
 </style>
