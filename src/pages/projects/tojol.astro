@@ -1,8 +1,9 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import { useTranslations } from '../../../i18n/utils';
+import Layout from '../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
-const t = useTranslations('en');
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <Layout title="Tojol - Café & Kitchen | Li">
@@ -141,15 +142,15 @@ const t = useTranslations('en');
     <!-- Back to Projects -->
     <section class="py-12 bg-white">
       <div class="max-w-6xl mx-auto px-6 text-center">
-        <a
-          href="/en/#work"
-          class="inline-flex items-center gap-3 px-8 py-4 bg-gray-900 text-white rounded-full font-semibold hover:bg-gray-800 transition-colors"
+        <button
+          onclick="history.back()"
+          class="inline-flex items-center gap-3 px-8 py-4 bg-gray-900 text-white rounded-full font-semibold hover:bg-gray-800 transition-colors cursor-pointer"
         >
           <svg class="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
           {t('tojol.backToProjects')}
-        </a>
+        </button>
       </div>
     </section>
   </main>

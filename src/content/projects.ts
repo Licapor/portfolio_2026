@@ -8,7 +8,7 @@ export const projects: Project[] = [
     tags: ['Hostelería', 'Operaciones', 'Marketing'],
     video: 'https://res.cloudinary.com/db50dpczx/video/upload/tojol_gjfoay.mp4',
     image: 'https://res.cloudinary.com/db50dpczx/raw/upload/v1770167481/tojol_gjfoay_poster',
-    projectUrl: '/en/projects/tojol',
+    projectUrl: '/projects/tojol',
     layout: 'tall',
   },
   {
