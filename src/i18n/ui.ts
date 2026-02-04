@@ -16,7 +16,7 @@ export const shared = {
   'hero.title3': 'Developer',
   'hero.yearsNumber': '9+',
   'hero.industriesNumber': '5',
-  'hero.marquee': 'Product Development • No-Code • WeWeb • Xano • Figma • AdTech • Prebid.js • Python • TypeScript • React • Node.js • AI/ML • Prompt Engineering • LLMs • RAG • API Design • Automation',
+  'hero.marquee': 'Product Development • No-Code • WeWeb • Xano • Figma • AdTech • Prebid.js • Python • TypeScript • React • Node.js • AI/ML • Prompt Engineering • LLMs • RAG • API Design • Automation •',
   'about.langES': 'ES',
   'about.langEN': 'EN',
   'about.langPT': 'PT',
