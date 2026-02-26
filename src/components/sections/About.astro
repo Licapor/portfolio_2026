@@ -23,9 +23,9 @@ const t = useTranslations(lang);
     <!-- Bento Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
       <!-- Columna izquierda: Card principal -->
-      <div class="lg:col-span-8">
+      <div class="lg:col-span-8 flex">
         <!-- Card 1: Main intro -->
-        <div class="bento-card p-8 flex flex-col justify-between reveal stagger-1 relative overflow-hidden min-h-[280px]">
+        <div class="bento-card p-8 flex flex-col justify-between reveal stagger-1 relative overflow-hidden w-full">
           <div class="absolute -top-10 -right-10 w-40 h-40 bg-mint-light rounded-full geo-float opacity-50"></div>
           <div class="absolute bottom-10 right-20 w-8 h-8 border border-mint rotate-45 opacity-30"></div>
 
@@ -77,9 +77,31 @@ const t = useTranslations(lang);
           </div>
         </InfoCard>
       </div>
-    </div>
-  </div>
 
+      <!-- Segunda fila: Currently + Adventures -->
+      <div class="lg:col-span-6">
+        <!-- Card 4: Currently -->
+        <InfoCard class="reveal stagger-4 h-full">
+          <div class="absolute -top-4 -right-4 w-16 h-16 bg-mint-light rounded-full opacity-30"></div>
+          <p class="text-gray-500 text-sm">{t('about.currentlyLabel')}</p>
+          <div class="relative">
+            <p class="text-xl font-bold text-gray-900">{t('about.currently')}</p>
+            <p class="text-sage font-medium">
+              {t('about.currentlyWith')}<a href="https://nieva.team/es" target="_blank" rel="noopener noreferrer" class="text-gold hover:underline">Nieva Team</a>
+            </p>
+          </div>
+        </InfoCard>
+      </div>
+
+      <div class="lg:col-span-6">
+        <!-- Card 5: Adventures -->
+        <InfoCard class="reveal stagger-5 h-full">
+          <div class="absolute bottom-4 right-4 w-8 h-8 border border-gold/20 rotate-12 opacity-40"></div>
+          <p class="text-gray-500 text-sm">{t('about.adventuresLabel')}</p>
+          <p class="text-lg font-medium text-gray-700 relative">{t('about.adventures')}</p>
+        </InfoCard>
+      </div>
+    </div>
   </div>
 
   <!-- Soft Skills Marquee - Section divider -->

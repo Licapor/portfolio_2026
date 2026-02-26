@@ -57,6 +57,11 @@ export const ui = {
     'about.location': 'Ciudad de México',
     'about.skillsTitle': 'Habilidades Blandas',
     'about.languagesLabel': 'Idiomas',
+    'about.currentlyLabel': 'Actualmente',
+    'about.currently': 'Bootcamp AI Engineering',
+    'about.currentlyWith': 'con ',
+    'about.adventuresLabel': 'Fuera del código',
+    'about.adventures': 'Viajando por México y el mundo en eventos de Tech y Artes Marciales',
 
     // Soft Skills
     'about.softSkillsMarquee': 'Comunicación • Liderazgo • Resolución de Problemas • Adaptabilidad • Trabajo en Equipo • Creatividad • Empatía • Pensamiento Analítico • Gestión del Tiempo • Atención al Detalle •',
@@ -196,6 +201,11 @@ export const ui = {
     'about.location': 'Mexico City',
     'about.skillsTitle': 'Soft Skills',
     'about.languagesLabel': 'Languages',
+    'about.currentlyLabel': 'Currently',
+    'about.currently': 'AI Engineering Bootcamp',
+    'about.currentlyWith': 'with ',
+    'about.adventuresLabel': 'Outside the code',
+    'about.adventures': 'Traveling through Mexico and the world for Tech and Martial Arts events',
 
     // Soft Skills
     'about.softSkillsMarquee': 'Communication • Leadership • Problem Solving • Adaptability • Teamwork • Creativity • Empathy • Analytical Thinking • Time Management • Attention to Detail •',
