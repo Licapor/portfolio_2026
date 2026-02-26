@@ -28,6 +28,9 @@ export const projectPagesTranslations = {
     'facultyEval.roleTitle': 'Mi Rol',
     'facultyEval.roleDesc':
       'Desarrollo frontend completo del sistema de forma independiente. Creación y gestión del backlog de actividades de frontend.',
+    'facultyEval.aiTitle': 'AI Engineering',
+    'facultyEval.aiDesc':
+      'El desarrollo core se realizó con un enfoque agentico de AI Engineering, utilizando Claude Code con .claudeskills, MCP (Model Context Protocol) y técnicas avanzadas de Prompt Engineering para acelerar la implementación y mantener alta calidad de código.',
     'facultyEval.stackTitle': 'Stack Técnico',
     'facultyEval.metricsTitle': 'Métricas',
     'facultyEval.metric1': '6,000 docentes',
@@ -60,6 +63,9 @@ export const projectPagesTranslations = {
     'docManagement.roleTitle': 'Mi Rol',
     'docManagement.roleDesc':
       'Diseño de servicios backend a partir de las necesidades del frontend. Gestión del backlog detallado en Linear. Pruebas de APIs, endpoints, pruebas end-to-end y unit tests con Jest.',
+    'docManagement.aiTitle': 'AI Engineering',
+    'docManagement.aiDesc':
+      'El desarrollo core se realizó con un enfoque agentico de AI Engineering, utilizando Claude Code con .claudeskills, MCP (Model Context Protocol) y técnicas avanzadas de Prompt Engineering para acelerar la implementación y mantener alta calidad de código.',
     'docManagement.metric1': '100,000 estudiantes',
     'docManagement.metric2': '80% menos espera',
     'docManagement.metric3': '70% menos revisión',
@@ -81,6 +87,9 @@ export const projectPagesTranslations = {
     'certification.roleTitle': 'Mi Rol',
     'certification.roleDesc':
       'Diseño de servicios backend a partir de las necesidades del frontend. Gestión del backlog detallado de actividades frontend en Linear. Pruebas de APIs, endpoints, pruebas end-to-end y unit tests con Jest.',
+    'certification.aiTitle': 'AI Engineering',
+    'certification.aiDesc':
+      'El desarrollo core se realizó con un enfoque agentico de AI Engineering, utilizando Claude Code con .claudeskills, MCP (Model Context Protocol) y técnicas avanzadas de Prompt Engineering para acelerar la implementación y mantener alta calidad de código.',
     'certification.metric1': '100,000 estudiantes',
     'certification.metric2': '60,000 administrativos',
     'certification.metric3': '75% reducción en tiempos',
@@ -117,6 +126,9 @@ export const projectPagesTranslations = {
     'facultyEval.roleTitle': 'My Role',
     'facultyEval.roleDesc':
       'Complete frontend development of the system independently. Creation and management of the frontend activities backlog.',
+    'facultyEval.aiTitle': 'AI Engineering',
+    'facultyEval.aiDesc':
+      'Core development was carried out with an agentic AI Engineering approach, using Claude Code with .claudeskills, MCP (Model Context Protocol), and advanced Prompt Engineering techniques to accelerate implementation and maintain high code quality.',
     'facultyEval.stackTitle': 'Tech Stack',
     'facultyEval.metricsTitle': 'Metrics',
     'facultyEval.metric1': '6,000 faculty members',
@@ -149,6 +161,9 @@ export const projectPagesTranslations = {
     'docManagement.roleTitle': 'My Role',
     'docManagement.roleDesc':
       'Backend service design based on frontend needs. Detailed backlog management in Linear. API and endpoint testing, end-to-end testing, and unit tests with Jest.',
+    'docManagement.aiTitle': 'AI Engineering',
+    'docManagement.aiDesc':
+      'Core development was carried out with an agentic AI Engineering approach, using Claude Code with .claudeskills, MCP (Model Context Protocol), and advanced Prompt Engineering techniques to accelerate implementation and maintain high code quality.',
     'docManagement.metric1': '100,000 students',
     'docManagement.metric2': '80% less wait time',
     'docManagement.metric3': '70% less review time',
@@ -170,6 +185,9 @@ export const projectPagesTranslations = {
     'certification.roleTitle': 'My Role',
     'certification.roleDesc':
       'Backend service design based on frontend needs. Detailed frontend backlog management in Linear. API and endpoint testing, end-to-end testing, and unit tests with Jest.',
+    'certification.aiTitle': 'AI Engineering',
+    'certification.aiDesc':
+      'Core development was carried out with an agentic AI Engineering approach, using Claude Code with .claudeskills, MCP (Model Context Protocol), and advanced Prompt Engineering techniques to accelerate implementation and maintain high code quality.',
     'certification.metric1': '100,000 students',
     'certification.metric2': '60,000 administrators',
     'certification.metric3': '75% time reduction',

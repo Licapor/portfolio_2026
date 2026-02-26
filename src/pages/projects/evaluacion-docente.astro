@@ -15,6 +15,7 @@ const stack = [
   { name: 'DynamoDB', category: 'Backend' },
   { name: 'Power BI', category: 'Analytics' },
   { name: 'Figma', category: 'Design' },
+  { name: 'Claude Code', category: 'AI Engineering' },
 ];
 
 const pageTitle = t('facultyEval.pageTitle');
@@ -131,6 +132,39 @@ const pageTitle = t('facultyEval.pageTitle');
             </span>
             <span class="px-4 py-2 bg-white rounded-full border border-sage/30 text-sage font-medium">
               React / Next.js
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Engineering Section -->
+    <section class="py-16 lg:py-24">
+      <div class="max-w-6xl mx-auto px-6 lg:px-12">
+        <div class="bento-card p-8 max-w-4xl mx-auto reveal">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
+              <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900">{t('facultyEval.aiTitle')}</h2>
+          </div>
+          <p class="text-gray-600 leading-relaxed mb-6">
+            {t('facultyEval.aiDesc')}
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <span class="px-4 py-2 bg-purple-50 rounded-full border border-purple-200 text-purple-700 font-medium text-sm">
+              Claude Code
+            </span>
+            <span class="px-4 py-2 bg-purple-50 rounded-full border border-purple-200 text-purple-700 font-medium text-sm">
+              .claudeskills
+            </span>
+            <span class="px-4 py-2 bg-purple-50 rounded-full border border-purple-200 text-purple-700 font-medium text-sm">
+              MCP (Model Context Protocol)
+            </span>
+            <span class="px-4 py-2 bg-purple-50 rounded-full border border-purple-200 text-purple-700 font-medium text-sm">
+              Prompt Engineering
             </span>
           </div>
         </div>
