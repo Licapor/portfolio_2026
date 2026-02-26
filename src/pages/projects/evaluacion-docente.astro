@@ -17,9 +17,7 @@ const stack = [
   { name: 'Figma', category: 'Design' },
 ];
 
-const pageTitle = lang === 'es'
-  ? 'Sistema de Evaluación Docente | Li'
-  : 'Faculty Evaluation System | Li';
+const pageTitle = t('facultyEval.pageTitle');
 ---
 
 <Layout title={pageTitle}>
@@ -51,11 +49,11 @@ const pageTitle = lang === 'es'
             <div class="flex flex-wrap gap-4 mt-8">
               <div class="px-4 py-2 bg-white rounded-xl border border-gray-200">
                 <span class="text-2xl font-bold text-gold">6K</span>
-                <span class="text-sm text-gray-500 ml-1">{lang === 'es' ? 'docentes' : 'teachers'}</span>
+                <span class="text-sm text-gray-500 ml-1">{t('facultyEval.metric1Label')}</span>
               </div>
               <div class="px-4 py-2 bg-white rounded-xl border border-gray-200">
                 <span class="text-2xl font-bold text-gold">80K</span>
-                <span class="text-sm text-gray-500 ml-1">{lang === 'es' ? 'estudiantes' : 'students'}</span>
+                <span class="text-sm text-gray-500 ml-1">{t('facultyEval.metric2Label')}</span>
               </div>
             </div>
           </div>

@@ -18,9 +18,7 @@ const stack = [
   { name: 'Figma', category: 'Design' },
 ];
 
-const pageTitle = lang === 'es'
-  ? 'Automatización de Titulación | Li'
-  : 'Certification Automation | Li';
+const pageTitle = t('certification.pageTitle');
 ---
 
 <Layout title={pageTitle}>
@@ -52,15 +50,15 @@ const pageTitle = lang === 'es'
             <div class="flex flex-wrap gap-4 mt-8">
               <div class="px-4 py-2 bg-white rounded-xl border border-gray-200">
                 <span class="text-2xl font-bold text-gold">100K</span>
-                <span class="text-sm text-gray-500 ml-1">{lang === 'es' ? 'estudiantes' : 'students'}</span>
+                <span class="text-sm text-gray-500 ml-1">{t('certification.metric1Label')}</span>
               </div>
               <div class="px-4 py-2 bg-white rounded-xl border border-gray-200">
                 <span class="text-2xl font-bold text-gold">60K</span>
-                <span class="text-sm text-gray-500 ml-1">{lang === 'es' ? 'administrativos' : 'staff'}</span>
+                <span class="text-sm text-gray-500 ml-1">{t('certification.metric2Label')}</span>
               </div>
               <div class="px-4 py-2 bg-white rounded-xl border border-gray-200">
                 <span class="text-2xl font-bold text-primary">-75%</span>
-                <span class="text-sm text-gray-500 ml-1">{lang === 'es' ? 'tiempo' : 'time'}</span>
+                <span class="text-sm text-gray-500 ml-1">{t('certification.metric3Label')}</span>
               </div>
             </div>
           </div>
