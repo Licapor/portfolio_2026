@@ -232,8 +232,8 @@ export const ui = {
     // Project titles and descriptions
     'project1.title': 'Document Management System',
     'project1.description': 'Platform that automates student admission process, reducing costs and operational times for a population of 80,000 users in an educational institution.',
-    'project2.title': 'Teacher Evaluation System',
-    'project2.description': 'Back office for creating and managing teacher evaluation periods, used by 6,000 teachers and 80,000 students.',
+    'project2.title': 'Faculty Evaluation System',
+    'project2.description': 'Back office for creating and managing faculty evaluation periods, used by 6,000 faculty members and 80,000 students.',
     'project3.title': 'Certification Automation',
     'project3.description': 'System that automates the certification process, achieving a 75% reduction in processing times and administrative workload.',
     'project4.title': 'Prebid.js Implementation',
@@ -258,16 +258,16 @@ export const ui = {
 
     // Faculty Evaluation Project Page
     'facultyEval.subtitle': 'Administrative system for educational institutions',
-    'facultyEval.description': 'Back office for creating and managing teacher evaluation periods. Administrative staff manages date ranges for students to access their teacher surveys, with unique identifiers linked to active school cycles.',
+    'facultyEval.description': 'Back office for creating and managing faculty evaluation periods. Administrative staff manages date ranges for students to access their faculty surveys, with unique identifiers linked to active school cycles.',
     'facultyEval.problemTitle': 'The Context',
-    'facultyEval.problemDesc': 'Educational institutions need to periodically evaluate their faculty to support hiring, retention, and career development processes. Managing these evaluation periods for a population of 6,000 teachers and 80,000 students requires a robust and flexible system.',
+    'facultyEval.problemDesc': 'Educational institutions need to periodically evaluate their faculty to support hiring, retention, and career development processes. Managing these evaluation periods for a population of 6,000 faculty members and 80,000 students requires a robust and flexible system.',
     'facultyEval.solutionTitle': 'The Solution',
-    'facultyEval.solutionDesc': 'A system that allows administrators to configure evaluation periods by university, enable or disable time extensions, and visualize key metrics through integrated Power BI reports: average ratings, student participation percentage, filters by teacher or subject.',
+    'facultyEval.solutionDesc': 'A system that allows administrators to configure evaluation periods by university, enable or disable time extensions, and visualize key metrics through integrated Power BI reports: average ratings, student participation percentage, filters by faculty member or subject.',
     'facultyEval.roleTitle': 'My Role',
     'facultyEval.roleDesc': 'Complete frontend development of the system independently. Creation and management of the frontend activities backlog.',
     'facultyEval.stackTitle': 'Tech Stack',
     'facultyEval.metricsTitle': 'Metrics',
-    'facultyEval.metric1': '6,000 teachers',
+    'facultyEval.metric1': '6,000 faculty members',
     'facultyEval.metric2': '80,000 students',
     'facultyEval.metric3': 'Multiple universities',
 

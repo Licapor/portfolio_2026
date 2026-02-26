@@ -17,6 +17,17 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const homePath = getLocalizedPath('/', lang);
 const emailHref = `mailto:${t('global.email')}`;
+
+// Check if we're on the home page
+const pathname = Astro.url.pathname;
+const isHomePage = pathname === '/' || pathname === '/en' || pathname === '/en/';
+
+// Helper to get correct href for nav links
+const getNavHref = (href: string) => {
+  if (isHomePage) return href;
+  // If not on home page, prepend home path to anchor links
+  return href.startsWith('#') ? `${homePath}${href}` : href;
+};
 ---
 
 <header class:list={['fixed top-0 left-0 right-0 z-50 glass transition-all duration-500', className]}>
@@ -29,7 +40,7 @@ const emailHref = `mailto:${t('global.email')}`;
       {navLinks.map(link => (
         <li>
           <a
-            href={link.href}
+            href={getNavHref(link.href)}
             class="text-dark-teal hover:text-primary transition-colors font-medium hover-underline"
           >
             {t(link.labelKey)}
@@ -62,7 +73,7 @@ const emailHref = `mailto:${t('global.email')}`;
     <ul class="px-6 py-6 space-y-4" role="list">
       {navLinks.map(link => (
         <li role="menuitem">
-          <a href={link.href} class="block text-dark font-medium py-2 hover:text-primary transition-colors">
+          <a href={getNavHref(link.href)} class="block text-dark font-medium py-2 hover:text-primary transition-colors">
             {t(link.labelKey)}
           </a>
         </li>

@@ -38,7 +38,7 @@ const t = useTranslations(lang);
             video={project.video}
             demoUrl={project.demoUrl}
             codeUrl={project.codeUrl}
-            projectUrl={project.projectUrl}
+            projectUrl={project.projectUrl ? (lang === 'en' ? `/en${project.projectUrl}` : project.projectUrl) : undefined}
             featured={!!project.layout}
             color={project.layout ? 'emerald' : 'gray'}
             featuredLabel={t('projects.featured')}
