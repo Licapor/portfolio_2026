@@ -1,0 +1,65 @@
+---
+interface Props {
+  content: string;
+  separator?: string;
+  variant?: 'dark' | 'light' | 'gold';
+  speed?: number;
+  class?: string;
+}
+
+const {
+  content,
+  separator = '•',
+  variant = 'dark',
+  speed = 30,
+  class: className = ''
+} = Astro.props;
+
+const variantClasses: Record<string, string> = {
+  dark: 'bg-gradient-to-r from-dark-teal via-sage to-dark-teal text-white',
+  light: 'bg-gradient-to-r from-cream via-gold/10 to-cream text-sage border-y border-gold/20',
+  gold: 'bg-gold text-white',
+};
+
+const bgClass = variantClasses[variant] || variantClasses.dark;
+---
+
+<div class:list={['marquee-bar py-4 overflow-hidden', bgClass, className]}>
+  <div class="marquee-track" style={`--marquee-speed: ${speed}s`}>
+    <span class="marquee-content">{content} </span>
+    <span class="marquee-content">{content} </span>
+    <span class="marquee-content">{content} </span>
+  </div>
+</div>
+
+<style>
+  .marquee-bar {
+    width: 100%;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marqueeScroll var(--marquee-speed, 30s) linear infinite;
+    will-change: transform;
+  }
+
+  .marquee-content {
+    flex-shrink: 0;
+    padding-left: 0.3em;
+    font-size: 1.125rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  @keyframes marqueeScroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.333%);
+    }
+  }
+</style>
