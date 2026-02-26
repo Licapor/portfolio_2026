@@ -7,7 +7,13 @@ import BentoCard from '../ui/BentoCard.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const emailHref = `mailto:${t('global.email')}`;
+
+// Ofuscación del email para evitar scrapers
+const emailParts = {
+  user: 'liliana',
+  domain: 'licapor',
+  tld: 'dev'
+};
 ---
 
 <section id="contact" class="py-24 lg:py-32 bg-white relative overflow-hidden">
@@ -28,10 +34,14 @@ const emailHref = `mailto:${t('global.email')}`;
         </p>
 
         <a
-          href={`mailto:${t('global.email')}`}
+          id="email-link"
+          href="#"
           class="inline-flex items-center gap-3 text-xl sm:text-2xl lg:text-4xl font-bold text-gray-900 hover:text-primary transition-colors hover-underline break-all"
+          data-u={emailParts.user}
+          data-d={emailParts.domain}
+          data-t={emailParts.tld}
         >
-          {t('global.email')}
+          <span class="email-text">{emailParts.user}[at]{emailParts.domain}[dot]{emailParts.tld}</span>
         </a>
       </div>
 
@@ -39,9 +49,13 @@ const emailHref = `mailto:${t('global.email')}`;
       <div class="grid grid-cols-2 gap-4 reveal stagger-2">
         <!-- Email card -->
         <a
-          href={emailHref}
+          id="email-card"
+          href="#"
           class="col-span-2"
           aria-label={t('contact.emailLabel')}
+          data-u={emailParts.user}
+          data-d={emailParts.domain}
+          data-t={emailParts.tld}
         >
           <BentoCard variant="gradient" class="p-6 relative overflow-hidden">
             <div class="absolute -top-4 -right-4 w-16 h-16 rounded-full border-2 border-sage/20"></div>
@@ -105,3 +119,30 @@ const emailHref = `mailto:${t('global.email')}`;
     animation: marquee 20s linear infinite;
   }
 </style>
+
+<script>
+  // Desofuscar email para usuarios reales (no bots)
+  function initEmailLinks() {
+    const emailElements = document.querySelectorAll('[data-u][data-d][data-t]');
+    emailElements.forEach(el => {
+      const u = el.getAttribute('data-u');
+      const d = el.getAttribute('data-d');
+      const t = el.getAttribute('data-t');
+      if (u && d && t) {
+        const email = `${u}@${d}.${t}`;
+        el.setAttribute('href', `mailto:${email}`);
+        const textEl = el.querySelector('.email-text');
+        if (textEl) {
+          textEl.textContent = email;
+        }
+      }
+    });
+  }
+
+  // Ejecutar cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEmailLinks);
+  } else {
+    initEmailLinks();
+  }
+</script>
