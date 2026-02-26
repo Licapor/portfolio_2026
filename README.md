@@ -1,43 +1,62 @@
-# Astro Starter Kit: Minimal
+# Portfolio 2026
 
-```sh
-npm create astro@latest -- --template minimal
+Portfolio personal construido con Astro, Tailwind CSS y TypeScript.
+
+**Live:** [li.studio](https://li.studio)
+
+## Tech Stack
+
+- **Framework:** Astro 5
+- **Styling:** Tailwind CSS 4
+- **Language:** TypeScript (strict)
+- **Deployment:** Vercel
+- **Analytics:** Vercel Analytics + Microsoft Clarity
+
+## Estructura del Proyecto
+
+```
+src/
+├── components/
+│   ├── layout/          # Header, Footer
+│   ├── sections/        # Hero, About, Projects, Contact
+│   └── ui/              # Componentes reutilizables
+├── content/             # Data (projects, skills, navigation)
+├── i18n/
+│   ├── translations/    # Traducciones por dominio
+│   └── utils.ts         # Helpers de i18n
+├── layouts/             # Layout principal
+├── pages/               # Rutas (ES default, EN en /en/)
+└── styles/              # CSS global
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Internacionalización
 
-## 🚀 Project Structure
+El sitio soporta Español (default) e Inglés. Las traducciones están organizadas por dominio:
 
-Inside of your Astro project, you'll see the following folders and files:
+- `nav.ts` - Navegación
+- `hero.ts` - Hero section
+- `about.ts` - About section
+- `projects.ts` - Proyectos
+- `contact.ts` - Contacto
+- `projectPages.ts` - Páginas individuales de proyectos
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+## Scripts
+
+```bash
+npm run dev          # Servidor de desarrollo
+npm run build        # Build de producción
+npm run preview      # Preview del build
+npm run lint         # Verificar código con ESLint
+npm run lint:fix     # Auto-corregir errores de lint
+npm run format       # Formatear con Prettier
+npm run test         # Ejecutar tests
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## CI/CD
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+GitHub Actions ejecuta automáticamente en cada push/PR:
+- Linting
+- Tests
+- Build de verificación
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Vercel despliega automáticamente en cada push a `main`.
