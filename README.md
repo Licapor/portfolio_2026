@@ -2,7 +2,7 @@
 
 Portfolio personal construido con Astro, Tailwind CSS y TypeScript.
 
-**Live:** [li.studio](https://li.studio)
+**Live:** [licapor.dev](https://licapor.dev)
 
 ## Tech Stack
 
