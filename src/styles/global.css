@@ -1,26 +1,42 @@
 @import "tailwindcss";
 
+/* ===== Self-hosted fonts ===== */
+@font-face { font-family: 'Clash Display'; font-weight: 600; font-style: normal; font-display: swap; src: url('/fonts/clash-display.woff2') format('woff2'); }
+@font-face { font-family: 'Hanken Grotesk'; font-weight: 400; font-style: normal; font-display: swap; src: url('/fonts/hanken-400.woff2') format('woff2'); }
+@font-face { font-family: 'Hanken Grotesk'; font-weight: 600; font-style: normal; font-display: swap; src: url('/fonts/hanken-600.woff2') format('woff2'); }
+@font-face { font-family: 'Hanken Grotesk'; font-weight: 800; font-style: normal; font-display: swap; src: url('/fonts/hanken-800.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 500; font-style: normal; font-display: swap; src: url('/fonts/jetbrains-mono.woff2') format('woff2'); }
+
 /* Custom Palette: Centralized Colors */
 @theme {
-  /* Base Palette */
+  /* Fonts */
+  --font-sans: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+  --font-display: 'Clash Display', 'Hanken Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+
+  /* Base Palette — warm refined */
+  --color-bone: #FAF7EC;
+  --color-sand: #EAE3CE;
   --color-cream: #EEE8B2;
   --color-cream-light: #F5F2CE;
-  --color-gold: #C18D52;
+  --color-gold: #B07C38;
   --color-gold-light: #D4A76A;
-  --color-gold-dark: #A67A45;
-  --color-dark: #081B1B;
-  --color-dark-teal: #203B37;
+  --color-gold-dark: #8F6329;
+  --color-gold-bright: #D9AC63; /* for dark / editorial contexts */
+  --color-dark: #0C201C;
+  --color-dark-teal: #16302B;
+  --color-ink: #10221F;
   --color-sage: #5A8F76;
   --color-sage-light: #6FA388;
   --color-mint: #96CDB0;
   --color-mint-light: #B0DBC4;
 
-  /* Primary (Emerald) - for interactive elements */
-  --color-primary: #10b981;
-  --color-primary-dark: #047857;
-  --color-primary-light: #34d399;
+  /* Primary → sage (retires generic emerald, unifies greens) */
+  --color-primary: #5A8F76;
+  --color-primary-dark: #47755F;
+  --color-primary-light: #6FA388;
 
-  /* Tojol Project */
+  /* Tojol Project (own brand — untouched) */
   --color-tojol-yellow: #eee03b;
   --color-tojol-yellow-light: #f5eb6e;
   --color-tojol-yellow-dark: #d4c935;
@@ -350,6 +366,55 @@ html {
   background: var(--color-primary);
   color: white;
 }
+
+/* Font utilities */
+.font-display { font-family: var(--font-display); }
+.font-mono { font-family: var(--font-mono); }
+
+/* Screen-reader-only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ========== HERO IDENTITY DECODE ========== */
+.roleWrap {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 6.6vw, 5.4rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--color-cream-light);
+}
+.roleWrap.mono { font-family: var(--font-mono); font-weight: 500; font-size: clamp(1.7rem, 4.4vw, 3.4rem); letter-spacing: -0.01em; color: var(--color-gold-bright); }
+.roleWrap.gold { color: var(--color-gold-bright); }
+.roleWrap.mint { color: var(--color-mint); }
+.roleWrap.cream { color: var(--color-cream-light); }
+.roleWrap.gradient #role { background: linear-gradient(120deg, var(--color-mint), var(--color-gold-bright)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.roleWrap.sage #role { background: linear-gradient(120deg, var(--color-mint), var(--color-sage)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.roleWrap.outline { color: transparent; -webkit-text-stroke: 2px var(--color-mint); }
+
+.roleWrap .dud { color: var(--color-gold-bright); -webkit-text-fill-color: var(--color-gold-bright); -webkit-text-stroke: 0; }
+.roleWrap.gold .dud, .roleWrap.mono .dud { color: var(--color-mint); -webkit-text-fill-color: var(--color-mint); }
+.roleWrap.outline .dud { -webkit-text-stroke: 0; color: var(--color-sage); -webkit-text-fill-color: var(--color-sage); }
+.roleWrap.gradient .dud, .roleWrap.sage .dud { -webkit-text-fill-color: var(--color-gold-bright); color: var(--color-gold-bright); }
+
+.hero-caret { display: inline-block; width: 0.46ch; height: 0.8em; background: var(--color-gold-bright); margin-left: 0.08em; vertical-align: -0.05em; animation: heroBlink 1.05s step-end infinite; }
+.roleWrap.gold .hero-caret, .roleWrap.mono .hero-caret { background: var(--color-mint); }
+@keyframes heroBlink { 50% { opacity: 0; } }
+
+/* ========== LOGO MARQUEE ========== */
+@keyframes logoScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.logo-marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); }
+.logo-marquee .logo-track { display: flex; width: max-content; flex-shrink: 0; align-items: center; animation: logoScroll 28s linear infinite; }
+.logo-marquee:hover .logo-track { animation-play-state: paused; }
 
 /* ========== ACCESSIBILITY ========== */
 

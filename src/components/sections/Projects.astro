@@ -1,34 +1,32 @@
 ---
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 import { projects } from '../../content/projects';
-import GeometricShapes from '../ui/GeometricShapes.astro';
-import SectionHeader from '../ui/SectionHeader.astro';
 import ProjectCard from '../ProjectCard.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const localizedProjectUrl = (url?: string) => {
+  if (!url) return undefined;
+  return lang === 'en' && !url.includes('tojol') ? `/en${url}` : url;
+};
 ---
 
-<section id="work" class="py-24 lg:py-32 bg-cream/20 relative overflow-hidden">
-  <GeometricShapes variant="projects" />
-
+<section id="work" class="work-section relative overflow-hidden">
   <div class="max-w-7xl mx-auto px-6 lg:px-12 relative">
-    <!-- Section Header -->
-    <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-6">
-      <SectionHeader
-        labelKey="projects.label"
-        titleKey="projects.title"
-        titleOutlineKey="projects.titleOutline"
-      />
+    <div class="work-head reveal">
+      <p class="work-label">{t('projects.label')}</p>
+      <h2 class="work-title">
+        {t('projects.title')} <span class="work-outline">{t('projects.titleOutline')}</span>
+      </h2>
     </div>
 
-    <!-- Bento Projects Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {projects.map((project, index) => (
         <div class:list={[
           `reveal stagger-${(index % 6) + 1}`,
           project.layout === 'wide' && 'md:col-span-2 lg:col-span-2',
-          project.layout === 'tall' && 'md:row-span-2'
+          project.layout === 'tall' && 'md:row-span-2',
         ]}>
           <ProjectCard
             title={t(project.titleKey)}
@@ -37,26 +35,24 @@ const t = useTranslations(lang);
             image={project.image}
             video={project.video}
             demoUrl={project.demoUrl}
-            codeUrl={project.codeUrl}
-            projectUrl={project.projectUrl ? (lang === 'en' && !project.projectUrl.includes('tojol') ? `/en${project.projectUrl}` : project.projectUrl) : undefined}
-            featured={!!project.layout}
-            color={project.layout ? 'emerald' : 'gray'}
+            projectUrl={localizedProjectUrl(project.projectUrl)}
+            art={project.art}
+            artVariant={project.artVariant}
+            featured={project.featured ?? !!project.layout}
             featuredLabel={t('projects.featured')}
-            liveDemoLabel={t('projects.liveDemo')}
             viewProjectLabel={t('projects.viewProject')}
-            codeLabel={t('projects.code')}
+            liveDemoLabel={t('projects.liveDemo')}
           />
         </div>
       ))}
     </div>
 
-    <!-- View All Link -->
     <div class="mt-16 text-center reveal">
       <a
         href="https://linkedin.com/in/lilianacapor"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-3 text-sage font-semibold text-lg hover-underline group"
+        class="view-all group"
       >
         {t('projects.viewAll')}
         <svg class="w-5 h-5 transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,3 +62,53 @@ const t = useTranslations(lang);
     </div>
   </div>
 </section>
+
+<style>
+  .work-section {
+    padding: 90px 0 100px;
+    color: var(--color-cream-light);
+    background: linear-gradient(180deg, #0c201c, #16302b);
+  }
+
+  .work-head {
+    margin-bottom: 56px;
+  }
+
+  .work-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-gold-bright);
+    margin: 0 0 12px;
+  }
+
+  .work-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.2rem, 5.4vw, 3.6rem);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .work-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-mint);
+  }
+
+  .view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    color: var(--color-mint);
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+
+  .view-all:hover {
+    color: var(--color-gold-bright);
+  }
+</style>

@@ -4,6 +4,7 @@ import { aboutTranslations } from './translations/about';
 import { projectsTranslations } from './translations/projects';
 import { contactTranslations } from './translations/contact';
 import { projectPagesTranslations } from './translations/projectPages';
+import { stackTranslations } from './translations/stack';
 
 export const languages = {
   es: 'Español',
@@ -17,14 +18,11 @@ export const shared = {
   'global.name': 'Li',
   'global.logo': 'LCP',
   'global.email': 'liliana@licapor.dev',
-  'hero.greeting': "Li's studio",
-  'hero.title1': 'Digital',
-  'hero.title2': 'Product',
-  'hero.title3': 'Developer',
+  'hero.eyebrow': 'Tech Benders · Wislab',
   'hero.yearsNumber': '9+',
   'hero.industriesNumber': '5',
   'hero.marquee':
-    'Product Development • No-Code • WeWeb • Xano • Figma • AdTech • Prebid.js • Python • TypeScript • React • Node.js • AI/ML • Prompt Engineering • LLMs • RAG • API Design • Automation •',
+    'AI Agents • MCP Servers • RAG • LLMs • Claude Code • Prompt Engineering • Agentic Workflows • Python • TypeScript • React • Next.js • Astro • API Design • AdTech • Automation •',
   'about.langES': 'ES',
   'about.langEN': 'EN',
   'about.langPT': 'PT',
@@ -44,6 +42,7 @@ export const ui = {
     ...projectsTranslations.es,
     ...contactTranslations.es,
     ...projectPagesTranslations.es,
+    ...stackTranslations.es,
   },
   en: {
     ...navTranslations.en,
@@ -52,6 +51,7 @@ export const ui = {
     ...projectsTranslations.en,
     ...contactTranslations.en,
     ...projectPagesTranslations.en,
+    ...stackTranslations.en,
   },
 } as const;
 

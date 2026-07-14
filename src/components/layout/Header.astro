@@ -2,11 +2,7 @@
 import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../i18n/utils';
 import { navLinks } from '../../content/navigation';
 import LanguagePicker from '../LanguagePicker.astro';
-import Button from '../ui/Button.astro';
-
-// Logo options - change this to test different logos:
-// Li_1.png | Li_claro.png | Li_Gris.png | Li_Negro.png | Li_verde.png | Li.png
-import logo from '../../assets/icons/li_logo.svg';
+import logo from '../../assets/icons/li_logo_claro.svg';
 
 interface Props {
   class?: string;
@@ -18,75 +14,74 @@ const t = useTranslations(lang);
 const homePath = getLocalizedPath('/', lang);
 const emailHref = `mailto:${t('global.email')}`;
 
-// Check if we're on the home page
 const pathname = Astro.url.pathname;
 const isHomePage = pathname === '/' || pathname === '/en' || pathname === '/en/';
 
-// Helper to get correct href for nav links
 const getNavHref = (href: string) => {
   if (isHomePage) return href;
-  // If not on home page, prepend home path to anchor links
   return href.startsWith('#') ? `${homePath}${href}` : href;
 };
 ---
 
-<header class:list={['fixed top-0 left-0 right-0 z-50 glass transition-all duration-500', className]}>
-  <nav class="max-w-7xl mx-auto px-6 lg:px-12 py-2 flex items-center justify-between" aria-label="Main navigation">
-    <a href={homePath} class="flex items-center" aria-label={t('global.name')}>
-      <img src={logo.src} alt={t('global.name')} class="h-16 w-auto" />
-    </a>
+<header class:list={['fixed top-0 left-0 right-0 z-50 px-4 pt-5', className]}>
+  <div class="max-w-4xl mx-auto relative">
+    <nav class="nav-pill flex items-center gap-6 rounded-full pl-6 pr-3 py-2.5" aria-label="Main navigation">
+      <a href={homePath} class="flex items-center mr-auto shrink-0" aria-label={t('global.name')}>
+        <img src={logo.src} alt={t('global.name')} class="h-9 w-auto" />
+      </a>
 
-    <ul class="hidden md:flex items-center gap-10" role="list">
-      {navLinks.map(link => (
-        <li>
-          <a
-            href={getNavHref(link.href)}
-            class="text-dark-teal hover:text-primary transition-colors font-medium hover-underline"
-          >
-            {t(link.labelKey)}
-          </a>
-        </li>
-      ))}
-    </ul>
+      <ul class="hidden md:flex items-center gap-8" role="list">
+        {navLinks.map(link => (
+          <li>
+            <a
+              href={getNavHref(link.href)}
+              class="text-cream-light/80 hover:text-cream-light transition-colors font-semibold text-sm"
+            >
+              {t(link.labelKey)}
+            </a>
+          </li>
+        ))}
+      </ul>
 
-    <div class="hidden md:flex items-center gap-6">
-      <LanguagePicker />
-      <Button variant="primary" href={emailHref} class="px-5 py-2.5 text-sm">
-        {t('nav.cta')}
-      </Button>
-    </div>
-
-    <button
-      id="mobile-menu-btn"
-      class="md:hidden text-gray-900"
-      aria-label="Toggle menu"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-    >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </button>
-  </nav>
-
-  <div id="mobile-menu" class="md:hidden hidden bg-white/95 backdrop-blur-xl border-t border-gray-100" role="menu">
-    <ul class="px-6 py-6 space-y-4" role="list">
-      {navLinks.map(link => (
-        <li role="menuitem">
-          <a href={getNavHref(link.href)} class="block text-dark font-medium py-2 hover:text-primary transition-colors">
-            {t(link.labelKey)}
-          </a>
-        </li>
-      ))}
-      <li class="pt-2" role="menuitem">
+      <div class="hidden md:flex items-center gap-4">
         <LanguagePicker />
-      </li>
-      <li class="pt-4" role="menuitem">
-        <Button variant="primary" href={emailHref} class="block w-full text-center">
-          {t('nav.cta')}
-        </Button>
-      </li>
-    </ul>
+        <a href={emailHref} class="nav-cta">
+          {t('nav.cta')} <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden text-cream-light"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </nav>
+
+    <div id="mobile-menu" class="md:hidden hidden absolute left-0 right-0 mt-3 nav-pill rounded-3xl p-5" role="menu">
+      <ul class="space-y-1" role="list">
+        {navLinks.map(link => (
+          <li role="menuitem">
+            <a href={getNavHref(link.href)} class="block text-cream-light/85 font-semibold py-2.5 hover:text-gold-bright transition-colors">
+              {t(link.labelKey)}
+            </a>
+          </li>
+        ))}
+        <li class="pt-3" role="menuitem">
+          <LanguagePicker />
+        </li>
+        <li class="pt-4" role="menuitem">
+          <a href={emailHref} class="nav-cta block text-center">
+            {t('nav.cta')} <span aria-hidden="true">↗</span>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </header>
 
@@ -108,8 +103,26 @@ const getNavHref = (href: string) => {
 </script>
 
 <style>
-  header.scrolled {
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  .nav-pill {
+    background: rgba(12, 32, 28, 0.6);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(217, 172, 99, 0.28);
+    box-shadow: 0 14px 40px -16px rgba(0, 0, 0, 0.55);
+  }
+
+  .nav-cta {
+    background: linear-gradient(135deg, var(--color-mint), var(--color-gold-bright));
+    color: #0c201c;
+    font-weight: 800;
+    font-size: 0.82rem;
+    padding: 0.55rem 1.05rem;
+    border-radius: 999px;
+    white-space: nowrap;
+    transition: transform 0.2s ease;
+  }
+
+  .nav-cta:hover {
+    transform: translateY(-1px);
   }
 </style>

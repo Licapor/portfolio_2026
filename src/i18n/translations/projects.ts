@@ -8,6 +8,12 @@ export const projectsTranslations = {
     'projects.liveDemo': 'Ver Demo',
     'projects.code': 'Código',
     'projects.viewProject': 'Ver Proyecto',
+    'project7.title': 'Wislab',
+    'project7.description':
+      'LMS impulsado por IA. Ownership completo: visión de producto, marca, arquitectura e implementación full-stack (Next.js / Vercel).',
+    'project8.title': 'Tech Benders',
+    'project8.description':
+      'Mi empresa de desarrollo de IA y agentes. Implementaciones a medida de agentes de IA y servidores MCP, más workshops prácticos de IA para equipos técnicos.',
     'project1.title': 'Sistema de Gestión Documental',
     'project1.description':
       'Plataforma que automatiza el proceso de admisión de estudiantes, reduciendo costos y tiempos operativos para una población de 80,000 usuarios en una institución educativa.',
@@ -36,6 +42,12 @@ export const projectsTranslations = {
     'projects.liveDemo': 'Live Demo',
     'projects.code': 'Code',
     'projects.viewProject': 'View Project',
+    'project7.title': 'Wislab',
+    'project7.description':
+      'AI-powered LMS. Full ownership: product vision, brand, architecture, and full-stack implementation (Next.js / Vercel).',
+    'project8.title': 'Tech Benders',
+    'project8.description':
+      'My AI and agentic development company. Custom AI agent and MCP server implementations, plus hands-on AI workshops for technical teams.',
     'project1.title': 'Document Management System',
     'project1.description':
       'Platform that automates student admission process, reducing costs and operational times for a population of 80,000 users in an educational institution.',

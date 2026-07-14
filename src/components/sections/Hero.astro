@@ -1,98 +1,354 @@
 ---
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
-import GeometricShapes from '../ui/GeometricShapes.astro';
-import Button from '../ui/Button.astro';
+import { heroIdentities } from '../../i18n/translations/hero';
 import Marquee from '../ui/Marquee.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const identities = heroIdentities[lang] ?? heroIdentities.es;
 ---
 
-<section class="min-h-screen relative overflow-hidden bg-gradient-to-br from-cream/30 via-white to-mint/20">
-  <GeometricShapes variant="hero" />
+<section class="hero relative overflow-hidden">
+  <div class="grain" aria-hidden="true"></div>
 
-  <!-- Main content -->
-  <div class="relative z-10 min-h-screen flex flex-col justify-center px-6 lg:px-12 max-w-7xl mx-auto pt-24 pb-24 md:pb-32 lg:pb-24">
-    <div class="grid lg:grid-cols-12 gap-8 items-center">
-      <!-- Left: Typography -->
-      <div class="lg:col-span-8">
-        <p class="text-gold font-semibold mb-4 text-lg tracking-wide hero-fade-in anim-delay-20">
-          {t('hero.greeting')}
-        </p>
+  <div class="hero-inner max-w-7xl mx-auto px-6 lg:px-12">
+    <div>
+      <p class="eyebrow">{t('hero.eyebrow')}</p>
 
-        <h1 class="mb-6 text-4xl sm:text-5xl md:text-7xl lg:text-[8rem] font-bold leading-[0.85] tracking-tight">
-          <span class="block split-text text-gray-900">{t('hero.title1')}</span>
-          <span class="block text-outline mt-2" aria-label={t('hero.title2')}>{t('hero.title2')}</span>
-          <span class="block text-gray-900 mt-2">{t('hero.title3')}</span>
-        </h1>
+      <h1 class="title">
+        <span class:list={['roleWrap', identities[0].style]} id="roleWrap" aria-hidden="true"><span id="role">{identities[0].text}</span><span class="hero-caret"></span></span>
+        <span class="sr-only">{t('hero.srHeadline')}</span>
+      </h1>
 
-        <p class="text-xl md:text-2xl text-gray-500 font-light mt-8 max-w-xl hero-slide-up-delayed">
-          {t('hero.description')}
-          <span class="gradient-text font-medium">{t('hero.highlight1')}</span> {t('hero.descriptionEnd')}
-          <span class="gradient-text font-medium">{t('hero.highlight2')}</span>
-        </p>
-      </div>
+      <p class="lead">
+        {t('hero.leadPre')} <span class="g">{t('hero.leadHl1')}</span> {t('hero.leadMid')} <span class="g">{t('hero.leadHl2')}</span>.
+      </p>
 
-      <!-- Right: Info cards -->
-      <div class="lg:col-span-4 space-y-4 hero-slide-up-more-delayed">
-        <div class="bento-card p-6">
-          <span class="text-5xl font-bold gradient-text">{t('hero.yearsNumber')}</span>
-          <p class="text-gray-500 mt-2">{t('hero.stat1')}</p>
-        </div>
-        <div class="bento-card p-6">
-          <span class="text-5xl font-bold gradient-text">{t('hero.industriesNumber')}</span>
-          <p class="text-gray-500 mt-2">{t('hero.stat2')}</p>
-        </div>
+      <div class="cta-row">
+        <a href="#work" class="btn-hero btn-hero-primary">{t('hero.cta1')}</a>
+        <a href="#contact" class="btn-hero btn-hero-outline">{t('hero.cta2')}</a>
       </div>
     </div>
 
-    <!-- Bottom: CTA + Scroll indicator -->
-    <div class="flex items-center justify-between mt-16 lg:mt-24">
-      <div class="flex flex-wrap gap-4">
-        <Button variant="primary" href="#work">
-          {t('hero.cta1')}
-        </Button>
-        <Button variant="outline" href="#contact">
-          {t('hero.cta2')}
-        </Button>
+    <div class="stats">
+      <div class="stat">
+        <div class="num">{t('hero.yearsNumber')}</div>
+        <p>{t('hero.stat1')}</p>
       </div>
-
-      <div class="flex items-center gap-3 text-dark-teal/50">
-        <span class="text-sm">{t('hero.scroll')}</span>
-        <div class="w-6 h-10 border-2 border-sage/30 rounded-full flex justify-center pt-2">
-          <div class="w-1.5 h-3 bg-gold rounded-full animate-bounce"></div>
-        </div>
+      <div class="stat">
+        <div class="num">{t('hero.industriesNumber')}</div>
+        <p>{t('hero.stat2')}</p>
       </div>
     </div>
   </div>
 
-  <!-- Marquee -->
-  <div class="absolute bottom-0 left-0 right-0">
-    <Marquee content={t('hero.marquee')} variant="dark" speed={30} />
-  </div>
+  <button class="replay" id="hero-replay" type="button">↻ {t('hero.replay')}</button>
 </section>
 
+<Marquee content={t('hero.marquee')} variant="dark" speed={34} />
+
+<script type="application/json" id="hero-identities" set:html={JSON.stringify(identities)} />
+
+<script>
+  const CHARS = '!<>-_\\/[]{}—=+*^?#________';
+
+  class Scramble {
+    el: HTMLElement;
+    text = '';
+    queue: { from: string; to: string; start: number; end: number; char: string | null }[] = [];
+    frame = 0;
+    raf = 0;
+    resolve: (() => void) | null = null;
+
+    constructor(el: HTMLElement) {
+      this.el = el;
+      this.update = this.update.bind(this);
+    }
+
+    setText(newText: string) {
+      const oldC = Array.from(this.text);
+      const newC = Array.from(newText);
+      const len = Math.max(oldC.length, newC.length);
+      this.text = newText;
+      this.queue = [];
+      for (let i = 0; i < len; i++) {
+        const from = oldC[i] || '';
+        const to = newC[i] || '';
+        const start = Math.floor(Math.random() * 20);
+        const end = start + 16 + Math.floor(Math.random() * 30);
+        this.queue.push({ from, to, start, end, char: null });
+      }
+      cancelAnimationFrame(this.raf);
+      this.frame = 0;
+      return new Promise<void>((res) => {
+        this.resolve = res;
+        this.update();
+      });
+    }
+
+    update() {
+      let out = '';
+      let done = 0;
+      for (const q of this.queue) {
+        if (this.frame >= q.end) {
+          done++;
+          out += q.to;
+        } else if (this.frame >= q.start) {
+          if (!q.char || Math.random() < 0.28) {
+            q.char = CHARS[Math.floor(Math.random() * CHARS.length)];
+          }
+          out += `<span class="dud">${q.char}</span>`;
+        } else {
+          out += q.from;
+        }
+      }
+      this.el.innerHTML = out;
+      if (done === this.queue.length) {
+        this.resolve?.();
+      } else {
+        this.frame++;
+        this.raf = requestAnimationFrame(this.update);
+      }
+    }
+  }
+
+  type Identity = { text: string; style: string };
+  const dataEl = document.getElementById('hero-identities');
+  const wrap = document.getElementById('roleWrap');
+  const role = document.getElementById('role');
+
+  if (dataEl && wrap && role) {
+    const ROLES: Identity[] = JSON.parse(dataEl.textContent || '[]');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const s = new Scramble(role);
+    let idx = 0;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let paused = false;
+    let running = false;
+
+    async function cycle() {
+      if (paused) { running = false; return; }
+      running = true;
+      const { text, style } = ROLES[idx];
+      wrap!.className = 'roleWrap ' + style;
+      await s.setText(text);
+      idx = (idx + 1) % ROLES.length;
+      if (paused) { running = false; return; }
+      timer = setTimeout(cycle, 2000);
+    }
+
+    function start() {
+      clearTimeout(timer);
+      idx = 0;
+      if (reduced) {
+        wrap!.className = 'roleWrap ' + ROLES[0].style;
+        role!.textContent = ROLES[0].text;
+        return;
+      }
+      running = false;
+      cycle();
+    }
+
+    function pause() {
+      paused = true;
+      clearTimeout(timer);
+    }
+
+    function resume() {
+      if (!paused) return;
+      paused = false;
+      if (!running && !reduced) cycle();
+    }
+
+    start();
+    document.getElementById('hero-replay')?.addEventListener('click', start);
+
+    // Pause the loop when the hero is off-screen or the tab is hidden (saves CPU/battery).
+    const heroEl = document.querySelector('.hero');
+    if (heroEl && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) resume();
+          else pause();
+        },
+        { threshold: 0 }
+      );
+      io.observe(heroEl);
+    }
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) pause();
+      else resume();
+    });
+  }
+</script>
+
 <style>
-  @keyframes fadeSlideUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
+  .hero {
+    min-height: 100vh;
+    padding: 150px 0 0;
+    color: var(--color-cream-light);
+    background:
+      radial-gradient(900px 560px at 88% 4%, rgba(90, 143, 118, 0.3), transparent 60%),
+      radial-gradient(700px 480px at 4% 96%, rgba(217, 172, 99, 0.14), transparent 55%),
+      linear-gradient(150deg, #0c201c, #16302b 55%, #0c201c);
+  }
+
+  .grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.6) 0.5px, transparent 0.5px);
+    background-size: 4px 4px;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 44px;
+    align-items: center;
+    min-height: calc(100vh - 250px);
+  }
+
+  @media (max-width: 900px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 30px;
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
-  .hero-fade-in {
-    animation: fadeSlideUp 0.8s ease both;
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-gold-bright);
+    margin: 0 0 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 
-  .hero-slide-up-delayed {
-    animation: fadeSlideUp 0.8s ease 0.8s both;
+  .eyebrow::before {
+    content: '';
+    width: 30px;
+    height: 1.5px;
+    background: var(--color-gold-bright);
+    display: inline-block;
   }
 
-  .hero-slide-up-more-delayed {
-    animation: fadeSlideUp 0.8s ease 1s both;
+  .title {
+    margin: 0;
+    min-height: clamp(8.5rem, 22vw, 12.5rem);
+    display: flex;
+    align-items: center;
+  }
+
+  .lead {
+    font-size: clamp(1.05rem, 2.2vw, 1.42rem);
+    color: #c7cbb8;
+    font-weight: 300;
+    max-width: 33ch;
+    margin: 30px 0 0;
+    line-height: 1.5;
+  }
+
+  .lead .g {
+    font-weight: 600;
+    background: linear-gradient(120deg, var(--color-mint), var(--color-gold-bright));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .stats {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .stat {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(150, 205, 176, 0.2);
+    border-radius: 20px;
+    padding: 24px;
+    backdrop-filter: blur(6px);
+  }
+
+  .stat .num {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 2.8rem;
+    line-height: 1;
+    background: linear-gradient(120deg, var(--color-mint), var(--color-gold-bright));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .stat p {
+    margin: 10px 0 0;
+    color: #aeb8ac;
+    font-size: 14px;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 38px;
+  }
+
+  .btn-hero {
+    font-weight: 800;
+    font-size: 15px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s ease;
+  }
+
+  .btn-hero-primary {
+    background: linear-gradient(135deg, var(--color-mint), var(--color-gold-bright));
+    color: #0c201c;
+    box-shadow: 0 12px 30px -12px rgba(150, 205, 176, 0.6);
+  }
+
+  .btn-hero-primary:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-hero-outline {
+    border: 1.5px solid var(--color-mint);
+    color: var(--color-mint);
+  }
+
+  .btn-hero-outline:hover {
+    background: var(--color-mint);
+    color: #0c201c;
+  }
+
+  .replay {
+    position: absolute;
+    bottom: 40px;
+    right: 24px;
+    z-index: 5;
+    font-family: var(--font-mono);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-cream-light);
+    border: 1px solid rgba(217, 172, 99, 0.4);
+    border-radius: 999px;
+    padding: 9px 16px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .replay:hover {
+    background: rgba(255, 255, 255, 0.16);
   }
 </style>

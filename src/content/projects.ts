@@ -2,14 +2,25 @@ import type { Project } from '../types';
 
 export const projects: Project[] = [
   {
-    id: 'project6',
-    titleKey: 'project6.title',
-    descriptionKey: 'project6.description',
-    tags: ['Hostelería', 'Operaciones', 'Marketing'],
-    video: 'https://res.cloudinary.com/db50dpczx/video/upload/q_auto,w_1080/tojol_gjfoay.mp4',
-    image: 'https://res.cloudinary.com/db50dpczx/raw/upload/v1770167481/tojol_gjfoay_poster',
-    projectUrl: '/projects/tojol',
-    layout: 'tall',
+    id: 'project7',
+    titleKey: 'project7.title',
+    descriptionKey: 'project7.description',
+    tags: ['Next.js', 'IA', 'Vercel', 'Claude Code'],
+    art: '/logos/wislab.webp',
+    artVariant: 'wislab',
+    demoUrl: 'https://wislab.app',
+    featured: true,
+    layout: 'wide',
+  },
+  {
+    id: 'project8',
+    titleKey: 'project8.title',
+    descriptionKey: 'project8.description',
+    tags: ['MCP', 'Agentes IA', 'RAG', 'LLMs'],
+    art: '/logos/techbenders.webp',
+    artVariant: 'tb',
+    demoUrl: 'https://techbenders.io',
+    featured: true,
   },
   {
     id: 'project1',
@@ -18,7 +29,6 @@ export const projects: Project[] = [
     tags: ['React', 'Next.js', 'TypeScript', 'AWS', 'Claude Code'],
     image: 'https://res.cloudinary.com/db50dpczx/video/upload/so_0,q_auto,w_1080/Demo_Expediente_digital_nw7x8y.jpg',
     projectUrl: '/projects/gestion-documental',
-    layout: 'wide',
   },
   {
     id: 'project2',
@@ -35,5 +45,15 @@ export const projects: Project[] = [
     tags: ['React', 'Next.js', 'TypeScript', 'AWS', 'Claude Code'],
     image: 'https://res.cloudinary.com/db50dpczx/video/upload/so_0,q_auto,w_1080/Demo_MET_MEC_xzlyjz.jpg',
     projectUrl: '/projects/titulacion',
+  },
+  {
+    id: 'project6',
+    titleKey: 'project6.title',
+    descriptionKey: 'project6.description',
+    tags: ['Hostelería', 'Operaciones', 'Marketing'],
+    video: 'https://res.cloudinary.com/db50dpczx/video/upload/q_auto,w_1080/tojol_gjfoay.mp4',
+    image: 'https://res.cloudinary.com/db50dpczx/raw/upload/v1770167481/tojol_gjfoay_poster',
+    projectUrl: '/projects/tojol',
+    layout: 'tall',
   },
 ];

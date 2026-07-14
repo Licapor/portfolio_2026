@@ -1,0 +1,119 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { stackCategories } from '../../content/stack';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="stack" class="stack-band">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="stack-head reveal">
+      <p class="stack-label">{t('stack.label')}</p>
+      <h2 class="stack-title">
+        {t('stack.title')} <span class="stack-outline">{t('stack.titleOutline')}</span>
+      </h2>
+      <p class="stack-intro">{t('stack.intro')}</p>
+    </div>
+
+    <div class="stack-grid">
+      {stackCategories.map((cat, i) => (
+        <div class:list={['stack-card reveal', `stagger-${(i % 6) + 1}`]}>
+          <h3 class="stack-cat">{t(cat.titleKey)}</h3>
+          <div class="chips">
+            {cat.items.map((item) => (
+              <span class="chip">{item}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .stack-band {
+    background: var(--color-bone);
+    padding: 80px 0 90px;
+  }
+
+  .stack-head {
+    max-width: 640px;
+    margin-bottom: 48px;
+  }
+
+  .stack-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin: 0 0 12px;
+  }
+
+  .stack-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin: 0 0 14px;
+  }
+
+  .stack-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-sage);
+  }
+
+  .stack-intro {
+    color: #6e6a5c;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .stack-card {
+    background: #fff;
+    border: 1px solid var(--color-sand);
+    border-radius: 22px;
+    padding: 26px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .stack-card:hover {
+    border-color: var(--color-gold);
+    box-shadow: 0 20px 44px -26px rgba(12, 32, 28, 0.35);
+    transform: translateY(-3px);
+  }
+
+  .stack-cat {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--color-ink);
+    margin: 0 0 16px;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--color-bone);
+    border: 1px solid var(--color-sand);
+    color: #4a5a52;
+    white-space: nowrap;
+  }
+</style>

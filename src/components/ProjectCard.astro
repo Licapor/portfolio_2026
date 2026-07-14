@@ -4,16 +4,15 @@ interface Props {
   description: string;
   image?: string;
   video?: string;
-  tags: string[];
   demoUrl?: string;
-  codeUrl?: string;
   projectUrl?: string;
+  tags: string[];
   featured?: boolean;
-  color?: string;
   featuredLabel?: string;
-  liveDemoLabel?: string;
+  art?: string;
+  artVariant?: 'wislab' | 'tb';
   viewProjectLabel?: string;
-  codeLabel?: string;
+  liveDemoLabel?: string;
 }
 
 const {
@@ -21,128 +20,261 @@ const {
   description,
   image,
   video,
-  tags,
   demoUrl,
-  codeUrl,
   projectUrl,
+  tags,
   featured = false,
-  color = "gray",
   featuredLabel,
-  liveDemoLabel,
+  art,
+  artVariant = 'wislab',
   viewProjectLabel,
-  codeLabel
+  liveDemoLabel,
 } = Astro.props;
 
-const isEmerald = color === 'emerald';
+// Primary link: internal project page first, else external demo.
+const href = projectUrl || demoUrl;
+const isExternal = !!href && href.startsWith('http');
+const badgeLabel = projectUrl ? viewProjectLabel : liveDemoLabel;
 
-// Generate poster URL from video URL for Cloudinary videos
+// Generate poster URL from Cloudinary video URL.
 const getVideoPoster = (videoUrl: string | undefined): string | undefined => {
   if (!videoUrl || !videoUrl.includes('cloudinary.com')) return undefined;
-  // Transform video URL to get first frame as JPG
-  // e.g., /video/upload/file.mp4 -> /video/upload/so_0/file.jpg
   return videoUrl.replace('/video/upload/', '/video/upload/so_0/').replace('.mp4', '.jpg');
 };
-
 const videoPoster = getVideoPoster(video);
+
+const Thumb = href ? 'a' : 'div';
 ---
 
-<article class:list={['group bento-card project-card h-full flex flex-col', featured ? 'min-h-[400px]' : 'min-h-[300px]']}>
-  <!-- Image/Visual area -->
-  <div class:list={[
-    'relative flex-1 overflow-hidden',
-    featured ? 'p-8' : 'p-6',
-    isEmerald ? 'bg-gradient-to-br from-cream/30 to-mint/20' : 'bg-gradient-to-br from-gray-50 to-gray-100/50'
-  ]}>
-    <!-- Project preview -->
+<article class:list={['pcard group', featured && 'pcard-featured']}>
+  <Thumb
+    class="thumb"
+    {...href ? { href } : {}}
+    {...isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+    aria-label={href ? `${badgeLabel}: ${title}` : undefined}
+  >
     {video ? (
-      <video
-        autoplay
-        muted
-        loop
-        playsinline
-        poster={videoPoster}
-        class="absolute top-4 left-4 right-4 w-[calc(100%-2rem)] h-[calc(100%-1rem)] object-cover rounded-t-xl"
-      >
+      <video class="media" autoplay muted loop playsinline poster={videoPoster}>
         <source src={video} type="video/mp4" />
       </video>
     ) : image ? (
-      <img src={image} alt={title} class="absolute top-4 left-4 right-4 w-[calc(100%-2rem)] h-[calc(100%-1rem)] object-cover rounded-t-xl" />
+      <img class="media" src={image} alt={title} loading="lazy" />
+    ) : art ? (
+      <div class:list={['art-panel', artVariant]}>
+        <img class="art-logo" src={art} alt={title} loading="lazy" />
+      </div>
     ) : (
-      <div class="absolute inset-0 flex items-center justify-center">
-        <div class="relative">
-          <!-- Decorative shapes -->
-          <div class:list={['w-32 h-32 rounded-2xl rotate-6 geo-float', isEmerald ? 'bg-mint/50' : 'bg-gray-200/50']}></div>
-          <div class:list={['absolute top-4 left-4 w-32 h-32 rounded-2xl -rotate-6 geo-float-delayed', isEmerald ? 'bg-gold/40' : 'bg-gray-300/50']}></div>
-          <div class:list={['absolute top-8 left-8 w-32 h-32 rounded-2xl', isEmerald ? 'bg-sage/30' : 'bg-gray-400/30']}></div>
-        </div>
+      <div class="art-plain">
+        <div class="deco"></div>
       </div>
     )}
 
-    <!-- Number indicator -->
-    <div class="absolute top-4 left-4">
-      <span class:list={['text-sm font-mono', isEmerald ? 'text-gold' : 'text-gray-400']}>
-        {featured ? featuredLabel : ''}
-      </span>
-    </div>
+    <div class="scrim" aria-hidden="true"></div>
 
-    <!-- Hover overlay with links -->
-    <div class="absolute inset-0 bg-white/95 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-4">
-      {projectUrl && (
-        <a
-          href={projectUrl}
-          class="px-6 py-3 btn-primary rounded-full flex items-center gap-2 font-semibold"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-          {viewProjectLabel}
-        </a>
-      )}
-      {demoUrl && (
-        <a
-          href={demoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="px-6 py-3 btn-primary rounded-full flex items-center gap-2 font-semibold"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-          </svg>
-          {liveDemoLabel}
-        </a>
-      )}
-      {codeUrl && (
-        <a
-          href={codeUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="px-6 py-3 btn-outline rounded-full flex items-center gap-2 font-semibold"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-          </svg>
-          {codeLabel}
-        </a>
-      )}
-    </div>
-  </div>
+    {featured && <span class="star" aria-hidden="true">{featuredLabel}</span>}
 
-  <!-- Content -->
-  <div class="p-6 border-t border-gray-100">
-    <h3 class:list={['font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors', featured ? 'text-2xl' : 'text-xl']}>
-      {title}
-    </h3>
-    <p class="text-gray-500 mb-4 line-clamp-2 text-sm">
-      {description}
-    </p>
+    {href && badgeLabel && (
+      <span class="pbadge">{badgeLabel}</span>
+    )}
+  </Thumb>
 
-    <!-- Tags -->
-    <div class="flex flex-wrap gap-2">
-      {tags.map(tag => (
-        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-full font-medium">
-          {tag}
-        </span>
+  <div class="pbody">
+    <h3 class="ptitle">{title}</h3>
+    <p class="pdesc">{description}</p>
+    <div class="ptags">
+      {tags.map((tag) => (
+        <span class="ptag">{tag}</span>
       ))}
     </div>
   </div>
 </article>
+
+<style>
+  .pcard {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(150, 205, 176, 0.16);
+    border-radius: 22px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .pcard:hover {
+    transform: translateY(-5px);
+    border-color: rgba(217, 172, 99, 0.4);
+    box-shadow: 0 28px 54px -28px rgba(0, 0, 0, 0.7);
+  }
+
+  .thumb {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 220px;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .pcard-featured .thumb {
+    height: 260px;
+  }
+
+  .media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, filter 0.35s ease;
+  }
+
+  .art-panel {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 34px;
+    transition: transform 0.5s ease;
+  }
+
+  .art-logo {
+    max-width: 80%;
+    max-height: 82%;
+    object-fit: contain;
+  }
+
+  .art-panel.wislab {
+    background: radial-gradient(120% 120% at 30% 15%, var(--color-cream-light), var(--color-sand));
+  }
+
+  .art-panel.tb {
+    background: radial-gradient(120% 120% at 72% 20%, #f6efdc, var(--color-sand));
+  }
+
+  .art-plain {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #14332c, #0f2621);
+  }
+
+  .art-plain .deco {
+    width: 96px;
+    height: 96px;
+    border-radius: 22px;
+    background: rgba(150, 205, 176, 0.25);
+    transform: rotate(8deg);
+  }
+
+  .scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 20, 18, 0.55);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+  }
+
+  .thumb:hover .media {
+    filter: brightness(0.6);
+    transform: scale(1.05);
+  }
+
+  .thumb:hover .art-panel {
+    transform: scale(1.04);
+  }
+
+  .thumb:hover .scrim {
+    opacity: 1;
+  }
+
+  .star {
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--color-gold-bright);
+    z-index: 2;
+  }
+
+  .pbadge {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 118px;
+    height: 118px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(245, 242, 206, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 12px;
+    color: var(--color-cream-light);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .thumb:hover .pbadge {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .pbody {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .ptitle {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: var(--color-cream-light);
+    margin: 0 0 8px;
+  }
+
+  .pcard-featured .ptitle {
+    font-size: 1.6rem;
+  }
+
+  .pdesc {
+    color: #aeb8ac;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0 0 16px;
+  }
+
+  .ptags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+  }
+
+  .ptag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--color-mint);
+    border: 1px solid rgba(150, 205, 176, 0.18);
+  }
+</style>

@@ -1,0 +1,26 @@
+export const stackTranslations = {
+  es: {
+    'clients.label': 'He trabajado con',
+    'stack.label': 'Stack',
+    'stack.title': 'Herramientas',
+    'stack.titleOutline': '& skills',
+    'stack.intro': 'Construyo sobre foundation models: no los entreno, diseño los sistemas que los ponen a trabajar.',
+    'stack.agentic': 'IA Agéntica',
+    'stack.stack': 'Stack Técnico',
+    'stack.arch': 'Arquitectura y Datos',
+    'stack.product': 'Producto y Entrega',
+    'stack.adtech': 'AdTech',
+  },
+  en: {
+    'clients.label': 'Worked with',
+    'stack.label': 'Stack',
+    'stack.title': 'Tools',
+    'stack.titleOutline': '& skills',
+    'stack.intro': 'I build on top of foundation models: I don’t train them, I design the systems that put them to work.',
+    'stack.agentic': 'Agentic AI',
+    'stack.stack': 'Tech Stack',
+    'stack.arch': 'Architecture & Data',
+    'stack.product': 'Product & Delivery',
+    'stack.adtech': 'AdTech',
+  },
+} as const;

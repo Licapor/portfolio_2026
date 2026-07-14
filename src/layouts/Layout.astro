@@ -13,8 +13,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://iele.dev
 const {
   title,
   description = lang === 'es'
-    ? "Estudio de desarrollo de productos digitales. Creando experiencias digitales modernas y funcionales."
-    : "Digital product development studio. Creating modern and functional digital experiences."
+    ? "AI Agent Engineer y fundadora de Tech Benders. Diseño agentes de IA, servidores MCP y flujos agénticos que ponen a trabajar a los LLMs."
+    : "AI Agent Engineer and founder of Tech Benders. I build AI agents, MCP servers, and agentic workflows that put LLMs to work."
 } = Astro.props;
 
 // Alternate language URLs for hreflang
@@ -55,9 +55,9 @@ const ogImage = `${canonicalURL.origin}/og-image.png`;
     <meta name="twitter:image" content={ogImage} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="preload" href="/fonts/clash-display.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/hanken-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin />
 
     <slot name="head" />
 
@@ -81,8 +81,8 @@ const ogImage = `${canonicalURL.origin}/og-image.png`;
       "@type": "Person",
       "name": t('global.name'),
       "url": canonicalURL.origin,
-      "jobTitle": "Digital Product Developer",
-      "knowsAbout": ["Product Development", "Frontend", "No-Code", "AdTech"],
+      "jobTitle": "AI Agent Engineer & Founder",
+      "knowsAbout": ["AI Agents", "MCP Servers", "RAG", "LLM Integration", "Agentic Workflows", "Product Development"],
       "address": {
         "@type": "PostalAddress",
         "addressLocality": t('about.location')
@@ -93,15 +93,15 @@ const ogImage = `${canonicalURL.origin}/og-image.png`;
       @import "../styles/global.css";
 
       body {
-        font-family: 'Inter', system-ui, sans-serif;
-        background-color: #fafafa;
-        color: #1f2937;
+        font-family: var(--font-sans);
+        background-color: var(--color-bone);
+        color: var(--color-ink);
         min-height: 100vh;
         overflow-x: hidden;
       }
 
       h1, h2, h3, h4, h5, h6 {
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: var(--font-display);
       }
     </style>
   </head>

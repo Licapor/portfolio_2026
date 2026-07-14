@@ -17,6 +17,12 @@ export interface Project {
   projectUrl?: string;
   /** Layout en grid: 'wide' = 2 cols, 'tall' = 2 rows, 'default' = 1x1 */
   layout?: ProjectLayout;
+  /** Wordmark shown as a branded gradient when there's no image/video */
+  art?: string;
+  /** Gradient variant for the art block */
+  artVariant?: 'wislab' | 'tb';
+  /** Marks a highlighted project (star + accent) regardless of layout */
+  featured?: boolean;
 }
 
 export interface Skill {
@@ -57,16 +63,4 @@ export interface BentoCardProps {
   variant?: 'default' | 'dark' | 'gradient';
 }
 
-export interface ProjectCardProps {
-  title: string;
-  description: string;
-  tags: string[];
-  image?: string;
-  video?: string;
-  demoUrl?: string;
-  codeUrl?: string;
-  projectUrl?: string;
-  featured?: boolean;
-  featuredLabel?: string;
-  color?: 'emerald' | 'gray';
-}
+// ProjectCard defines its own local Props in the component (kept in sync there).
