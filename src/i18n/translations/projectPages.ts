@@ -38,6 +38,8 @@ export const projectPagesTranslations = {
     'facultyEval.metric3': 'Múltiples universidades',
     'facultyEval.metric1Label': 'docentes',
     'facultyEval.metric2Label': 'estudiantes',
+    'facultyEval.seoDescription':
+      'Back office para gestionar periodos de evaluación docente de 6,000 profesores y 80,000 estudiantes, con reportes de Power BI.',
 
     // Document Management
     'docManagement.pageTitle': 'Sistema de Gestión Documental | Li',
@@ -72,6 +74,10 @@ export const projectPagesTranslations = {
     'docManagement.metric1Label': 'estudiantes',
     'docManagement.metric2Label': 'tiempo de espera',
     'docManagement.metric3Label': 'tiempo de revisión',
+    'docManagement.seoDescription':
+      'Expediente digital para más de 100,000 estudiantes: documentación centralizada, 80% menos espera y 70% menos tiempo de revisión.',
+    'docManagement.stackTitle': 'Stack Técnico',
+    'docManagement.metricsTitle': 'Métricas',
 
     // Certification
     'certification.pageTitle': 'Automatización de Titulación | Li',
@@ -96,6 +102,10 @@ export const projectPagesTranslations = {
     'certification.metric1Label': 'estudiantes',
     'certification.metric2Label': 'administrativos',
     'certification.metric3Label': 'tiempo',
+    'certification.seoDescription':
+      'Plataforma de titulación y certificación universitaria: múltiples modalidades, pagos en línea flexibles y 75% menos tiempo de tramitación.',
+    'certification.stackTitle': 'Stack Técnico',
+    'certification.metricsTitle': 'Métricas',
   },
   en: {
     // Tojol
@@ -136,6 +146,8 @@ export const projectPagesTranslations = {
     'facultyEval.metric3': 'Multiple universities',
     'facultyEval.metric1Label': 'teachers',
     'facultyEval.metric2Label': 'students',
+    'facultyEval.seoDescription':
+      'Back office to manage faculty evaluation periods for 6,000 teachers and 80,000 students, with integrated Power BI reporting.',
 
     // Document Management
     'docManagement.pageTitle': 'Document Management System | Li',
@@ -170,6 +182,10 @@ export const projectPagesTranslations = {
     'docManagement.metric1Label': 'students',
     'docManagement.metric2Label': 'wait time',
     'docManagement.metric3Label': 'review time',
+    'docManagement.seoDescription':
+      'Digital student records for 100,000+ students: centralized documentation, 80% less waiting and 70% less review time across universities.',
+    'docManagement.stackTitle': 'Tech Stack',
+    'docManagement.metricsTitle': 'Metrics',
 
     // Certification
     'certification.pageTitle': 'Certification Automation | Li',
@@ -194,5 +210,9 @@ export const projectPagesTranslations = {
     'certification.metric1Label': 'students',
     'certification.metric2Label': 'staff',
     'certification.metric3Label': 'time',
+    'certification.seoDescription':
+      'University degree and certification platform: multiple modalities, flexible online payments and 75% faster processing times.',
+    'certification.stackTitle': 'Tech Stack',
+    'certification.metricsTitle': 'Metrics',
   },
 } as const;

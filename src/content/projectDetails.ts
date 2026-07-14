@@ -72,6 +72,8 @@ export const projectDetails = {
       { name: 'Figma', category: 'Design' },
       { name: 'Claude Code', category: 'AI Engineering' },
     ],
+    hasFeatures: false,
+    hasMigration: false,
   },
   'titulacion': {
     i18nPrefix: 'certification',
@@ -85,6 +87,8 @@ export const projectDetails = {
     roleTags: ['Backend Service Design', 'Backlog (Linear)', 'API Testing', 'E2E & Unit Tests'],
     aiTags: AI_TAGS,
     stack: BASE_STACK,
+    hasFeatures: false,
+    hasMigration: false,
   },
 } as const satisfies Record<string, ProjectDetailConfig>;
 
