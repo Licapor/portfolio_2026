@@ -1,18 +1,13 @@
 ---
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
-import GeometricShapes from '../ui/GeometricShapes.astro';
 import SectionHeader from '../ui/SectionHeader.astro';
-import InfoCard from '../ui/InfoCard.astro';
-import Marquee from '../ui/Marquee.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section id="about" class="min-h-screen flex flex-col bg-white relative overflow-hidden">
-  <GeometricShapes variant="about" />
-
-  <div class="max-w-7xl mx-auto px-6 lg:px-12 relative pt-24 lg:pt-32 pb-16 lg:pb-24">
+<section id="about" class="about-band">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 pt-24 lg:pt-32 pb-20 lg:pb-28">
     <SectionHeader
       labelKey="about.label"
       titleKey="about.title"
@@ -20,92 +15,135 @@ const t = useTranslations(lang);
       class="mb-16"
     />
 
-    <!-- Bento Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-      <!-- Columna izquierda: Card principal -->
-      <div class="lg:col-span-8 flex">
-        <!-- Card 1: Main intro -->
-        <div class="bento-card p-8 flex flex-col justify-between reveal stagger-1 relative overflow-hidden w-full">
-          <div class="absolute -top-10 -right-10 w-40 h-40 bg-mint-light rounded-full geo-float opacity-50"></div>
-          <div class="absolute bottom-10 right-20 w-8 h-8 border border-mint rotate-45 opacity-30"></div>
+    <div class="about-grid">
+      <div class="about-main reveal">
+        <h3 class="about-intro">
+          {t('about.intro')}
+          <span class="gradient-text">{t('about.introHighlight')}</span>
+        </h3>
+        <p class="about-desc">{t('about.description')}</p>
+      </div>
 
-          <div class="relative">
-            <h3 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
-              {t('about.intro')}
-              <span class="gradient-text">{t('about.introHighlight')}</span>
-            </h3>
-          </div>
-          <p class="text-gray-500 text-lg relative">
-            {t('about.description')}
-          </p>
+      <dl class="about-dossier reveal stagger-2">
+        <div class="dossier-row">
+          <dt>{t('about.locationLabel')}</dt>
+          <dd>{t('about.location')}</dd>
         </div>
-      </div>
-
-      <!-- Columna derecha: Location, Languages -->
-      <div class="lg:col-span-4 flex flex-col gap-6">
-        <!-- Card 2: Location -->
-        <InfoCard variant="gradient" class="reveal stagger-2">
-          <div class="absolute -bottom-6 -right-6 w-20 h-20 rounded-full border-2 border-white/20"></div>
-          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          <div>
-            <p class="text-sm text-white/70">{t('about.locationLabel')}</p>
-            <p class="text-2xl font-bold text-white">{t('about.location')}</p>
-          </div>
-        </InfoCard>
-
-        <!-- Card 3: Languages -->
-        <InfoCard class="reveal stagger-3">
-          <div class="absolute top-4 right-4 w-6 h-6 border border-gold/30 rotate-45 opacity-30"></div>
-          <div class="absolute bottom-8 right-8 w-3 h-3 rounded-full bg-sage opacity-20"></div>
-          <p class="text-gray-500 text-sm">{t('about.languagesLabel')}</p>
-          <div class="flex gap-4 text-xl font-bold">
-            <span class="flex items-center gap-1.5">
-              <span class="text-2xl">🇲🇽</span>
-              <span class="text-gold">{t('about.langES')}</span>
+        <div class="dossier-row">
+          <dt>{t('about.languagesLabel')}</dt>
+          <dd>{t('about.languages')}</dd>
+        </div>
+        <div class="dossier-row">
+          <dt>{t('about.currentlyLabel')}</dt>
+          <dd>
+            {t('about.currently')}
+            <span class="dossier-note">
+              {t('about.currentlyWith')}<a href="https://nieva.team/es" target="_blank" rel="noopener noreferrer">Nieva Team</a>
             </span>
-            <span class="flex items-center gap-1.5">
-              <span class="text-2xl">🇺🇸</span>
-              <span class="text-gold">{t('about.langEN')}</span>
-            </span>
-            <span class="flex items-center gap-1.5">
-              <span class="text-2xl">🇧🇷</span>
-              <span class="text-gold">{t('about.langPT')}</span>
-            </span>
-          </div>
-        </InfoCard>
-      </div>
-
-      <!-- Segunda fila: Currently + Adventures -->
-      <div class="lg:col-span-6">
-        <!-- Card 4: Currently -->
-        <InfoCard class="reveal stagger-4 h-full">
-          <div class="absolute -top-4 -right-4 w-16 h-16 bg-mint-light rounded-full opacity-30"></div>
-          <p class="text-gray-500 text-sm">{t('about.currentlyLabel')}</p>
-          <div class="relative">
-            <p class="text-xl font-bold text-gray-900">{t('about.currently')}</p>
-            <p class="text-sage font-medium">
-              {t('about.currentlyWith')}<a href="https://nieva.team/es" target="_blank" rel="noopener noreferrer" class="text-gold hover:underline">Nieva Team</a>
-            </p>
-          </div>
-        </InfoCard>
-      </div>
-
-      <div class="lg:col-span-6">
-        <!-- Card 5: Adventures -->
-        <InfoCard class="reveal stagger-5 h-full">
-          <div class="absolute bottom-4 right-4 w-8 h-8 border border-gold/20 rotate-12 opacity-40"></div>
-          <p class="text-gray-500 text-sm">{t('about.adventuresLabel')}</p>
-          <p class="text-lg font-medium text-gray-700 relative">{t('about.adventures')}</p>
-        </InfoCard>
-      </div>
+          </dd>
+        </div>
+        <div class="dossier-row">
+          <dt>{t('about.adventuresLabel')}</dt>
+          <dd>{t('about.adventures')}</dd>
+        </div>
+      </dl>
     </div>
   </div>
-
-  <!-- Soft Skills Marquee - Section divider -->
-  <div class="mt-auto">
-    <Marquee content={t('about.softSkillsMarquee')} variant="gold" speed={35} />
-  </div>
 </section>
+
+<style>
+  .about-band {
+    background: var(--color-bone);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+
+  .about-intro {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin: 0 0 26px;
+    max-width: 24ch;
+  }
+
+  .about-desc {
+    color: rgba(16, 34, 31, 0.72);
+    font-size: 1.1rem;
+    line-height: 1.65;
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  .about-dossier {
+    margin: 0;
+    border-top: 1px solid rgba(16, 34, 31, 0.15);
+  }
+
+  .dossier-row {
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    gap: 18px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(16, 34, 31, 0.15);
+  }
+
+  @media (max-width: 480px) {
+    .dossier-row {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+  }
+
+  .dossier-row dt {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-gold-dark);
+    padding-top: 3px;
+  }
+
+  .dossier-row dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-size: 1.02rem;
+    line-height: 1.55;
+  }
+
+  .dossier-note {
+    display: block;
+    color: rgba(16, 34, 31, 0.72);
+    font-size: 0.95rem;
+    margin-top: 2px;
+  }
+
+  .dossier-note a {
+    color: var(--color-gold-dark);
+    text-decoration: none;
+  }
+
+  .dossier-note a:hover {
+    text-decoration: underline;
+  }
+
+  .dossier-note a:focus-visible {
+    outline: 2px solid var(--color-gold-dark);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+</style>

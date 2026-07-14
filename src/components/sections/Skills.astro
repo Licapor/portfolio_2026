@@ -4,6 +4,8 @@ import { stackCategories } from '../../content/stack';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const pad = (n: number) => String(n).padStart(2, '0');
 ---
 
 <section id="stack" class="stack-band">
@@ -16,15 +18,15 @@ const t = useTranslations(lang);
       <p class="stack-intro">{t('stack.intro')}</p>
     </div>
 
-    <div class="stack-grid">
+    <div class="spec-table">
       {stackCategories.map((cat, i) => (
-        <div class:list={['stack-card reveal', `stagger-${(i % 6) + 1}`]}>
-          <h3 class="stack-cat">{t(cat.titleKey)}</h3>
-          <div class="chips">
-            {cat.items.map((item) => (
-              <span class="chip">{item}</span>
-            ))}
-          </div>
+        <div class:list={['spec-row reveal', `stagger-${(i % 6) + 1}`]}>
+          <span class="spec-idx" aria-hidden="true">{pad(i + 1)}</span>
+          <h3 class="spec-cat">
+            {t(cat.titleKey)}
+            <span class="spec-count" aria-hidden="true">({pad(cat.items.length)})</span>
+          </h3>
+          <p class="spec-items">{cat.items.join(' · ')}</p>
         </div>
       ))}
     </div>
@@ -39,7 +41,7 @@ const t = useTranslations(lang);
 
   .stack-head {
     max-width: 640px;
-    margin-bottom: 48px;
+    margin-bottom: 56px;
   }
 
   .stack-label {
@@ -47,7 +49,7 @@ const t = useTranslations(lang);
     font-size: 12px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--color-gold);
+    color: var(--color-gold-dark);
     margin: 0 0 12px;
   }
 
@@ -66,54 +68,72 @@ const t = useTranslations(lang);
   }
 
   .stack-intro {
-    color: #6e6a5c;
+    color: rgba(16, 34, 31, 0.72);
     font-size: 1.05rem;
     line-height: 1.55;
     margin: 0;
   }
 
-  .stack-grid {
+  /* Spec sheet: hairlines + mono indices, no cards */
+  .spec-table {
+    border-top: 1px solid rgba(16, 34, 31, 0.15);
+  }
+
+  .spec-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: 3.5rem minmax(13rem, 17rem) 1fr;
+    gap: 24px;
+    align-items: baseline;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(16, 34, 31, 0.15);
+    transition: background 0.25s ease;
   }
 
-  .stack-card {
-    background: #fff;
-    border: 1px solid var(--color-sand);
-    border-radius: 22px;
-    padding: 26px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  .spec-row:hover {
+    background: rgba(255, 255, 255, 0.55);
   }
 
-  .stack-card:hover {
-    border-color: var(--color-gold);
-    box-shadow: 0 20px 44px -26px rgba(12, 32, 28, 0.35);
-    transform: translateY(-3px);
+  @media (max-width: 768px) {
+    .spec-row {
+      grid-template-columns: 3.5rem 1fr;
+      gap: 10px 16px;
+      padding: 22px 0;
+    }
+
+    .spec-items {
+      grid-column: 1 / -1;
+    }
   }
 
-  .stack-cat {
+  .spec-idx {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-gold-dark);
+  }
+
+  .spec-cat {
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
     color: var(--color-ink);
-    margin: 0 0 16px;
+    margin: 0;
   }
 
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .chip {
+  .spec-count {
     font-family: var(--font-mono);
     font-size: 12px;
-    padding: 6px 12px;
-    border-radius: 999px;
-    background: var(--color-bone);
-    border: 1px solid var(--color-sand);
-    color: #4a5a52;
-    white-space: nowrap;
+    font-weight: 400;
+    color: var(--color-gold-dark);
+    margin-left: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  .spec-items {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.9;
+    color: rgba(16, 34, 31, 0.75);
+    margin: 0;
   }
 </style>

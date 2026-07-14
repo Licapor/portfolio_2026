@@ -4,38 +4,33 @@ import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-// Real brand logos. Names for the screen-reader list.
+// Real brand logos, shown as a static editorial strip.
 const clients = [
   { name: 'Lottus Education', logo: '/logos/clients/lottus.png' },
   { name: 'Nieva', logo: '/logos/clients/nieva.png' },
   { name: 'Xandr', logo: '/logos/clients/xandr.png' },
   { name: 'Segundamano', logo: '/logos/clients/segundamano.png' },
 ];
-// Duplicated once for a seamless -50% marquee loop.
-const loop = [...clients, ...clients];
 ---
 
-<section class="clients-band">
-  <p class="clients-label">{t('clients.label')}</p>
-  <ul class="sr-only">
-    {clients.map((c) => <li>{c.name}</li>)}
-  </ul>
-  <div class="logo-marquee" aria-hidden="true">
-    <div class="logo-track">
-      {loop.map((c) => (
-        <img class:list={['client-logo', c.name === 'Nieva' && 'is-icon']} src={c.logo} alt="" />
+<section class="clients-band" aria-labelledby="clients-label">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <p id="clients-label" class="clients-label">{t('clients.label')}</p>
+    <ul class="clients-row">
+      {clients.map((c) => (
+        <li>
+          <img class:list={['client-logo', c.name === 'Nieva' && 'is-icon']} src={c.logo} alt={c.name} loading="lazy" />
+        </li>
       ))}
-    </div>
+    </ul>
   </div>
 </section>
 
 <style>
   .clients-band {
-    background: #ffffff;
-    padding: 52px 0 48px;
-    text-align: center;
-    border-top: 1px solid var(--color-sand);
-    border-bottom: 1px solid var(--color-sand);
+    background: var(--color-bone);
+    padding: 56px 0 52px;
+    border-bottom: 1px solid rgba(16, 34, 31, 0.08);
   }
 
   .clients-label {
@@ -43,18 +38,31 @@ const loop = [...clients, ...clients];
     font-size: 11.5px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #6e6a5c;
-    margin: 0 0 30px;
+    color: var(--color-gold-dark);
+    text-align: center;
+    margin: 0 0 34px;
+  }
+
+  .clients-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 28px 64px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
   .client-logo {
     height: 30px;
     width: auto;
-    margin: 0 44px;
     object-fit: contain;
+    /* multiply lets white logo boxes melt into the bone background */
+    mix-blend-mode: multiply;
     filter: grayscale(1);
-    opacity: 0.55;
-    transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0.6;
+    transition: filter 0.3s ease, opacity 0.3s ease;
   }
 
   .client-logo.is-icon {
@@ -64,6 +72,5 @@ const loop = [...clients, ...clients];
   .client-logo:hover {
     filter: grayscale(0);
     opacity: 1;
-    transform: translateY(-2px);
   }
 </style>
