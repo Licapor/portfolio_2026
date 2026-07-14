@@ -8,7 +8,7 @@ interface Props {
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://iele.dev');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://licapor.dev');
 
 const {
   title,

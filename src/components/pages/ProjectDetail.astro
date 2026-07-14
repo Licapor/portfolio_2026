@@ -1,0 +1,573 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../layout/Header.astro';
+import Footer from '../layout/Footer.astro';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../i18n/utils';
+import { projectDetails, type ProjectDetailSlug } from '../../content/projectDetails';
+
+interface Props {
+  slug: ProjectDetailSlug;
+}
+
+const { slug } = Astro.props;
+const project = projectDetails[slug];
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const p = (key: string) => t(`${project.i18nPrefix}.${key}`);
+
+const backHref = getLocalizedPath('/', lang) + '#work';
+const videoSrc = `https://player.cloudinary.com/embed/?cloud_name=db50dpczx&public_id=${project.videoId}&fluid=true&controls=true&source_types%5B0%5D=mp4`;
+---
+
+<Layout title={p('pageTitle')} description={p('description')}>
+  <Header />
+
+  <main>
+    <!-- Editorial dark hero -->
+    <section class="detail-hero relative overflow-hidden" aria-labelledby="project-title">
+      <div class="grain" aria-hidden="true"></div>
+
+      <div class="max-w-6xl mx-auto px-6 lg:px-12 relative z-10">
+        <a href={backHref} class="back-link">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+          </svg>
+          {t('tojol.backToProjects')}
+        </a>
+
+        <p class="detail-eyebrow reveal">{p('subtitle')} · {t('project.multitenant')}</p>
+
+        <h1 id="project-title" class="detail-title reveal">{t(project.titleKey)}</h1>
+
+        <p class="detail-lead reveal stagger-1">{p('description')}</p>
+
+        <div class="hero-grid">
+          <div class="video-card reveal stagger-2">
+            <iframe
+              src={videoSrc}
+              title={`Demo — ${t(project.titleKey)}`}
+              width="100%"
+              height="400"
+              allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+              allowfullscreen
+              class="w-full aspect-video"
+            ></iframe>
+          </div>
+
+          <ul class="metrics reveal stagger-3" aria-label={t('facultyEval.metricsTitle')}>
+            {project.metrics.map((metric) => (
+              <li class="metric">
+                <span class="metric-num">{metric.value}</span>
+                <span class="metric-label">{p(metric.labelKey)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- The case: problem & solution (bone) -->
+    <section class="detail-case" aria-labelledby="problem-title">
+      <div class="max-w-6xl mx-auto px-6 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <article class="case-card reveal stagger-1">
+            <p class="case-num" aria-hidden="true">01</p>
+            <h2 id="problem-title" class="case-title">{p('problemTitle')}</h2>
+            <p class="case-body">{p('problemDesc')}</p>
+          </article>
+
+          <article class="case-card reveal stagger-2">
+            <p class="case-num" aria-hidden="true">02</p>
+            <h2 class="case-title">{p('solutionTitle')}</h2>
+            <p class="case-body">{p('solutionDesc')}</p>
+          </article>
+        </div>
+
+        {project.hasFeatures && (
+          <div class="features">
+            <h2 class="features-title reveal">{p('featuresTitle')}</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <article class="case-card reveal stagger-1">
+                <h3 class="case-title">{p('feature1Title')}</h3>
+                <p class="case-body">{p('feature1Desc')}</p>
+              </article>
+              <article class="case-card reveal stagger-2">
+                <h3 class="case-title">{p('feature2Title')}</h3>
+                <p class="case-body">{p('feature2Desc')}</p>
+              </article>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- Dark accent: AI Engineering + role (editorial contrast) -->
+    <section class="detail-dark" aria-labelledby="ai-title">
+      <div class="max-w-6xl mx-auto px-6 lg:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <article class="dark-card dark-card-featured reveal stagger-1">
+            <h2 id="ai-title" class="dark-title dark-title-gradient">{p('aiTitle')}</h2>
+            <p class="dark-body">{p('aiDesc')}</p>
+            <ul class="chips" aria-label={p('aiTitle')}>
+              {project.aiTags.map((tag) => (
+                <li class="chip">{tag}</li>
+              ))}
+            </ul>
+          </article>
+
+          <article class="dark-card reveal stagger-2">
+            <h2 class="dark-title">{p('roleTitle')}</h2>
+            <p class="dark-body">{p('roleDesc')}</p>
+            <ul class="chips" aria-label={p('roleTitle')}>
+              {project.roleTags.map((tag) => (
+                <li class="chip">{tag}</li>
+              ))}
+            </ul>
+          </article>
+        </div>
+
+        {project.hasMigration && (
+          <article class="dark-card migration reveal">
+            <p class="migration-pills" aria-hidden="true">
+              <span class="pill pill-from">Bubble</span>
+              <svg class="w-7 h-7 arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+              <span class="pill pill-to">React + Next.js</span>
+            </p>
+            <h2 class="dark-title">{p('migrationTitle')}</h2>
+            <p class="dark-body">{p('migrationDesc')}</p>
+          </article>
+        )}
+      </div>
+    </section>
+
+    <!-- Stack (bone) -->
+    <section class="detail-stack" aria-labelledby="stack-title">
+      <div class="max-w-6xl mx-auto px-6 lg:px-12 text-center">
+        <h2 id="stack-title" class="stack-title reveal">{t('facultyEval.stackTitle')}</h2>
+
+        <ul class="stack-list reveal stagger-1">
+          {project.stack.map((tech) => (
+            <li class="stack-chip">
+              <span class="stack-name">{tech.name}</span>
+              <span class="stack-cat">{tech.category}</span>
+            </li>
+          ))}
+        </ul>
+
+        <a href={backHref} class="back-cta group reveal stagger-2">
+          {t('tojol.backToProjects')}
+          <svg class="w-5 h-5 transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* ===== Hero ===== */
+  .detail-hero {
+    padding: 140px 0 90px;
+    color: var(--color-cream-light);
+    background:
+      radial-gradient(900px 560px at 88% 4%, rgba(90, 143, 118, 0.3), transparent 60%),
+      radial-gradient(700px 480px at 4% 96%, rgba(217, 172, 99, 0.14), transparent 55%),
+      linear-gradient(150deg, #0c201c, #16302b 55%, #0c201c);
+  }
+
+  .grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.6) 0.5px, transparent 0.5px);
+    background-size: 4px 4px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--color-mint);
+    text-decoration: none;
+    margin-bottom: 28px;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--color-gold-bright);
+  }
+
+  .back-link:focus-visible,
+  .back-cta:focus-visible {
+    outline: 2px solid var(--color-gold-bright);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  .detail-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-gold-bright);
+    margin: 0 0 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .detail-eyebrow::before {
+    content: '';
+    width: 30px;
+    height: 1.5px;
+    background: var(--color-gold-bright);
+    flex-shrink: 0;
+  }
+
+  .detail-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.5rem, 6.5vw, 5rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    margin: 0;
+    max-width: 18ch;
+  }
+
+  .detail-lead {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    color: #c7cbb8;
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 65ch;
+    margin: 26px 0 0;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 24px;
+    align-items: stretch;
+    margin-top: 56px;
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .video-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(150, 205, 176, 0.2);
+    border-radius: 24px;
+    overflow: hidden;
+    backdrop-filter: blur(6px);
+  }
+
+  .video-card iframe {
+    display: block;
+    border: 0;
+  }
+
+  .metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (max-width: 900px) {
+    .metrics {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .metrics .metric {
+      flex: 1 1 140px;
+    }
+  }
+
+  .metric {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(150, 205, 176, 0.2);
+    border-radius: 20px;
+    padding: 20px 24px;
+    backdrop-filter: blur(6px);
+  }
+
+  .metric-num {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.9rem, 3vw, 2.6rem);
+    line-height: 1;
+    background: linear-gradient(120deg, var(--color-mint), var(--color-gold-bright));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .metric-label {
+    margin-top: 8px;
+    color: #aeb8ac;
+    font-size: 14px;
+  }
+
+  /* ===== Case (bone) ===== */
+  .detail-case {
+    padding: 90px 0;
+    background: var(--color-bone);
+  }
+
+  .case-card {
+    background: white;
+    border: 1px solid var(--color-sand);
+    border-radius: 24px;
+    padding: 36px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .case-card:hover {
+    border-color: var(--color-gold-light);
+    transform: translateY(-3px);
+  }
+
+  .case-num {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    color: var(--color-gold-dark);
+    margin: 0 0 14px;
+  }
+
+  .case-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.55rem;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+    margin: 0 0 14px;
+  }
+
+  .case-body {
+    color: rgba(16, 34, 31, 0.72);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    margin: 0;
+    max-width: 65ch;
+  }
+
+  .features {
+    margin-top: 64px;
+  }
+
+  .features-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin: 0 0 28px;
+  }
+
+  /* ===== Dark accent ===== */
+  .detail-dark {
+    padding: 90px 0;
+    color: var(--color-cream-light);
+    background: linear-gradient(180deg, #16302b, #0c201c);
+  }
+
+  .dark-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(150, 205, 176, 0.18);
+    border-radius: 24px;
+    padding: 36px;
+    backdrop-filter: blur(6px);
+    transition: border-color 0.3s ease;
+  }
+
+  .dark-card:hover {
+    border-color: rgba(150, 205, 176, 0.4);
+  }
+
+  .dark-card-featured {
+    border-color: rgba(217, 172, 99, 0.35);
+  }
+
+  .dark-card-featured:hover {
+    border-color: rgba(217, 172, 99, 0.6);
+  }
+
+  .dark-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.7rem;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+  }
+
+  .dark-title-gradient {
+    background: linear-gradient(120deg, var(--color-mint), var(--color-gold-bright));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    width: fit-content;
+  }
+
+  .dark-body {
+    color: #c7cbb8;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    margin: 0 0 24px;
+    max-width: 65ch;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-mint);
+    border: 1px solid rgba(150, 205, 176, 0.35);
+    border-radius: 999px;
+    padding: 8px 16px;
+  }
+
+  .migration {
+    margin-top: 24px;
+    text-align: center;
+  }
+
+  .migration .dark-body {
+    margin: 0 auto;
+  }
+
+  .migration-pills {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 0 0 24px;
+  }
+
+  .migration-pills .arrow {
+    color: var(--color-gold-bright);
+  }
+
+  .pill {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    border-radius: 999px;
+    padding: 10px 20px;
+  }
+
+  .pill-from {
+    color: #c7cbb8;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .pill-to {
+    color: var(--color-mint);
+    border: 1px solid rgba(150, 205, 176, 0.45);
+    background: rgba(150, 205, 176, 0.08);
+  }
+
+  /* ===== Stack (bone) ===== */
+  .detail-stack {
+    padding: 90px 0 100px;
+    background: var(--color-bone);
+  }
+
+  .stack-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin: 0 0 32px;
+  }
+
+  .stack-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+  }
+
+  .stack-chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    background: white;
+    border: 1px solid var(--color-sand);
+    border-radius: 999px;
+    padding: 10px 18px;
+  }
+
+  .stack-name {
+    font-weight: 600;
+    color: var(--color-ink);
+    font-size: 0.95rem;
+  }
+
+  .stack-cat {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: rgba(16, 34, 31, 0.6);
+  }
+
+  .back-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    margin-top: 48px;
+    padding: 14px 28px;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--color-cream-light);
+    background: var(--color-dark);
+    border-radius: 999px;
+    text-decoration: none;
+    transition: background 0.25s ease, transform 0.2s ease;
+  }
+
+  .back-cta:hover {
+    background: var(--color-dark-teal);
+    transform: translateY(-2px);
+  }
+
+  .back-cta:focus-visible {
+    outline-color: var(--color-gold-dark);
+  }
+</style>

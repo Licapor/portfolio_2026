@@ -26,3 +26,4 @@ pnpm-debug.log*
 
 # raw source logos (processed versions in public/logos)
 /logos/
+.gstack/
