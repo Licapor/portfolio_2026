@@ -24,29 +24,40 @@ const t = useTranslations(lang);
         <p class="about-desc">{t('about.description')}</p>
       </div>
 
-      <dl class="about-dossier reveal stagger-2">
-        <div class="dossier-row">
-          <dt>{t('about.locationLabel')}</dt>
-          <dd>{t('about.location')}</dd>
+      <!-- Agent OS: the bio data as the agent's profile card -->
+      <div class="agent-card reveal stagger-2">
+        <div class="agent-bar" aria-hidden="true">
+          <span>agent.profile</span>
+          <span class="agent-id">licapor.dev</span>
         </div>
-        <div class="dossier-row">
-          <dt>{t('about.languagesLabel')}</dt>
-          <dd>{t('about.languages')}</dd>
-        </div>
-        <div class="dossier-row">
-          <dt>{t('about.currentlyLabel')}</dt>
-          <dd>
-            {t('about.currently')}
-            <span class="dossier-note">
-              {t('about.currentlyWith')}<a href="https://nieva.team/es" target="_blank" rel="noopener noreferrer">Nieva Team</a>
-            </span>
-          </dd>
-        </div>
-        <div class="dossier-row">
-          <dt>{t('about.adventuresLabel')}</dt>
-          <dd>{t('about.adventures')}</dd>
-        </div>
-      </dl>
+        <dl class="agent-rows">
+          <div class="agent-row">
+            <dt>{t('about.locationLabel')}</dt>
+            <dd>
+              {t('about.location')}
+              <span class="agent-coord" aria-hidden="true">19.43°N · 99.13°W</span>
+            </dd>
+          </div>
+          <div class="agent-row">
+            <dt>{t('about.languagesLabel')}</dt>
+            <dd>{t('about.languages')}</dd>
+          </div>
+          <div class="agent-row">
+            <dt>{t('about.currentlyLabel')}</dt>
+            <dd>
+              <span class="live-dot" aria-hidden="true"></span>
+              {t('about.currently')}
+              <span class="agent-note">
+                {t('about.currentlyWith')}<a href="https://nieva.team/es" target="_blank" rel="noopener noreferrer">Nieva Team</a>
+              </span>
+            </dd>
+          </div>
+          <div class="agent-row">
+            <dt>{t('about.adventuresLabel')}</dt>
+            <dd>{t('about.adventures')}</dd>
+          </div>
+        </dl>
+      </div>
     </div>
   </div>
 </section>
@@ -89,61 +100,118 @@ const t = useTranslations(lang);
     max-width: 60ch;
   }
 
-  .about-dossier {
-    margin: 0;
-    border-top: 1px solid rgba(16, 34, 31, 0.15);
+  /* ===== Agent profile card ===== */
+  .agent-card {
+    background:
+      radial-gradient(500px 300px at 85% 0%, rgba(90, 143, 118, 0.18), transparent 60%),
+      linear-gradient(165deg, #0c201c, #16302b);
+    border: 1px solid rgba(150, 205, 176, 0.25);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 34px 70px -34px rgba(12, 32, 28, 0.5);
   }
 
-  .dossier-row {
+  .agent-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 13px 22px;
+    border-bottom: 1px solid rgba(150, 205, 176, 0.15);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--color-gold-bright);
+  }
+
+  .agent-id {
+    color: rgba(150, 205, 176, 0.75);
+  }
+
+  .agent-rows {
+    margin: 0;
+    padding: 8px 22px 14px;
+  }
+
+  .agent-row {
     display: grid;
-    grid-template-columns: 10rem 1fr;
-    gap: 18px;
-    padding: 20px 0;
-    border-bottom: 1px solid rgba(16, 34, 31, 0.15);
+    grid-template-columns: 8.5rem 1fr;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(150, 205, 176, 0.12);
+  }
+
+  .agent-row:last-child {
+    border-bottom: 0;
   }
 
   @media (max-width: 480px) {
-    .dossier-row {
+    .agent-row {
       grid-template-columns: 1fr;
-      gap: 6px;
+      gap: 4px;
     }
   }
 
-  .dossier-row dt {
+  .agent-row dt {
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: 11.5px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--color-gold-dark);
+    color: var(--color-gold-bright);
     padding-top: 3px;
   }
 
-  .dossier-row dd {
+  .agent-row dd {
     margin: 0;
-    color: var(--color-ink);
-    font-size: 1.02rem;
+    color: var(--color-cream-light);
+    font-size: 0.98rem;
     line-height: 1.55;
   }
 
-  .dossier-note {
+  .agent-coord {
     display: block;
-    color: rgba(16, 34, 31, 0.72);
-    font-size: 0.95rem;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    color: rgba(150, 205, 176, 0.75);
+    margin-top: 3px;
+  }
+
+  .agent-note {
+    display: block;
+    color: #c7cbb8;
+    font-size: 0.92rem;
     margin-top: 2px;
   }
 
-  .dossier-note a {
-    color: var(--color-gold-dark);
+  .agent-note a {
+    color: var(--color-gold-bright);
     text-decoration: none;
   }
 
-  .dossier-note a:hover {
+  .agent-note a:hover {
     text-decoration: underline;
   }
 
-  .dossier-note a:focus-visible {
-    outline: 2px solid var(--color-gold-dark);
+  .agent-note a:focus-visible {
+    outline: 2px solid var(--color-gold-bright);
     outline-offset: 2px;
     border-radius: 3px;
+  }
+
+  .live-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--color-mint);
+    margin-right: 8px;
+    vertical-align: 2px;
+    animation: livePulse 2s ease-in-out infinite;
+  }
+
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(150, 205, 176, 0.5); }
+    50% { opacity: 0.6; box-shadow: 0 0 0 5px rgba(150, 205, 176, 0); }
   }
 </style>

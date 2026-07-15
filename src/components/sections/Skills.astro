@@ -6,6 +6,15 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const pad = (n: number) => String(n).padStart(2, '0');
+const slug = (s: string) =>
+  s
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '');
+
+const totalTools = stackCategories.reduce((n, c) => n + c.items.length, 0);
 ---
 
 <section id="stack" class="stack-band">
@@ -18,17 +27,31 @@ const pad = (n: number) => String(n).padStart(2, '0');
       <p class="stack-intro">{t('stack.intro')}</p>
     </div>
 
-    <div class="spec-table">
-      {stackCategories.map((cat, i) => (
-        <div class:list={['spec-row reveal', `stagger-${(i % 6) + 1}`]}>
-          <span class="spec-idx" aria-hidden="true">{pad(i + 1)}</span>
-          <h3 class="spec-cat">
-            {t(cat.titleKey)}
-            <span class="spec-count" aria-hidden="true">({pad(cat.items.length)})</span>
-          </h3>
-          <p class="spec-items">{cat.items.join(' · ')}</p>
-        </div>
-      ))}
+    <!-- Agent OS: the skill set as the agent's tool manifest -->
+    <div class="terminal reveal stagger-2">
+      <div class="term-bar" aria-hidden="true">
+        <span class="term-title">agent.tools — manifest</span>
+        <span class="term-meta">{pad(stackCategories.length)} groups · {totalTools} tools</span>
+      </div>
+
+      <div class="term-body">
+        <p class="term-cmd" aria-hidden="true">$ agent.tools --list<span class="hero-caret"></span></p>
+
+        {stackCategories.map((cat, i) => (
+          <div class:list={['tool-row reveal', `stagger-${(i % 6) + 1}`]}>
+            <h3 class="tool-name">
+              <span class="sr-only">{t(cat.titleKey)}</span>
+              <span class="tool-line" aria-hidden="true">
+                <span class="tool-idx">[{pad(i + 1)}]</span>
+                <span class="tool-slug">{slug(t(cat.titleKey))}</span>
+                <span class="tool-dots"></span>
+                <span class="tool-status">[ACTIVE] ({pad(cat.items.length)})</span>
+              </span>
+            </h3>
+            <p class="tool-items">{cat.items.join(' · ')}</p>
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 </section>
@@ -41,7 +64,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 
   .stack-head {
     max-width: 640px;
-    margin-bottom: 56px;
+    margin-bottom: 48px;
   }
 
   .stack-label {
@@ -74,66 +97,114 @@ const pad = (n: number) => String(n).padStart(2, '0');
     margin: 0;
   }
 
-  /* Spec sheet: hairlines + mono indices, no cards */
-  .spec-table {
-    border-top: 1px solid rgba(16, 34, 31, 0.15);
+  /* ===== Terminal panel ===== */
+  .terminal {
+    background:
+      radial-gradient(700px 400px at 90% 0%, rgba(90, 143, 118, 0.18), transparent 60%),
+      linear-gradient(165deg, #0c201c, #16302b);
+    border: 1px solid rgba(150, 205, 176, 0.25);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 34px 70px -34px rgba(12, 32, 28, 0.5);
   }
 
-  .spec-row {
-    display: grid;
-    grid-template-columns: 3.5rem minmax(13rem, 17rem) 1fr;
-    gap: 24px;
-    align-items: baseline;
-    padding: 28px 0;
-    border-bottom: 1px solid rgba(16, 34, 31, 0.15);
-    transition: background 0.25s ease;
-  }
-
-  .spec-row:hover {
-    background: rgba(255, 255, 255, 0.55);
-  }
-
-  @media (max-width: 768px) {
-    .spec-row {
-      grid-template-columns: 3.5rem 1fr;
-      gap: 10px 16px;
-      padding: 22px 0;
-    }
-
-    .spec-items {
-      grid-column: 1 / -1;
-    }
-  }
-
-  .spec-idx {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    color: var(--color-gold-dark);
-  }
-
-  .spec-cat {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.4rem;
-    letter-spacing: -0.01em;
-    color: var(--color-ink);
-    margin: 0;
-  }
-
-  .spec-count {
+  .term-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 24px;
+    border-bottom: 1px solid rgba(150, 205, 176, 0.15);
     font-family: var(--font-mono);
     font-size: 12px;
-    font-weight: 400;
-    color: var(--color-gold-dark);
-    margin-left: 10px;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
   }
 
-  .spec-items {
+  .term-title {
+    color: var(--color-gold-bright);
+  }
+
+  .term-meta {
+    color: rgba(150, 205, 176, 0.75);
+  }
+
+  .term-body {
+    padding: 26px 24px 30px;
+  }
+
+  @media (min-width: 768px) {
+    .term-body {
+      padding: 30px 34px 36px;
+    }
+  }
+
+  .term-cmd {
     font-family: var(--font-mono);
     font-size: 14px;
+    color: var(--color-mint);
+    margin: 0 0 26px;
+  }
+
+  .tool-row {
+    margin-bottom: 22px;
+  }
+
+  .tool-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .tool-name {
+    margin: 0 0 8px;
+  }
+
+  .tool-line {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 15px;
+  }
+
+  .tool-idx {
+    color: var(--color-gold-bright);
+  }
+
+  .tool-slug {
+    color: var(--color-mint);
+  }
+
+  .tool-dots {
+    flex: 1;
+    min-width: 20px;
+    border-bottom: 1px dotted rgba(150, 205, 176, 0.3);
+    transform: translateY(-4px);
+  }
+
+  .tool-status {
+    color: var(--color-gold-bright);
+    font-size: 12.5px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .tool-items {
+    font-family: var(--font-mono);
+    font-size: 13.5px;
     line-height: 1.9;
-    color: rgba(16, 34, 31, 0.75);
+    color: #c7cbb8;
     margin: 0;
+    padding-left: 3rem;
+    max-width: 72ch;
+  }
+
+  @media (max-width: 640px) {
+    .tool-items {
+      padding-left: 0;
+    }
+
+    .tool-status {
+      font-size: 11.5px;
+    }
   }
 </style>
