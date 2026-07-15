@@ -4,14 +4,17 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils';
 interface Props {
   title: string;
   description?: string;
+  /** Pages without an /en/ counterpart (e.g. Tojol) must not advertise an EN alternate. */
+  hasEnVersion?: boolean;
 }
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://iele.dev');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://licapor.dev');
 
 const {
   title,
+  hasEnVersion = true,
   description = lang === 'es'
     ? "AI Agent Engineer y fundadora de Tech Benders. Diseño agentes de IA, servidores MCP y flujos agénticos que ponen a trabajar a los LLMs."
     : "AI Agent Engineer and founder of Tech Benders. I build AI agents, MCP servers, and agentic workflows that put LLMs to work."
@@ -37,7 +40,7 @@ const ogImage = `${canonicalURL.origin}/og-image.png`;
 
     <!-- Hreflang for i18n SEO -->
     <link rel="alternate" hreflang="es" href={`${canonicalURL.origin}${esURL}`} />
-    <link rel="alternate" hreflang="en" href={`${canonicalURL.origin}${enURL}`} />
+    {hasEnVersion && <link rel="alternate" hreflang="en" href={`${canonicalURL.origin}${enURL}`} />}
     <link rel="alternate" hreflang="x-default" href={`${canonicalURL.origin}${esURL}`} />
 
     <!-- Open Graph -->

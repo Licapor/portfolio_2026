@@ -1,9 +1,7 @@
 ---
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 import { socialLinks, whatsappLink } from '../../content/social';
-import GeometricShapes from '../ui/GeometricShapes.astro';
 import SectionHeader from '../ui/SectionHeader.astro';
-import BentoCard from '../ui/BentoCard.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -14,14 +12,17 @@ const emailParts = {
   domain: 'licapor',
   tld: 'dev'
 };
+
+const links = [
+  ...socialLinks.map((l) => ({ name: l.name, url: l.url, note: null as string | null })),
+  { name: 'WhatsApp', url: whatsappLink, note: t('contact.whatsappLabel') },
+];
 ---
 
-<section id="contact" class="py-24 lg:py-32 bg-white relative overflow-hidden">
-  <GeometricShapes variant="contact" />
-
+<section id="contact" class="contact-band relative overflow-hidden">
   <div class="max-w-7xl mx-auto px-6 lg:px-12 relative">
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
-      <!-- Left: Text content -->
+    <div class="contact-grid">
+      <!-- Left: statement + email -->
       <div class="reveal">
         <SectionHeader
           labelKey="contact.label"
@@ -29,14 +30,14 @@ const emailParts = {
           titleOutlineKey="contact.titleOutline"
           class="mb-8"
         />
-        <p class="text-xl text-gray-500 mb-8 max-w-md">
+        <p class="contact-desc">
           {t('contact.description')}
         </p>
 
         <a
           id="email-link"
           href="#"
-          class="inline-flex items-center gap-3 text-xl sm:text-2xl lg:text-4xl font-bold text-gray-900 hover:text-primary transition-colors hover-underline break-all"
+          class="contact-email hover-underline"
           data-u={emailParts.user}
           data-d={emailParts.domain}
           data-t={emailParts.tld}
@@ -45,71 +46,138 @@ const emailParts = {
         </a>
       </div>
 
-      <!-- Right: Social & Contact cards bento -->
-      <div class="grid grid-cols-2 gap-4 reveal stagger-2">
-        <!-- Email card -->
-        <a
-          id="email-card"
-          href="#"
-          class="col-span-2"
-          aria-label={t('contact.emailLabel')}
-          data-u={emailParts.user}
-          data-d={emailParts.domain}
-          data-t={emailParts.tld}
-        >
-          <BentoCard variant="gradient" class="p-6 relative overflow-hidden">
-            <div class="absolute -top-4 -right-4 w-16 h-16 rounded-full border-2 border-sage/20"></div>
-            <div class="absolute bottom-4 right-12 w-4 h-4 rounded-full bg-gold/30"></div>
-            <p class="text-xl font-bold text-gray-900 relative">{t('contact.emailLabel')}</p>
-          </BentoCard>
-        </a>
-
-        <!-- Social links -->
-        {socialLinks.map((link) => (
-          <a
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Visit ${link.name}`}
-            class="bento-card p-6 flex flex-col items-center justify-center gap-3 group hover:border-primary transition-all duration-300 relative overflow-hidden"
-          >
-            <svg class="w-8 h-8 text-gold group-hover:text-primary transition-colors relative z-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" set:html={link.icon} />
-            <span class="text-sm font-medium text-gray-600 group-hover:text-gray-900 transition-colors relative z-10">{link.name}</span>
-          </a>
+      <!-- Right: mono link index -->
+      <ul class="contact-links reveal stagger-2">
+        {links.map((link) => (
+          <li>
+            <a class="contact-link" href={link.url} target="_blank" rel="noopener noreferrer">
+              <span class="link-name">{link.name}</span>
+              {link.note && <span class="link-note">{link.note}</span>}
+              <svg class="link-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H8m9 0v9" />
+              </svg>
+            </a>
+          </li>
         ))}
-
-        <!-- WhatsApp card -->
-        <a
-          href={whatsappLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="col-span-2"
-          aria-label={t('contact.whatsappLabel')}
-        >
-          <BentoCard variant="gradient" class="p-6 relative overflow-hidden">
-            <div class="absolute -top-4 -left-4 w-16 h-16 rounded-full border-2 border-sage/20"></div>
-            <div class="absolute bottom-4 left-12 w-4 h-4 rounded-full bg-gold/30"></div>
-            <p class="text-xl font-bold text-gray-900 relative">{t('contact.whatsappLabel')}</p>
-          </BentoCard>
-        </a>
-      </div>
+      </ul>
     </div>
 
-    <!-- Bottom marquee text -->
-    <div class="mt-24 overflow-hidden reveal">
+    <!-- Bottom watermark marquee -->
+    <div class="mt-24 overflow-hidden reveal" aria-hidden="true">
       <div class="flex gap-8 animate-marquee whitespace-nowrap">
-        <span class="text-4xl sm:text-6xl lg:text-[12rem] font-bold text-gray-100 select-none">
-          {t('contact.marquee')}
-        </span>
-        <span class="text-4xl sm:text-6xl lg:text-[12rem] font-bold text-gray-100 select-none">
-          {t('contact.marquee')}
-        </span>
+        <span class="watermark">{t('contact.marquee')}</span>
+        <span class="watermark">{t('contact.marquee')}</span>
       </div>
     </div>
   </div>
 </section>
 
 <style>
+  .contact-band {
+    background: var(--color-bone);
+    padding: 96px 0 40px;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+
+  .contact-desc {
+    color: rgba(16, 34, 31, 0.72);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    max-width: 44ch;
+    margin: 0 0 40px;
+  }
+
+  .contact-email {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3.6vw, 2.8rem);
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    text-decoration: none;
+    word-break: break-all;
+    transition: color 0.25s ease;
+  }
+
+  .contact-email:hover {
+    color: var(--color-gold-dark);
+  }
+
+  .contact-email:focus-visible,
+  .contact-link:focus-visible {
+    outline: 2px solid var(--color-gold-dark);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .contact-links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid rgba(16, 34, 31, 0.15);
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    min-height: 44px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(16, 34, 31, 0.15);
+    text-decoration: none;
+    color: var(--color-ink);
+    transition: color 0.25s ease;
+  }
+
+  .contact-link:hover {
+    color: var(--color-gold-dark);
+  }
+
+  .link-name {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .link-note {
+    color: rgba(16, 34, 31, 0.6);
+    font-size: 0.92rem;
+  }
+
+  .link-arrow {
+    width: 18px;
+    height: 18px;
+    margin-left: auto;
+    align-self: center;
+    transition: transform 0.25s ease;
+  }
+
+  .contact-link:hover .link-arrow {
+    transform: translate(3px, -3px);
+  }
+
+  .watermark {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(4rem, 12vw, 12rem);
+    color: rgba(16, 34, 31, 0.06);
+    user-select: none;
+  }
+
   @keyframes marquee {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }

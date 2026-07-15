@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://li.studio/sitemap.xml
+Sitemap: https://licapor.dev/sitemap-index.xml

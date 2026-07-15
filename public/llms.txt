@@ -1,0 +1,28 @@
+# Liliana Capor — licapor.dev
+
+> Portfolio of Liliana Capor, AI Agent Engineer and founder of Tech Benders. She designs AI agents, MCP servers, and agentic workflows that put LLMs to work, with 9+ years building digital products.
+
+The site is available in Spanish (default) and English (under /en/).
+
+## Key pages
+
+- [Home (ES)](https://licapor.dev/): positioning, featured work, clients, contact
+- [Home (EN)](https://licapor.dev/en/)
+
+## Case studies (Lottus Education — multi-tenant EdTech SaaS)
+
+- [Sistema de Gestión Documental](https://licapor.dev/projects/gestion-documental): digital student records for 100K+ students; Bubble → React/Next.js migration
+- [Sistema de Evaluación Docente](https://licapor.dev/projects/evaluacion-docente): faculty evaluation periods for 6K faculty / 80K students
+- [Automatización de Titulación](https://licapor.dev/projects/titulacion): degree and certification automation, 75% faster processing
+
+English versions live under https://licapor.dev/en/projects/…
+
+## Expertise
+
+AI agents, MCP (Model Context Protocol) servers, agentic workflows with Claude Code, RAG, LLM integration, React/Next.js, TypeScript, AWS.
+
+## Contact
+
+- Email: liliana@licapor.dev
+- LinkedIn: https://linkedin.com/in/lilianacapor
+- GitHub: https://github.com/Licapor
