@@ -1,7 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 import { socialLinks, whatsappLink } from '../../content/social';
-import SectionHeader from '../ui/SectionHeader.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -24,12 +23,16 @@ const links = [
     <div class="contact-grid">
       <!-- Left: statement + email -->
       <div class="reveal">
-        <SectionHeader
-          labelKey="contact.label"
-          titleKey="contact.title"
-          titleOutlineKey="contact.titleOutline"
-          class="mb-8"
-        />
+        <!-- Cabecera propia en vez de SectionHeader: aquí el label es el prompt de
+             la sesión. Es la única sección que lo necesita, así que va inline en vez
+             de meterle una variante al componente compartido. -->
+        <div class="mb-8">
+          <p class="session-cmd" aria-hidden="true">$ session.open<span class="hero-caret"></span></p>
+          <span class="sr-only">{t('contact.label')}</span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 mt-2">
+            {t('contact.title')} <span class="text-outline">{t('contact.titleOutline')}</span>
+          </h2>
+        </div>
         <p class="contact-desc">
           {t('contact.description')}
         </p>
@@ -48,9 +51,10 @@ const links = [
 
       <!-- Right: mono link index -->
       <ul class="contact-links reveal stagger-2">
-        {links.map((link) => (
+        {links.map((link, i) => (
           <li>
             <a class="contact-link" href={link.url} target="_blank" rel="noopener noreferrer">
+              <span class="link-idx" aria-hidden="true">[{String(i + 1).padStart(2, '0')}]</span>
               <span class="link-name">{link.name}</span>
               {link.note && <span class="link-note">{link.note}</span>}
               <svg class="link-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -143,6 +147,26 @@ const links = [
   }
 
   .contact-link:hover {
+    color: var(--color-gold-dark);
+  }
+
+  .session-cmd {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: var(--color-gold-dark);
+    margin: 0;
+  }
+
+  /* El caret global es gold-bright, pensado para fondo oscuro. Sobre bone no contrasta. */
+  .session-cmd .hero-caret {
+    background: var(--color-gold-dark);
+  }
+
+  .link-idx {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
     color: var(--color-gold-dark);
   }
 
