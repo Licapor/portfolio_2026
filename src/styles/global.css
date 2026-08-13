@@ -406,6 +406,10 @@ html {
 .roleWrap.outline .dud { -webkit-text-stroke: 0; color: var(--color-sage); -webkit-text-fill-color: var(--color-sage); }
 .roleWrap.gradient .dud, .roleWrap.sage .dud { -webkit-text-fill-color: var(--color-gold-bright); color: var(--color-gold-bright); }
 
+/* Scramble del manifest de Skills. Va aquí y no en el <style> de la sección porque
+   los <span> los inyecta el script en runtime y no llevan el atributo de scoping. */
+.tool-slug .dud { color: var(--color-gold-bright); }
+
 .hero-caret { display: inline-block; width: 0.46ch; height: 0.8em; background: var(--color-gold-bright); margin-left: 0.08em; vertical-align: -0.05em; animation: heroBlink 1.05s step-end infinite; }
 .roleWrap.gold .hero-caret, .roleWrap.mono .hero-caret { background: var(--color-mint); }
 @keyframes heroBlink { 50% { opacity: 0; } }

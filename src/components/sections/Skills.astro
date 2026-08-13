@@ -43,7 +43,7 @@ const totalTools = stackCategories.reduce((n, c) => n + c.items.length, 0);
               <span class="sr-only">{t(cat.titleKey)}</span>
               <span class="tool-line" aria-hidden="true">
                 <span class="tool-idx">[{pad(i + 1)}]</span>
-                <span class="tool-slug">{slug(t(cat.titleKey))}</span>
+                <span class="tool-slug" data-slug={slug(t(cat.titleKey))}>{slug(t(cat.titleKey))}</span>
                 <span class="tool-dots"></span>
                 <span class="tool-status">[ACTIVE] ({pad(cat.items.length)})</span>
               </span>
@@ -55,6 +55,57 @@ const totalTools = stackCategories.reduce((n, c) => n + c.items.length, 0);
     </div>
   </div>
 </section>
+
+<script>
+  import { Scramble } from '../../scripts/scramble';
+
+  // Cada grupo del manifest se decodifica al entrar en viewport, una sola vez.
+  // El nombre real de la categoría vive en el .sr-only hermano, que no se toca.
+  const slugs = document.querySelectorAll<HTMLElement>('.tool-slug');
+
+  if (slugs.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const running = new Map<HTMLElement, Scramble>();
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target as HTMLElement;
+          obs.unobserve(el);
+          const text = el.dataset.slug || el.textContent || '';
+          const delay = Number(el.dataset.order || 0) * 90;
+          // Scramble arranca con text = '', así que la línea se decodifica desde
+          // cero en vez de glitchear sobre sí misma. Con la pestaña oculta no hay
+          // frames de rAF: se deja el texto que ya vino del servidor.
+          setTimeout(() => {
+            if (document.hidden) return;
+            const s = new Scramble(el);
+            running.set(el, s);
+            s.setText(text).then(() => running.delete(el));
+          }, delay);
+        });
+      },
+      { threshold: 0.6 }
+    );
+
+    slugs.forEach((el, i) => {
+      el.dataset.order = String(i);
+      observer.observe(el);
+    });
+
+    // Si la pestaña se oculta a media animación, rAF se detiene y la fila queda
+    // en caracteres basura. Se cancela el frame pendiente (si no, al volver el
+    // foco reanudaría y volvería a ensuciar el texto) y se asienta el final.
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) return;
+      running.forEach((s, el) => {
+        cancelAnimationFrame(s.raf);
+        el.textContent = el.dataset.slug || '';
+      });
+      running.clear();
+    });
+  }
+</script>
 
 <style>
   .stack-band {
