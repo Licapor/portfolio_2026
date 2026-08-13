@@ -18,7 +18,7 @@ export const experienceTranslations = {
     'exp.unid.program': 'Ingeniería de Software y Sistemas Computacionales',
     'exp.unid.period': 'Cursando',
     'exp.nieva.program': 'AI Engineering',
-    'exp.nieva.period': '2026',
+    'exp.nieva.period': 'Cursando · 2026',
     'exp.devf.period': '2018',
     'exp.laboratoria.period': '2016',
 
@@ -47,7 +47,7 @@ export const experienceTranslations = {
     'exp.unid.program': 'B.Sc. Software Engineering and Computer Systems',
     'exp.unid.period': 'In progress',
     'exp.nieva.program': 'AI Engineering',
-    'exp.nieva.period': '2026',
+    'exp.nieva.period': 'In progress · 2026',
     'exp.devf.period': '2018',
     'exp.laboratoria.period': '2016',
 

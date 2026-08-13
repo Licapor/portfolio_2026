@@ -21,7 +21,7 @@ const TojolRow = tojolHref ? 'a' : 'div';
       class="mb-14"
     />
 
-    <ol class="exp-list">
+    <ol class="exp-list" role="list">
       {roles.map((role, i) => (
         <li class:list={['exp-row reveal', `stagger-${(i % 6) + 1}`]}>
           <p class="exp-period">{t(role.periodKey)}</p>

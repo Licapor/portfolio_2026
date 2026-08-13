@@ -76,6 +76,9 @@ const links = [
   .contact-band {
     background: var(--color-bone);
     padding: 96px 0 40px;
+    /* Trayectoria también es bone: sin este filete las dos bandas se leen como
+       una sola losa continua. */
+    border-top: 1px solid rgba(16, 34, 31, 0.08);
   }
 
   .contact-grid {

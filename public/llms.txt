@@ -6,7 +6,7 @@ The site is available in Spanish (default) and English (under /en/).
 
 ## Key pages
 
-- [Home (ES)](https://licapor.dev/): positioning, featured work, clients, contact
+- [Home (ES)](https://licapor.dev/): positioning, featured work, clients, career timeline (roles, dates, education), contact
 - [Home (EN)](https://licapor.dev/en/)
 
 ## Case studies (Lottus Education — multi-tenant EdTech SaaS)
