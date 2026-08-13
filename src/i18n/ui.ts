@@ -5,6 +5,7 @@ import { projectsTranslations } from './translations/projects';
 import { contactTranslations } from './translations/contact';
 import { projectPagesTranslations } from './translations/projectPages';
 import { stackTranslations } from './translations/stack';
+import { experienceTranslations } from './translations/experience';
 
 export const languages = {
   es: 'Español',
@@ -44,6 +45,7 @@ export const ui = {
     ...contactTranslations.es,
     ...projectPagesTranslations.es,
     ...stackTranslations.es,
+    ...experienceTranslations.es,
   },
   en: {
     ...navTranslations.en,
@@ -53,6 +55,7 @@ export const ui = {
     ...contactTranslations.en,
     ...projectPagesTranslations.en,
     ...stackTranslations.en,
+    ...experienceTranslations.en,
   },
 } as const;
 

@@ -26,11 +26,6 @@ export const projectsTranslations = {
     'project5.title': 'Reportes Automatizados AdTech',
     'project5.description':
       'Desarrollo de reportes automatizados mediante API de Xandr Monetize y Power BI para análisis de monetización y recomendaciones estratégicas.',
-    'other.label': 'Otra experiencia',
-    'other.role': 'Fundadora',
-    'other.description':
-      'Negocio de hospitalidad que fundé y operé: equipo de 5 personas, 10% de crecimiento mensual en ventas y rating promedio de 5 estrellas.',
-    'other.meta': 'Puerto Escondido, Oaxaca · 2022–2024',
     'project.multitenant': 'Arquitectura Multitenant',
     'project.multitenantDesc':
       'Sistema diseñado para operar con múltiples universidades de forma simultánea, cada una con su configuración y datos aislados.',
@@ -62,11 +57,6 @@ export const projectsTranslations = {
     'project5.title': 'Automated AdTech Reports',
     'project5.description':
       'Development of automated reports using Xandr Monetize API and Power BI for monetization analysis and strategic recommendations.',
-    'other.label': 'Other experience',
-    'other.role': 'Founder',
-    'other.description':
-      'Hospitality business I founded and ran: a team of five, 10% month-over-month revenue growth, and an average 5-star rating.',
-    'other.meta': 'Puerto Escondido, Oaxaca · 2022–2024',
     'project.multitenant': 'Multitenant Architecture',
     'project.multitenantDesc':
       'System designed to operate with multiple universities simultaneously, each with its own configuration and isolated data.',

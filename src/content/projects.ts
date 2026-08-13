@@ -37,15 +37,3 @@ export const projects: Project[] = [
     projectUrl: '/projects/titulacion',
   },
 ];
-
-/**
- * Trabajo fuera de la ingeniería. Vive aparte del grid para no competir con los
- * proyectos de plataforma, igual que la sección "Other Experience" del CV.
- */
-export const otherExperience = {
-  titleKey: 'project6.title',
-  roleKey: 'other.role',
-  descriptionKey: 'other.description',
-  metaKey: 'other.meta',
-  projectUrl: '/projects/tojol',
-};
