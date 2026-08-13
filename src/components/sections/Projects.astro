@@ -10,6 +10,11 @@ const localizedProjectUrl = (url?: string) => {
   if (!url) return undefined;
   return lang === 'en' && !url.includes('tojol') ? `/en${url}` : url;
 };
+
+// Tojol solo tiene página en español. En inglés la fila se muestra sin enlace
+// en vez de mandar al lector a una página que no puede leer.
+const otherHref = lang === 'en' ? undefined : otherExperience.projectUrl;
+const OtherRow = otherHref ? 'a' : 'div';
 ---
 
 <section id="work" class="work-section relative overflow-hidden">
@@ -48,19 +53,21 @@ const localizedProjectUrl = (url?: string) => {
 
     <div class="other reveal">
       <p class="other-label">{t('other.label')}</p>
-      <a class="other-row" href={localizedProjectUrl(otherExperience.projectUrl)}>
-        <span class="other-main">
-          <span class="other-head">
+      <OtherRow class:list={['other-row', !otherHref && 'is-static']} href={otherHref}>
+        <div class="other-main">
+          <div class="other-head">
             <h3 class="other-title">{t(otherExperience.titleKey)}</h3>
             <span class="other-role">{t(otherExperience.roleKey)}</span>
-          </span>
-          <span class="other-desc">{t(otherExperience.descriptionKey)}</span>
-        </span>
+          </div>
+          <p class="other-desc">{t(otherExperience.descriptionKey)}</p>
+        </div>
         <span class="other-meta">{t(otherExperience.metaKey)}</span>
-        <svg class="other-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
-      </a>
+        {otherHref && (
+          <svg class="other-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        )}
+      </OtherRow>
     </div>
 
     <div class="mt-16 text-center reveal">
@@ -140,7 +147,12 @@ const localizedProjectUrl = (url?: string) => {
     transition: border-color 0.25s ease;
   }
 
-  .other-row:hover {
+  /* Sin flecha (inglés, sin página de Tojol) la tercera pista sobra. */
+  .other-row.is-static {
+    grid-template-columns: 1fr auto;
+  }
+
+  a.other-row:hover {
     border-color: rgba(217, 172, 99, 0.55);
   }
 
@@ -179,8 +191,7 @@ const localizedProjectUrl = (url?: string) => {
   }
 
   .other-desc {
-    display: block;
-    margin-top: 6px;
+    margin: 6px 0 0;
     font-size: 0.95rem;
     line-height: 1.55;
     color: rgba(240, 236, 222, 0.66);
@@ -202,15 +213,23 @@ const localizedProjectUrl = (url?: string) => {
     transition: transform 0.25s ease, color 0.25s ease;
   }
 
-  .other-row:hover .other-arrow {
+  a.other-row:hover .other-arrow {
     transform: translateX(6px);
     color: var(--color-gold-bright);
   }
 
   @media (max-width: 700px) {
-    .other-row {
+    .other-row,
+    .other-row.is-static {
       grid-template-columns: 1fr auto;
       align-items: start;
+    }
+
+    /* La fecha baja a su propio renglón; la flecha se queda junto al título.
+       Sin posición explícita, el auto-placement la mandaría a un tercer renglón. */
+    .other-arrow {
+      grid-column: 2;
+      grid-row: 1;
     }
 
     .other-meta {

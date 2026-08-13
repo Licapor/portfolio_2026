@@ -15,7 +15,7 @@ export interface Project {
   demoUrl?: string;
   codeUrl?: string;
   projectUrl?: string;
-  /** Layout en grid: 'wide' = 2 cols, 'tall' = 2 rows, 'default' = 1x1 */
+  /** Layout en grid: 'wide' = fila completa, 'default' = 1x1 */
   layout?: ProjectLayout;
   /** Wordmark shown as a branded gradient when there's no image/video */
   art?: string;

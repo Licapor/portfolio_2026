@@ -29,7 +29,6 @@ export const shared = {
   'about.langEN': 'EN',
   'about.langPT': 'PT',
   'project6.title': 'Tojol - Lo Bueno de Comer',
-  'project6.description': 'Coffee brew bar and healthy breakfast.',
   'tojol.subtitle': 'Healthy Breakfast • Dairy & Gluten-Free • Vegan Options',
   'tojol.location': 'La Punta, Puerto Escondido',
   'contact.titleOutline': '!',

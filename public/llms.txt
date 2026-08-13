@@ -11,7 +11,7 @@ The site is available in Spanish (default) and English (under /en/).
 
 ## Case studies (Lottus Education — multi-tenant EdTech SaaS)
 
-- [Sistema de Gestión Documental](https://licapor.dev/projects/gestion-documental): digital student records for 100K+ students; Bubble → React/Next.js migration
+- [Sistema de Gestión Documental](https://licapor.dev/projects/gestion-documental): digital student records for 80,000 users; Bubble → React/Next.js migration
 - [Sistema de Evaluación Docente](https://licapor.dev/projects/evaluacion-docente): faculty evaluation periods for 6K faculty / 80K students
 - [Automatización de Titulación](https://licapor.dev/projects/titulacion): degree and certification automation, 75% faster processing
 
