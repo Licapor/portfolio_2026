@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { roles, education } from '../content/experience';
 
 interface Props {
   title: string;
@@ -88,7 +89,7 @@ const ogImage = `${canonicalURL.origin}${lang === 'en' ? '/og-image-en.png' : '/
       "name": t('global.fullName'),
       "alternateName": t('global.name'),
       "url": canonicalURL.origin,
-      "jobTitle": ["Senior Software Engineer", t('about.role')],
+      "jobTitle": ["Senior Software Engineer", (roles.find((r) => r.current) ?? roles[0]).title],
       "worksFor": {
         "@type": "Organization",
         "name": "Tech Benders",
@@ -106,6 +107,17 @@ const ogImage = `${canonicalURL.origin}${lang === 'en' ? '/og-image-en.png' : '/
         "React",
         "Next.js",
         "TypeScript"
+      ],
+      // Formación e idiomas: el llms.txt ya anuncia la trayectoria, así que la
+      // capa estructurada tiene que contar lo mismo y no una versión más pobre.
+      "alumniOf": education.map((e) => ({
+        "@type": "EducationalOrganization",
+        "name": e.school
+      })),
+      "knowsLanguage": [
+        { "@type": "Language", "name": "Spanish", "alternateName": "es" },
+        { "@type": "Language", "name": "English", "alternateName": "en" },
+        { "@type": "Language", "name": "Portuguese", "alternateName": "pt" }
       ],
       "address": {
         "@type": "PostalAddress",

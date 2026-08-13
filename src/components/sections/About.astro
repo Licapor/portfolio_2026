@@ -1,9 +1,14 @@
 ---
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { roles } from '../../content/experience';
 import SectionHeader from '../ui/SectionHeader.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+// El puesto actual sale de la trayectoria, no de una copia en about.ts: si cambia
+// el título, la tarjeta y la sección de trayectoria no pueden decir cosas distintas.
+const currentRole = roles.find((r) => r.current) ?? roles[0];
 ---
 
 <section id="about" class="about-band">
@@ -34,7 +39,7 @@ const t = useTranslations(lang);
           <div class="agent-row">
             <dt>{t('about.roleLabel')}</dt>
             <dd>
-              {t('about.role')}
+              {currentRole.title}
               <span class="agent-note">{t('about.roleNote')}</span>
             </dd>
           </div>

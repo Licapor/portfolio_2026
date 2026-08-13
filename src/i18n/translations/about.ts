@@ -8,7 +8,6 @@ export const aboutTranslations = {
     'about.description':
       'Construyo agentes de IA, servidores MCP y flujos agénticos sobre foundation models: no los entreno, diseño los sistemas que los ponen a trabajar. Más de 8 años creando productos digitales en EdTech, AdTech, hostelería y e-commerce: defino contratos de API con los equipos de backend, modernizo sistemas legados sin frenar producción y mentoreo a desarrolladores junior. Donde más aporto es entendiendo problemas, ordenando ideas y convirtiéndolas en soluciones viables.',
     'about.roleLabel': 'Rol actual',
-    'about.role': 'Lead Front-end Developer & Product Engineer',
     'about.roleNote': 'Tech Benders · desde 2021',
     'about.locationLabel': 'Ciudad actual',
     'about.location': 'Ciudad de México',
@@ -42,7 +41,6 @@ export const aboutTranslations = {
     'about.description':
       'I build AI agents, MCP servers, and agentic workflows on top of foundation models: I don’t train them, I design the systems that put them to work. 8+ years shipping digital products across EdTech, AdTech, hospitality, and e-commerce: I define API contracts with backend teams, modernize legacy systems without stalling production, and mentor junior developers. Where I add the most value is understanding problems, ordering ideas, and turning them into viable solutions.',
     'about.roleLabel': 'Current role',
-    'about.role': 'Lead Front-end Developer & Product Engineer',
     'about.roleNote': 'Tech Benders · since 2021',
     'about.locationLabel': 'Current city',
     'about.location': 'Mexico City',

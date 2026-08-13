@@ -21,16 +21,19 @@ const TojolRow = tojolHref ? 'a' : 'div';
       class="mb-14"
     />
 
+    <!-- Los otros dos grupos rotulan visualmente; este no lo necesita, pero sin él
+         la navegación por encabezados salta de h2 a h4. -->
+    <h3 class="sr-only">{t('exp.workLabel')}</h3>
     <ol class="exp-list" role="list">
       {roles.map((role, i) => (
         <li class:list={['exp-row reveal', `stagger-${(i % 6) + 1}`]}>
           <p class="exp-period">{t(role.periodKey)}</p>
           <div class="exp-body">
-            <h3 class="exp-company">
+            <h4 class="exp-company">
               {role.company}
               <span class="exp-location">{t(role.locationKey)}</span>
               {role.current && <span class="exp-current">{t('exp.current')}</span>}
-            </h3>
+            </h4>
             <p class="exp-title">{role.title}</p>
             {role.contextKey && <p class="exp-context">{t(role.contextKey)}</p>}
             <p class="exp-stack">{role.stack.join(' · ')}</p>
@@ -40,14 +43,14 @@ const TojolRow = tojolHref ? 'a' : 'div';
     </ol>
 
     <div class="exp-sub reveal">
-      <p class="exp-sublabel">{t('exp.otherLabel')}</p>
+      <h3 class="exp-sublabel">{t('exp.otherLabel')}</h3>
       <TojolRow class:list={['exp-row', 'exp-other', !tojolHref && 'is-static']} href={tojolHref}>
         <p class="exp-period">{t(otherExperience.periodKey)}</p>
         <div class="exp-body">
-          <h3 class="exp-company">
+          <h4 class="exp-company">
             {t(otherExperience.titleKey)}
             <span class="exp-location">{t(otherExperience.locationKey)}</span>
-          </h3>
+          </h4>
           <p class="exp-title">{t(otherExperience.roleKey)}</p>
           <p class="exp-context">{t(otherExperience.descriptionKey)}</p>
         </div>
@@ -60,18 +63,18 @@ const TojolRow = tojolHref ? 'a' : 'div';
     </div>
 
     <div class="exp-sub reveal">
-      <p class="exp-sublabel">{t('exp.educationLabel')}</p>
-      <dl class="edu-list">
+      <h3 class="exp-sublabel">{t('exp.educationLabel')}</h3>
+      <ul class="edu-list" role="list">
         {education.map((e) => (
-          <div class="edu-row">
-            <dt class="edu-school">{e.school}</dt>
-            <dd class="edu-detail">
-              {e.programKey && <span class="edu-program">{t(e.programKey)}</span>}
-              <span class="edu-period">{t(e.periodKey)}</span>
-            </dd>
-          </div>
+          <li class="exp-row edu-row">
+            <p class="exp-period">{t(e.periodKey)}</p>
+            <div class="exp-body">
+              <h4 class="edu-school">{e.school}</h4>
+              {e.programKey && <p class="edu-program">{t(e.programKey)}</p>}
+            </div>
+          </li>
         ))}
-      </dl>
+      </ul>
     </div>
   </div>
 </section>
@@ -79,7 +82,6 @@ const TojolRow = tojolHref ? 'a' : 'div';
 <style>
   .exp-band {
     background: var(--color-bone);
-    border-top: 1px solid rgba(16, 34, 31, 0.08);
   }
 
   .exp-list {
@@ -141,7 +143,7 @@ const TojolRow = tojolHref ? 'a' : 'div';
   }
 
   .exp-location {
-    color: rgba(16, 34, 31, 0.5);
+    color: rgba(16, 34, 31, 0.65);
   }
 
   .exp-current {
@@ -156,7 +158,7 @@ const TojolRow = tojolHref ? 'a' : 'div';
 
   .exp-context {
     font-size: 0.95rem;
-    color: rgba(16, 34, 31, 0.6);
+    color: rgba(16, 34, 31, 0.65);
     margin: 4px 0 0;
     max-width: 62ch;
   }
@@ -165,7 +167,7 @@ const TojolRow = tojolHref ? 'a' : 'div';
     font-family: var(--font-mono);
     font-size: 12px;
     line-height: 1.7;
-    color: rgba(16, 34, 31, 0.5);
+    color: rgba(16, 34, 31, 0.65);
     margin: 12px 0 0;
     max-width: 72ch;
   }
@@ -215,57 +217,52 @@ const TojolRow = tojolHref ? 'a' : 'div';
     transform: translateX(6px);
   }
 
+  /* Formación reusa .exp-row para que el riel de fechas no se corte a media
+     sección: la fecha vive en la misma columna que en los puestos de arriba. */
   .edu-list {
+    list-style: none;
     margin: 0;
     padding: 0;
-    border-top: 1px solid rgba(16, 34, 31, 0.14);
   }
 
   .edu-row {
-    display: grid;
-    grid-template-columns: 11rem 1fr;
-    gap: 4px 32px;
     padding: 16px 0;
-    border-bottom: 1px solid rgba(16, 34, 31, 0.1);
+  }
+
+  .edu-list .edu-row:last-child {
+    border-bottom: 1px solid rgba(16, 34, 31, 0.14);
   }
 
   .edu-school {
+    font-family: var(--font-sans);
+    font-size: 1rem;
     font-weight: 600;
     color: var(--color-ink);
-  }
-
-  .edu-detail {
     margin: 0;
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 4px 14px;
-    color: rgba(16, 34, 31, 0.66);
   }
 
-  .edu-period {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.06em;
-    color: var(--color-gold-dark);
+  .edu-program {
+    font-size: 0.95rem;
+    color: rgba(16, 34, 31, 0.65);
+    margin: 2px 0 0;
   }
 
-  @media (max-width: 780px) {
+  /* 900px es el breakpoint del resto de las secciones (About, Hero, Contact,
+     ProjectDetail). Colapsar a otro valor deja esta sección en escritorio
+     mientras sus vecinas ya son de una columna. */
+  @media (max-width: 900px) {
     .exp-row,
-    .exp-other.is-static,
-    .edu-row {
+    .exp-other.is-static {
       grid-template-columns: 1fr auto;
       gap: 6px 16px;
     }
 
     /* La fecha encabeza la fila en móvil; la flecha se queda a su lado. */
-    .exp-period,
-    .edu-school {
+    .exp-period {
       grid-column: 1;
     }
 
-    .exp-body,
-    .edu-detail {
+    .exp-body {
       grid-column: 1 / -1;
     }
 

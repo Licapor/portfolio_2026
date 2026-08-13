@@ -4,6 +4,7 @@ export const experienceTranslations = {
     'exp.title': 'Dónde he',
     'exp.titleOutline': 'estado',
     'exp.current': '[ACTUAL]',
+    'exp.workLabel': 'Experiencia profesional',
     'exp.otherLabel': 'Otra experiencia',
     'exp.educationLabel': 'Formación',
 
@@ -22,10 +23,10 @@ export const experienceTranslations = {
     'exp.devf.period': '2018',
     'exp.laboratoria.period': '2016',
 
-    'other.period': 'ago 2022 — may 2024',
-    'other.location': 'Puerto Escondido, Oaxaca',
-    'other.role': 'Fundadora',
-    'other.description':
+    'exp.other.period': 'ago 2022 — may 2024',
+    'exp.other.location': 'Puerto Escondido, Oaxaca',
+    'exp.other.role': 'Fundadora',
+    'exp.other.description':
       'Negocio de hospitalidad que fundé y operé: equipo de 5 personas, 10% de crecimiento mensual en ventas y rating promedio de 5 estrellas.',
   },
   en: {
@@ -33,6 +34,7 @@ export const experienceTranslations = {
     'exp.title': 'Where',
     'exp.titleOutline': "I've been",
     'exp.current': '[CURRENT]',
+    'exp.workLabel': 'Work experience',
     'exp.otherLabel': 'Other experience',
     'exp.educationLabel': 'Education',
 
@@ -51,10 +53,10 @@ export const experienceTranslations = {
     'exp.devf.period': '2018',
     'exp.laboratoria.period': '2016',
 
-    'other.period': 'aug 2022 — may 2024',
-    'other.location': 'Puerto Escondido, Oaxaca',
-    'other.role': 'Founder',
-    'other.description':
+    'exp.other.period': 'aug 2022 — may 2024',
+    'exp.other.location': 'Puerto Escondido, Oaxaca',
+    'exp.other.role': 'Founder',
+    'exp.other.description':
       'Hospitality business I founded and ran: a team of five, 10% month-over-month revenue growth, and an average 5-star rating.',
   },
 } as const;

@@ -64,10 +64,10 @@ export const roles: Role[] = [
  */
 export const otherExperience = {
   titleKey: 'project6.title',
-  periodKey: 'other.period',
-  locationKey: 'other.location',
-  roleKey: 'other.role',
-  descriptionKey: 'other.description',
+  periodKey: 'exp.other.period',
+  locationKey: 'exp.other.location',
+  roleKey: 'exp.other.role',
+  descriptionKey: 'exp.other.description',
   /** Solo existe en español; en inglés la fila se muestra sin enlace. */
   projectUrl: '/projects/tojol',
 };
