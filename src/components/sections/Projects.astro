@@ -1,6 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
-import { projects } from '../../content/projects';
+import { projects, otherExperience } from '../../content/projects';
 import ProjectCard from '../ProjectCard.astro';
 
 const lang = getLangFromUrl(Astro.url);
@@ -10,6 +10,11 @@ const localizedProjectUrl = (url?: string) => {
   if (!url) return undefined;
   return lang === 'en' && !url.includes('tojol') ? `/en${url}` : url;
 };
+
+// Tojol solo tiene página en español. En inglés la fila se muestra sin enlace
+// en vez de mandar al lector a una página que no puede leer.
+const otherHref = lang === 'en' ? undefined : otherExperience.projectUrl;
+const OtherRow = otherHref ? 'a' : 'div';
 ---
 
 <section id="work" class="work-section relative overflow-hidden">
@@ -25,8 +30,7 @@ const localizedProjectUrl = (url?: string) => {
       {projects.map((project, index) => (
         <div class:list={[
           `reveal stagger-${(index % 6) + 1}`,
-          project.layout === 'wide' && 'md:col-span-2 lg:col-span-2',
-          project.layout === 'tall' && 'md:row-span-2',
+          project.layout === 'wide' && 'md:col-span-2 lg:col-span-3',
         ]}>
           <ProjectCard
             title={t(project.titleKey)}
@@ -45,6 +49,25 @@ const localizedProjectUrl = (url?: string) => {
           />
         </div>
       ))}
+    </div>
+
+    <div class="other reveal">
+      <p class="other-label">{t('other.label')}</p>
+      <OtherRow class:list={['other-row', !otherHref && 'is-static']} href={otherHref}>
+        <div class="other-main">
+          <div class="other-head">
+            <h3 class="other-title">{t(otherExperience.titleKey)}</h3>
+            <span class="other-role">{t(otherExperience.roleKey)}</span>
+          </div>
+          <p class="other-desc">{t(otherExperience.descriptionKey)}</p>
+        </div>
+        <span class="other-meta">{t(otherExperience.metaKey)}</span>
+        {otherHref && (
+          <svg class="other-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        )}
+      </OtherRow>
     </div>
 
     <div class="mt-16 text-center reveal">
@@ -94,6 +117,125 @@ const localizedProjectUrl = (url?: string) => {
   .work-outline {
     color: transparent;
     -webkit-text-stroke: 1.5px var(--color-mint);
+  }
+
+  /* ===== Otra experiencia: deliberadamente más ligero que el grid ===== */
+  .other {
+    margin-top: 64px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(150, 205, 176, 0.22);
+  }
+
+  .other-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-gold-bright);
+    margin: 0 0 18px;
+  }
+
+  .other-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 24px;
+    padding: 18px 0;
+    border-top: 1px solid rgba(150, 205, 176, 0.12);
+    color: inherit;
+    text-decoration: none;
+    transition: border-color 0.25s ease;
+  }
+
+  /* Sin flecha (inglés, sin página de Tojol) la tercera pista sobra. */
+  .other-row.is-static {
+    grid-template-columns: 1fr auto;
+  }
+
+  a.other-row:hover {
+    border-color: rgba(217, 172, 99, 0.55);
+  }
+
+  .other-row:focus-visible {
+    outline: 2px solid var(--color-gold-bright);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  .other-main {
+    display: block;
+    min-width: 0;
+  }
+
+  .other-head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .other-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.25rem;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .other-role {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-mint);
+  }
+
+  .other-desc {
+    margin: 6px 0 0;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: rgba(240, 236, 222, 0.66);
+    max-width: 62ch;
+  }
+
+  .other-meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: rgba(150, 205, 176, 0.75);
+    white-space: nowrap;
+  }
+
+  .other-arrow {
+    width: 20px;
+    height: 20px;
+    color: var(--color-mint);
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+
+  a.other-row:hover .other-arrow {
+    transform: translateX(6px);
+    color: var(--color-gold-bright);
+  }
+
+  @media (max-width: 700px) {
+    .other-row,
+    .other-row.is-static {
+      grid-template-columns: 1fr auto;
+      align-items: start;
+    }
+
+    /* La fecha baja a su propio renglón; la flecha se queda junto al título.
+       Sin posición explícita, el auto-placement la mandaría a un tercer renglón. */
+    .other-arrow {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .other-meta {
+      grid-column: 1 / -1;
+      white-space: normal;
+    }
   }
 
   .view-all {

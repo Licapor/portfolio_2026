@@ -13,16 +13,6 @@ export const projects: Project[] = [
     layout: 'wide',
   },
   {
-    id: 'project8',
-    titleKey: 'project8.title',
-    descriptionKey: 'project8.description',
-    tags: ['MCP', 'Agentes IA', 'RAG', 'LLMs'],
-    art: '/logos/techbenders.webp',
-    artVariant: 'tb',
-    demoUrl: 'https://techbenders.io',
-    featured: true,
-  },
-  {
     id: 'project1',
     titleKey: 'project1.title',
     descriptionKey: 'project1.description',
@@ -46,14 +36,16 @@ export const projects: Project[] = [
     image: 'https://res.cloudinary.com/db50dpczx/video/upload/so_0,q_auto,w_1080/Demo_MET_MEC_xzlyjz.jpg',
     projectUrl: '/projects/titulacion',
   },
-  {
-    id: 'project6',
-    titleKey: 'project6.title',
-    descriptionKey: 'project6.description',
-    tags: ['Hostelería', 'Operaciones', 'Marketing'],
-    video: 'https://res.cloudinary.com/db50dpczx/video/upload/q_auto,w_1080/tojol_gjfoay.mp4',
-    image: 'https://res.cloudinary.com/db50dpczx/raw/upload/v1770167481/tojol_gjfoay_poster',
-    projectUrl: '/projects/tojol',
-    layout: 'tall',
-  },
 ];
+
+/**
+ * Trabajo fuera de la ingeniería. Vive aparte del grid para no competir con los
+ * proyectos de plataforma, igual que la sección "Other Experience" del CV.
+ */
+export const otherExperience = {
+  titleKey: 'project6.title',
+  roleKey: 'other.role',
+  descriptionKey: 'other.description',
+  metaKey: 'other.meta',
+  projectUrl: '/projects/tojol',
+};
