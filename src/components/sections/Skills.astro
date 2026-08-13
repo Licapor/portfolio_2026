@@ -64,6 +64,8 @@ const totalTools = stackCategories.reduce((n, c) => n + c.items.length, 0);
   const slugs = document.querySelectorAll<HTMLElement>('.tool-slug');
 
   if (slugs.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const running = new Map<HTMLElement, Scramble>();
+
     const observer = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach((entry) => {
@@ -73,11 +75,13 @@ const totalTools = stackCategories.reduce((n, c) => n + c.items.length, 0);
           const text = el.dataset.slug || el.textContent || '';
           const delay = Number(el.dataset.order || 0) * 90;
           // Scramble arranca con text = '', así que la línea se decodifica desde
-          // cero en vez de glitchear sobre sí misma. En pestaña oculta no hay
+          // cero en vez de glitchear sobre sí misma. Con la pestaña oculta no hay
           // frames de rAF: se deja el texto que ya vino del servidor.
           setTimeout(() => {
             if (document.hidden) return;
-            new Scramble(el).setText(text);
+            const s = new Scramble(el);
+            running.set(el, s);
+            s.setText(text).then(() => running.delete(el));
           }, delay);
         });
       },
@@ -87,6 +91,18 @@ const totalTools = stackCategories.reduce((n, c) => n + c.items.length, 0);
     slugs.forEach((el, i) => {
       el.dataset.order = String(i);
       observer.observe(el);
+    });
+
+    // Si la pestaña se oculta a media animación, rAF se detiene y la fila queda
+    // en caracteres basura. Se cancela el frame pendiente (si no, al volver el
+    // foco reanudaría y volvería a ensuciar el texto) y se asienta el final.
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) return;
+      running.forEach((s, el) => {
+        cancelAnimationFrame(s.raf);
+        el.textContent = el.dataset.slug || '';
+      });
+      running.clear();
     });
   }
 </script>
