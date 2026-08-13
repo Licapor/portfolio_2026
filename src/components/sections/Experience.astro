@@ -1,0 +1,274 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { roles, otherExperience, education } from '../../content/experience';
+import SectionHeader from '../ui/SectionHeader.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Tojol solo tiene página en español. En inglés la fila va sin enlace en vez de
+// mandar al lector a una página que no puede leer.
+const tojolHref = lang === 'en' ? undefined : otherExperience.projectUrl;
+const TojolRow = tojolHref ? 'a' : 'div';
+---
+
+<section id="experience" class="exp-band">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 pt-20 lg:pt-24 pb-20 lg:pb-24">
+    <SectionHeader
+      labelKey="exp.label"
+      titleKey="exp.title"
+      titleOutlineKey="exp.titleOutline"
+      class="mb-14"
+    />
+
+    <!-- Los otros dos grupos rotulan visualmente; este no lo necesita, pero sin él
+         la navegación por encabezados salta de h2 a h4. -->
+    <h3 class="sr-only">{t('exp.workLabel')}</h3>
+    <ol class="exp-list" role="list">
+      {roles.map((role, i) => (
+        <li class:list={['exp-row reveal', `stagger-${(i % 6) + 1}`]}>
+          <p class="exp-period">{t(role.periodKey)}</p>
+          <div class="exp-body">
+            <h4 class="exp-company">
+              {role.company}
+              <span class="exp-location">{t(role.locationKey)}</span>
+              {role.current && <span class="exp-current">{t('exp.current')}</span>}
+            </h4>
+            <p class="exp-title">{role.title}</p>
+            {role.contextKey && <p class="exp-context">{t(role.contextKey)}</p>}
+            <p class="exp-stack">{role.stack.join(' · ')}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <div class="exp-sub reveal">
+      <h3 class="exp-sublabel">{t('exp.otherLabel')}</h3>
+      <TojolRow class:list={['exp-row', 'exp-other', !tojolHref && 'is-static']} href={tojolHref}>
+        <p class="exp-period">{t(otherExperience.periodKey)}</p>
+        <div class="exp-body">
+          <h4 class="exp-company">
+            {t(otherExperience.titleKey)}
+            <span class="exp-location">{t(otherExperience.locationKey)}</span>
+          </h4>
+          <p class="exp-title">{t(otherExperience.roleKey)}</p>
+          <p class="exp-context">{t(otherExperience.descriptionKey)}</p>
+        </div>
+        {tojolHref && (
+          <svg class="exp-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        )}
+      </TojolRow>
+    </div>
+
+    <div class="exp-sub reveal">
+      <h3 class="exp-sublabel">{t('exp.educationLabel')}</h3>
+      <ul class="edu-list" role="list">
+        {education.map((e) => (
+          <li class="exp-row edu-row">
+            <p class="exp-period">{t(e.periodKey)}</p>
+            <div class="exp-body">
+              <h4 class="edu-school">{e.school}</h4>
+              {e.programKey && <p class="edu-program">{t(e.programKey)}</p>}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .exp-band {
+    background: var(--color-bone);
+  }
+
+  .exp-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Fecha en mono a la izquierda, contenido a la derecha: la misma retícula de
+     ficha técnica que usa el manifest de Skills. */
+  .exp-row {
+    display: grid;
+    grid-template-columns: 11rem 1fr auto;
+    gap: 8px 32px;
+    padding: 26px 0;
+    border-top: 1px solid rgba(16, 34, 31, 0.14);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .exp-list .exp-row:last-child {
+    border-bottom: 1px solid rgba(16, 34, 31, 0.14);
+  }
+
+  .exp-period {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    color: var(--color-gold-dark);
+    margin: 0;
+    padding-top: 3px;
+    white-space: nowrap;
+  }
+
+  .exp-body {
+    min-width: 0;
+  }
+
+  .exp-company {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.3rem;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+  }
+
+  .exp-location,
+  .exp-current {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .exp-location {
+    color: rgba(16, 34, 31, 0.65);
+  }
+
+  .exp-current {
+    color: var(--color-gold-dark);
+  }
+
+  .exp-title {
+    font-size: 1rem;
+    color: rgba(16, 34, 31, 0.82);
+    margin: 6px 0 0;
+  }
+
+  .exp-context {
+    font-size: 0.95rem;
+    color: rgba(16, 34, 31, 0.65);
+    margin: 4px 0 0;
+    max-width: 62ch;
+  }
+
+  .exp-stack {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.7;
+    color: rgba(16, 34, 31, 0.65);
+    margin: 12px 0 0;
+    max-width: 72ch;
+  }
+
+  /* ===== Otra experiencia y formación ===== */
+  .exp-sub {
+    margin-top: 52px;
+  }
+
+  .exp-sublabel {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-gold-dark);
+    margin: 0 0 14px;
+  }
+
+  .exp-other {
+    border-bottom: 1px solid rgba(16, 34, 31, 0.14);
+    transition: border-color 0.25s ease;
+  }
+
+  a.exp-other:hover {
+    border-color: rgba(176, 124, 56, 0.6);
+  }
+
+  a.exp-other:focus-visible {
+    outline: 2px solid var(--color-gold-dark);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  .exp-other.is-static {
+    grid-template-columns: 11rem 1fr;
+  }
+
+  .exp-arrow {
+    width: 20px;
+    height: 20px;
+    align-self: center;
+    color: var(--color-gold-dark);
+    transition: transform 0.25s ease;
+  }
+
+  a.exp-other:hover .exp-arrow {
+    transform: translateX(6px);
+  }
+
+  /* Formación reusa .exp-row para que el riel de fechas no se corte a media
+     sección: la fecha vive en la misma columna que en los puestos de arriba. */
+  .edu-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .edu-row {
+    padding: 16px 0;
+  }
+
+  .edu-list .edu-row:last-child {
+    border-bottom: 1px solid rgba(16, 34, 31, 0.14);
+  }
+
+  .edu-school {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin: 0;
+  }
+
+  .edu-program {
+    font-size: 0.95rem;
+    color: rgba(16, 34, 31, 0.65);
+    margin: 2px 0 0;
+  }
+
+  /* 900px es el breakpoint del resto de las secciones (About, Hero, Contact,
+     ProjectDetail). Colapsar a otro valor deja esta sección en escritorio
+     mientras sus vecinas ya son de una columna. */
+  @media (max-width: 900px) {
+    .exp-row,
+    .exp-other.is-static {
+      grid-template-columns: 1fr auto;
+      gap: 6px 16px;
+    }
+
+    /* La fecha encabeza la fila en móvil; la flecha se queda a su lado. */
+    .exp-period {
+      grid-column: 1;
+    }
+
+    .exp-body {
+      grid-column: 1 / -1;
+    }
+
+    .exp-arrow {
+      grid-column: 2;
+      grid-row: 1;
+    }
+  }
+</style>
