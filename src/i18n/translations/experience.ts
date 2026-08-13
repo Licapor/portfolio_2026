@@ -8,7 +8,7 @@ export const experienceTranslations = {
     'exp.otherLabel': 'Otra experiencia',
     'exp.educationLabel': 'Formación',
 
-    'exp.tb.period': 'jul 2021 — hoy',
+    'exp.tb.period': 'may 2022 — hoy',
     'exp.tb.location': 'México (remoto)',
     'exp.tb.context': 'Lottus Education · Wislab',
     'exp.xandr.period': 'jun 2019 — jun 2022',
@@ -38,7 +38,7 @@ export const experienceTranslations = {
     'exp.otherLabel': 'Other experience',
     'exp.educationLabel': 'Education',
 
-    'exp.tb.period': 'jul 2021 — now',
+    'exp.tb.period': 'may 2022 — now',
     'exp.tb.location': 'Mexico (remote)',
     'exp.tb.context': 'Lottus Education · Wislab',
     'exp.xandr.period': 'jun 2019 — jun 2022',
