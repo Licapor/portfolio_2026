@@ -1,6 +1,6 @@
-# Liliana Capor — licapor.dev
+# Liliana Canedo Portillo — licapor.dev
 
-> Portfolio of Liliana Capor, AI Agent Engineer and founder of Tech Benders. She designs AI agents, MCP servers, and agentic workflows that put LLMs to work, with 9+ years building digital products.
+> Portfolio of Liliana Canedo Portillo (Li), Senior Software Engineer at Tech Benders with 8+ years building digital products across EdTech, AdTech, hospitality, and e-commerce. She specializes in applied AI (agents, MCP servers, agentic workflows on top of LLMs) alongside React/Next.js frontend and product engineering.
 
 The site is available in Spanish (default) and English (under /en/).
 
@@ -19,7 +19,7 @@ English versions live under https://licapor.dev/en/projects/…
 
 ## Expertise
 
-AI agents, MCP (Model Context Protocol) servers, agentic workflows with Claude Code, RAG, LLM integration, React/Next.js, TypeScript, AWS.
+AI agents, MCP (Model Context Protocol) servers, agentic workflows with Claude Code, RAG, LLM integration, React/Next.js, TypeScript, Node.js, Python, solution architecture, API contract design, legacy modernization, AWS.
 
 ## Contact
 

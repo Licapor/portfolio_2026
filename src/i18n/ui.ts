@@ -16,11 +16,13 @@ export const defaultLang = 'es';
 // Valores que no necesitan traducción (marcas, números, nombres propios)
 export const shared = {
   'global.name': 'Li',
+  // Nombre legal completo: se usa en JSON-LD y meta author, donde "Li" no identifica a nadie.
+  'global.fullName': 'Liliana Canedo Portillo',
   'global.logo': 'LCP',
   'global.email': 'liliana@licapor.dev',
   'hero.eyebrow': 'Tech Benders · Wislab',
-  'hero.yearsNumber': '9+',
-  'hero.industriesNumber': '5',
+  'hero.yearsNumber': '8+',
+  'hero.industriesNumber': '4',
   'hero.marquee':
     'AI Agents • MCP Servers • RAG • LLMs • Claude Code • Prompt Engineering • Agentic Workflows • Python • TypeScript • React • Next.js • Astro • API Design • AdTech • Automation •',
   'about.langES': 'ES',

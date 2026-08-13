@@ -3,7 +3,7 @@
 // ============================================
 
 /** Layout variants para tarjetas de proyecto en el grid bento */
-export type ProjectLayout = 'default' | 'wide' | 'tall';
+export type ProjectLayout = 'default' | 'wide';
 
 export interface Project {
   id: string;

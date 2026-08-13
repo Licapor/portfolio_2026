@@ -16,8 +16,8 @@ const {
   title,
   hasEnVersion = true,
   description = lang === 'es'
-    ? "AI Agent Engineer y fundadora de Tech Benders. Diseño agentes de IA, servidores MCP y flujos agénticos que ponen a trabajar a los LLMs."
-    : "AI Agent Engineer and founder of Tech Benders. I build AI agents, MCP servers, and agentic workflows that put LLMs to work."
+    ? "Senior Software Engineer con 8+ años en EdTech y AdTech. Diseño agentes de IA, servidores MCP y flujos agénticos que ponen a trabajar a los LLMs."
+    : "Senior Software Engineer with 8+ years across EdTech and AdTech. I build AI agents, MCP servers, and agentic workflows that put LLMs to work."
 } = Astro.props;
 
 // Alternate language URLs for hreflang
@@ -25,7 +25,7 @@ const currentPath = Astro.url.pathname;
 const esURL = currentPath.startsWith('/en') ? currentPath.replace('/en', '') || '/' : currentPath;
 const enURL = currentPath.startsWith('/en') ? currentPath : `/en${currentPath}`;
 
-const ogImage = `${canonicalURL.origin}/og-image.png`;
+const ogImage = `${canonicalURL.origin}${lang === 'en' ? '/og-image-en.png' : '/og-image.png'}`;
 ---
 
 <!doctype html>
@@ -34,7 +34,7 @@ const ogImage = `${canonicalURL.origin}/og-image.png`;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="author" content={t('global.name')} />
+    <meta name="author" content={t('global.fullName')} />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalURL.href} />
 
@@ -49,6 +49,9 @@ const ogImage = `${canonicalURL.origin}/og-image.png`;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
     <meta property="og:locale" content={lang === 'es' ? 'es_MX' : 'en_US'} />
 
     <!-- Twitter Card -->
@@ -82,10 +85,28 @@ const ogImage = `${canonicalURL.origin}/og-image.png`;
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Person",
-      "name": t('global.name'),
+      "name": t('global.fullName'),
+      "alternateName": t('global.name'),
       "url": canonicalURL.origin,
-      "jobTitle": "AI Agent Engineer & Founder",
-      "knowsAbout": ["AI Agents", "MCP Servers", "RAG", "LLM Integration", "Agentic Workflows", "Product Development"],
+      "jobTitle": "Senior Software Engineer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Tech Benders",
+        "url": "https://techbenders.io"
+      },
+      "knowsAbout": [
+        "AI Agents",
+        "MCP Servers",
+        "RAG",
+        "LLM Integration",
+        "Agentic Workflows",
+        "Frontend Engineering",
+        "Product Engineering",
+        "Solution Architecture",
+        "React",
+        "Next.js",
+        "TypeScript"
+      ],
       "address": {
         "@type": "PostalAddress",
         "addressLocality": t('about.location')
